@@ -1,0 +1,10 @@
+{
+  "name": "tech-gallery-2027",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tech Gallery 2027 – Full-Stack College Technology Exhibition Portal",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "dev": "npm --prefix frontend run dev"
+  }
+}

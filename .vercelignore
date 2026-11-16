@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+frontend/node_modules
+__pycache__
+backend/__pycache__
+api/__pycache__
+*.pyc
+
+# Local databases & logs
+*.db
+backend/*.db
+*.log
+.system_generated
+
+# Git & IDE
+.git
+.vscode
+.idea
