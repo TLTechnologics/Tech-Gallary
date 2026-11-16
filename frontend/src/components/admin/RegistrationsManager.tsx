@@ -75,7 +75,7 @@ export const RegistrationsManager: React.FC<RegistrationsManagerProps> = ({
           <select
             value={selectedEventId}
             onChange={(e) => setSelectedEventId(e.target.value)}
-            className="bg-dark-850 border border-neutral-700 px-3 py-2 text-xs font-mono text-neutral-100 focus:border-brand-lime focus:outline-none"
+            className="glass-select px-3 py-2 text-xs font-mono text-neutral-100 focus:outline-none"
           >
             <option value="all">All Events ({registrations.length})</option>
             {events.map((e) => (

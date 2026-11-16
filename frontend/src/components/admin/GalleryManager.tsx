@@ -111,7 +111,7 @@ export const GalleryManager: React.FC<GalleryManagerProps> = ({ items, onRefresh
               <select
                 value={formData.category}
                 onChange={(e: any) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full bg-dark-850 border border-neutral-700 p-2 text-white focus:border-brand-lime focus:outline-none"
+                className="w-full glass-select p-2 text-white focus:outline-none"
               >
                 <option value="hardware">Hardware</option>
                 <option value="software">Software</option>

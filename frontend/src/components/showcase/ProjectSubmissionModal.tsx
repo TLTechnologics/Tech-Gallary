@@ -402,7 +402,7 @@ export const ProjectSubmissionModal: React.FC<ProjectSubmissionModalProps> = ({
                   <select
                     value={formData.sub_category}
                     onChange={(e) => setFormData({ ...formData, sub_category: e.target.value })}
-                    className="w-full bg-dark-850 border border-neutral-700 px-3.5 py-2.5 text-xs text-neutral-100 font-mono focus:border-brand-lime focus:outline-none"
+                    className="w-full glass-select px-3.5 py-2.5 text-xs text-neutral-100 font-mono focus:outline-none"
                   >
                     {currentSubCats.map((cat) => (
                       <option key={cat} value={cat}>

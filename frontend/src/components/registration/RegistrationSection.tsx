@@ -4,6 +4,19 @@ import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types'
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
 
+const YEAR_SEMESTER_OPTIONS = [
+  '1st Year / Semester 1',
+  '1st Year / Semester 2',
+  '2nd Year / Semester 3',
+  '2nd Year / Semester 4',
+  '3rd Year / Semester 5',
+  '3rd Year / Semester 6',
+  '4th Year / Semester 7',
+  '4th Year / Semester 8',
+  "Postgraduate / Master's",
+  'Faculty / Guest / Other',
+];
+
 interface RegistrationSectionProps {
   events: EventItem[];
   preselectedEventId?: string | null;
@@ -33,7 +46,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   const [isInternalCollege, setIsInternalCollege] = useState(true);
   const [rollNumber, setRollNumber] = useState('');
   const [department, setDepartment] = useState('BCA');
-  const [yearSemester, setYearSemester] = useState('3rd Year / Semester 5');
+  const [yearSemester, setYearSemester] = useState(YEAR_SEMESTER_OPTIONS[0]);
   const [teamName, setTeamName] = useState('');
   const [teamMembers, setTeamMembers] = useState('');
   const [isParentAttendee, setIsParentAttendee] = useState(false);
@@ -269,6 +282,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   value={selectedEventId}
                   onChange={(e) => setSelectedEventId(e.target.value)}
                   disabled={selectedPass === 'showcasing'}
+                  className="glass-select"
                 >
                   {selectedPass === 'showcasing' ? (
                     <option value={selectedEventId}>Tech Showcase – Flagship Project Exhibition</option>
@@ -400,13 +414,19 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 </label>
 
                 <label className="field">
-                  <span>Year / Semester</span>
-                  <input
-                    type="text"
+                  <span>Year / Semester *</span>
+                  <select
                     value={yearSemester}
                     onChange={(e) => setYearSemester(e.target.value)}
-                    placeholder="e.g. 3rd Year / Sem 5"
-                  />
+                    required
+                    className="glass-select"
+                  >
+                    {YEAR_SEMESTER_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
 

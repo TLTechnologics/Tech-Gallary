@@ -150,7 +150,7 @@ export const EventsManager: React.FC<EventsManagerProps> = ({ events, onRefresh 
                 <select
                   value={editingEvent.registration_status}
                   onChange={(e: any) => setEditingEvent({ ...editingEvent, registration_status: e.target.value })}
-                  className="w-full bg-dark-850 border border-neutral-700 p-2 text-white font-mono focus:border-brand-lime focus:outline-none"
+                  className="w-full glass-select p-2 text-white font-mono focus:outline-none"
                 >
                   <option value="open">Open</option>
                   <option value="waitlist">Waitlist</option>

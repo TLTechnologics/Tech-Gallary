@@ -66,7 +66,7 @@ export const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onRe
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="bg-dark-850 border border-neutral-700 px-3 py-2 text-xs font-mono text-neutral-100 focus:border-brand-lime focus:outline-none"
+            className="glass-select px-3 py-2 text-xs font-mono text-neutral-100 focus:outline-none"
           >
             <option value="all">All Categories</option>
             <option value="hardware">Hardware</option>
@@ -77,7 +77,7 @@ export const ProjectsManager: React.FC<ProjectsManagerProps> = ({ projects, onRe
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="bg-dark-850 border border-neutral-700 px-3 py-2 text-xs font-mono text-neutral-100 focus:border-brand-lime focus:outline-none"
+            className="glass-select px-3 py-2 text-xs font-mono text-neutral-100 focus:outline-none"
           >
             <option value="all">All Statuses ({projects.length})</option>
             <option value="pending">Pending</option>
