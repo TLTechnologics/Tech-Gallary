@@ -2,6 +2,9 @@ import os
 from pydantic_settings import BaseSettings
 from typing import List
 
+_backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_env_path = os.path.join(_backend_dir, ".env")
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "TECH GALLERY 2027 API"
     VERSION: str = "1.0.0"
@@ -23,14 +26,14 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
     
     # College identity check
-    OUR_COLLEGE_NAME: str = "Tech Gallery Engineering College"
+    OUR_COLLEGE_NAME: str = "LJCCA"
 
     @property
     def cors_origins_list(self) -> List[str]:
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
 
     class Config:
-        env_file = ".env"
+        env_file = (_env_path, ".env")
         extra = "allow"
 
 settings = Settings()

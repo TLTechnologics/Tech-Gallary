@@ -14,7 +14,7 @@ interface RegistrationSectionProps {
 export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   events,
   preselectedEventId,
-  ourCollegeName = 'Tech Gallery Engineering College',
+  ourCollegeName = 'LJCCA',
   onOpenSubmission,
 }) => {
   const { showNotification } = useNotification();
@@ -29,9 +29,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [collegeName, setCollegeName] = useState(ourCollegeName);
+  const [collegeName, setCollegeName] = useState('LJCCA');
   const [isInternalCollege, setIsInternalCollege] = useState(true);
-  const [department, setDepartment] = useState('Computer Science & Engineering');
+  const [rollNumber, setRollNumber] = useState('');
+  const [department, setDepartment] = useState('BCA');
   const [yearSemester, setYearSemester] = useState('3rd Year / Semester 5');
   const [teamName, setTeamName] = useState('');
   const [teamMembers, setTeamMembers] = useState('');
@@ -64,7 +65,14 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
   const handleCollegeToggle = (isInternal: boolean) => {
     setIsInternalCollege(isInternal);
-    setCollegeName(isInternal ? ourCollegeName : '');
+    if (isInternal) {
+      setCollegeName('LJCCA');
+      setDepartment('BCA');
+    } else {
+      setCollegeName('');
+      setDepartment('Computer Science & Engineering');
+      setRollNumber('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,6 +83,14 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
       setFormFeedback({
         isError: true,
         message: 'Please fill in all mandatory fields: Full Name, Email, Phone, and College Name.',
+      });
+      return;
+    }
+
+    if (isInternalCollege && !rollNumber.trim()) {
+      setFormFeedback({
+        isError: true,
+        message: 'Please enter your Roll Number for LJCCA verification.',
       });
       return;
     }
@@ -126,8 +142,9 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
         full_name: fullName.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
-        college_name: collegeName.trim(),
-        department: department.trim(),
+        college_name: isInternalCollege ? 'LJCCA' : collegeName.trim(),
+        roll_number: isInternalCollege ? rollNumber.trim() : undefined,
+        department: isInternalCollege ? 'BCA' : department.trim(),
         year_semester: yearSemester.trim(),
         event_id: selectedEventId,
         registration_type: selectedPass,
@@ -332,7 +349,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 </span>
               </label>
 
-              {/* College Name & Department */}
+              {/* College Name */}
               <label className="field">
                 <span>College name *</span>
                 <input
@@ -342,17 +359,43 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   onChange={(e) => setCollegeName(e.target.value)}
                   placeholder="College / University Name"
                   readOnly={isInternalCollege}
+                  style={isInternalCollege ? { opacity: 0.9, cursor: 'not-allowed', background: 'rgba(255,255,255,0.04)' } : undefined}
                 />
+                {isInternalCollege && (
+                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem' }}>
+                    Locked to host institution (LJCCA).
+                  </span>
+                )}
               </label>
+
+              {/* Roll Number (Shown and required when Our College / LJCCA is selected) */}
+              {isInternalCollege && (
+                <label className="field">
+                  <span>Roll number (LJCCA) *</span>
+                  <input
+                    type="text"
+                    required
+                    value={rollNumber}
+                    onChange={(e) => setRollNumber(e.target.value)}
+                    placeholder="e.g. 23BCA101 or Roll No."
+                    autoComplete="off"
+                  />
+                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem' }}>
+                    Required for student identity verification at campus entry.
+                  </span>
+                </label>
+              )}
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <label className="field">
-                  <span>Department</span>
+                  <span>Department {isInternalCollege ? '(Locked to BCA)' : ''}</span>
                   <input
                     type="text"
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
-                    placeholder="e.g. Computer Science"
+                    placeholder="e.g. BCA or Computer Science"
+                    readOnly={isInternalCollege}
+                    style={isInternalCollege ? { opacity: 0.9, cursor: 'not-allowed', background: 'rgba(255,255,255,0.04)' } : undefined}
                   />
                 </label>
 

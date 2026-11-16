@@ -43,6 +43,7 @@ class Registration(Base):
     phone = Column(String(30), nullable=False, index=True)
     college_name = Column(String(200), nullable=False)
     is_internal = Column(Boolean, default=False)
+    roll_number = Column(String(50), nullable=True)
     department = Column(String(100), nullable=False)
     year_semester = Column(String(50), nullable=False)
     event_id = Column(String(50), ForeignKey("events.id"), nullable=False)

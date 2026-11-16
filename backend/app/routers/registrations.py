@@ -17,7 +17,7 @@ def is_our_college(college_name: str, official_name: str) -> bool:
     norm_official = official_name.strip().lower()
     if norm_input == norm_official:
         return True
-    keywords = ["our college", "tech gallery", "tgec", "tgit", "host college", "internal"]
+    keywords = ["our college", "tech gallery", "tgec", "tgit", "host college", "internal", "ljcca", "lj cca", "lj", "lj university", "lj institute"]
     for kw in keywords:
         if kw in norm_input:
             return True
@@ -151,6 +151,7 @@ def create_registration(payload: RegistrationCreate, db: Session = Depends(get_d
         phone=payload.phone.strip(),
         college_name=payload.college_name.strip(),
         is_internal=is_internal,
+        roll_number=payload.roll_number.strip() if payload.roll_number else None,
         department=payload.department.strip(),
         year_semester=payload.year_semester.strip(),
         event_id=payload.event_id,

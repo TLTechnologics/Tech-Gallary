@@ -23,6 +23,7 @@ export interface RegistrationPayload {
   email: string;
   phone: string;
   college_name: string;
+  roll_number?: string;
   department: string;
   year_semester: string;
   event_id: string;
@@ -39,6 +40,7 @@ export interface RegistrationRecord {
   phone: string;
   college_name: string;
   is_internal: boolean;
+  roll_number?: string;
   department: string;
   year_semester: string;
   event_id: string;

@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS public.registrations (
     phone TEXT NOT NULL,
     college_name TEXT NOT NULL,
     is_internal BOOLEAN DEFAULT FALSE,
+    roll_number TEXT,
     department TEXT NOT NULL,
     year_semester TEXT NOT NULL,
     event_id TEXT NOT NULL REFERENCES public.events(id) ON DELETE RESTRICT,

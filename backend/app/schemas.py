@@ -1,5 +1,6 @@
-from typing import List, Optional, Literal
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from typing import List, Optional, Literal, Union
+from uuid import UUID
+from pydantic import BaseModel, EmailStr, Field, field_validator, field_serializer
 from datetime import datetime
 
 # --- Events ---
@@ -42,6 +43,7 @@ class RegistrationCreate(BaseModel):
     email: EmailStr
     phone: str = Field(..., min_length=10, max_length=20)
     college_name: str = Field(..., min_length=2, max_length=200)
+    roll_number: Optional[str] = None
     department: str = Field(..., min_length=2, max_length=100)
     year_semester: str = Field(..., min_length=1, max_length=50)
     event_id: str
@@ -59,13 +61,14 @@ class RegistrationCreate(BaseModel):
         return cleaned
 
 class RegistrationOut(BaseModel):
-    id: str
+    id: Union[str, UUID]
     reg_code: str
     full_name: str
     email: str
     phone: str
     college_name: str
     is_internal: bool
+    roll_number: Optional[str] = None
     department: str
     year_semester: str
     event_id: str
@@ -79,6 +82,11 @@ class RegistrationOut(BaseModel):
     whatsapp_url: Optional[str] = None
     whatsapp_message: Optional[str] = None
     created_at: datetime
+
+    @field_serializer('id')
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 
@@ -88,8 +96,13 @@ class ProjectImageBase(BaseModel):
     caption: Optional[str] = None
 
 class ProjectImageOut(ProjectImageBase):
-    id: str
+    id: Union[str, UUID]
     created_at: datetime
+
+    @field_serializer('id')
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 
@@ -113,7 +126,7 @@ class ProjectStatusUpdate(BaseModel):
     admin_notes: Optional[str] = None
 
 class ProjectOut(BaseModel):
-    id: str
+    id: Union[str, UUID]
     project_code: str
     student_name: str
     college_name: str
@@ -132,6 +145,11 @@ class ProjectOut(BaseModel):
     created_at: datetime
     updated_at: datetime
     images: List[ProjectImageOut] = []
+
+    @field_serializer('id')
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 
@@ -145,8 +163,13 @@ class GalleryCreate(BaseModel):
     is_placeholder: bool = False
 
 class GalleryOut(GalleryCreate):
-    id: str
+    id: Union[str, UUID]
     created_at: datetime
+
+    @field_serializer('id')
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 
@@ -164,8 +187,13 @@ class FAQUpdate(BaseModel):
     display_order: Optional[int] = None
 
 class FAQOut(FAQCreate):
-    id: str
+    id: Union[str, UUID]
     created_at: datetime
+
+    @field_serializer('id')
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 

@@ -181,6 +181,11 @@ export const RegistrationConfirmation: React.FC<RegistrationConfirmationProps> =
               INSTITUTION
             </span>
             <span style={{ color: 'var(--mute)' }}>{registration.college_name}</span>
+            {registration.roll_number && (
+              <span className="mono" style={{ display: 'block', fontSize: '0.75rem', color: 'var(--accent-text)', marginTop: '0.15rem' }}>
+                Roll: {registration.roll_number}
+              </span>
+            )}
           </div>
 
           <div>

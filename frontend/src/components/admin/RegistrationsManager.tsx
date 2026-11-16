@@ -123,7 +123,12 @@ export const RegistrationsManager: React.FC<RegistrationsManagerProps> = ({
                 </td>
                 <td className="py-3 px-4 max-w-[180px] truncate" title={r.college_name}>
                   {r.college_name}
-                  <span className="ml-1 text-[10px] text-neutral-400">
+                  {r.roll_number && (
+                    <span className="block text-[10px] text-amber-400 font-mono">
+                      Roll: {r.roll_number}
+                    </span>
+                  )}
+                  <span className="text-[10px] text-neutral-400">
                     ({r.is_internal ? 'Internal' : 'External'})
                   </span>
                 </td>
@@ -228,6 +233,12 @@ export const RegistrationsManager: React.FC<RegistrationsManagerProps> = ({
                 <span className="ml-2 text-brand-lime text-[11px]">
                   ({selectedReg.is_internal ? 'Our College' : 'External College'})
                 </span>
+                {selectedReg.roll_number && (
+                  <div className="mt-1">
+                    <span className="text-neutral-400 text-[10px]">ROLL NO: </span>
+                    <span className="font-bold text-amber-400 font-mono">{selectedReg.roll_number}</span>
+                  </div>
+                )}
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
