@@ -13,8 +13,6 @@ const YEAR_SEMESTER_OPTIONS = [
   '3rd Year / Semester 6',
   '4th Year / Semester 7',
   '4th Year / Semester 8',
-  "Postgraduate / Master's",
-  'Faculty / Guest / Other',
 ];
 
 interface RegistrationSectionProps {
