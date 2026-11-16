@@ -1,7 +1,7 @@
 from typing import List, Optional, Literal, Union
 from uuid import UUID
 from pydantic import BaseModel, EmailStr, Field, field_validator, field_serializer
-from datetime import datetime
+from datetime import datetime, date
 
 # --- Events ---
 class EventBase(BaseModel):
@@ -212,13 +212,18 @@ class SettingsUpdate(BaseModel):
 class SettingsOut(BaseModel):
     festival_name: str
     tagline: str
-    start_date: str
-    end_date: str
+    start_date: Union[str, date]
+    end_date: Union[str, date]
     our_college_name: str
     official_email: str
     phone: str
     address: str
     instagram_url: str
+
+    @field_serializer('start_date', 'end_date')
+    def serialize_date(self, v: Union[str, date]) -> str:
+        return str(v)
+
     class Config:
         from_attributes = True
 
