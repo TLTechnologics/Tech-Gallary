@@ -3,6 +3,7 @@ import { api } from '../../services/api';
 import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types';
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
+import { GlassSelect } from '../common/GlassSelect';
 
 const YEAR_SEMESTER_OPTIONS = [
   '1st Year / Semester 1',
@@ -296,25 +297,24 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               <h3>Your details</h3>
 
               {/* Event Dropdown */}
-              <label className="field">
-                <span>Selected Festival Event *</span>
-                <select
+              <div className="field">
+                <span className="field-label">Selected Festival Event *</span>
+                <GlassSelect
                   value={selectedEventId}
-                  onChange={(e) => setSelectedEventId(e.target.value)}
-                  className="glass-select"
-                >
-                  {availableEvents.map((ev) => (
-                    <option key={ev.id} value={ev.id}>
-                      {ev.date_display} — {ev.name} ({ev.eligibility})
-                    </option>
-                  ))}
-                </select>
+                  onChange={setSelectedEventId}
+                  options={availableEvents.map((ev) => ({
+                    value: ev.id,
+                    label: ev.name,
+                    sublabel: ev.date_display,
+                    badge: ev.eligibility_type === 'internal_only' ? 'College Only' : ev.eligibility_type === 'parents_only' ? 'Parents' : 'All Colleges',
+                  }))}
+                />
                 {!isInternalCollege && (
-                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem', display: 'block' }}>
+                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.35rem', display: 'block' }}>
                     External college students can only select from Tech Showcase days (Day 1 &amp; Day 2).
                   </span>
                 )}
-              </label>
+              </div>
 
               {/* College Affiliation Selector */}
               <div style={{ marginBottom: '1.1rem' }}>
@@ -433,21 +433,14 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   />
                 </label>
 
-                <label className="field">
-                  <span>Year / Semester *</span>
-                  <select
+                <div className="field">
+                  <span className="field-label">Year / Semester *</span>
+                  <GlassSelect
                     value={yearSemester}
-                    onChange={(e) => setYearSemester(e.target.value)}
-                    required
-                    className="glass-select"
-                  >
-                    {YEAR_SEMESTER_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                    onChange={setYearSemester}
+                    options={YEAR_SEMESTER_OPTIONS}
+                  />
+                </div>
               </div>
 
               {/* Team Name for Showcasing or Hackathons */}

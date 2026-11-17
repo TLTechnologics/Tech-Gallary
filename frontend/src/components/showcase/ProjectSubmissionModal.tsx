@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import { api } from '../../services/api';
 import { ProjectPayload, RegistrationRecord } from '../../types';
 import { useNotification } from '../../context/NotificationContext';
+import { GlassSelect } from '../common/GlassSelect';
 
 interface ProjectSubmissionModalProps {
   isOpen: boolean;
@@ -399,17 +400,11 @@ export const ProjectSubmissionModal: React.FC<ProjectSubmissionModalProps> = ({
                   <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-1.5">
                     Specific Track / Domain *
                   </label>
-                  <select
+                  <GlassSelect
                     value={formData.sub_category}
-                    onChange={(e) => setFormData({ ...formData, sub_category: e.target.value })}
-                    className="w-full glass-select px-3.5 py-2.5 text-xs text-neutral-100 font-mono focus:outline-none"
-                  >
-                    {currentSubCats.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
+                    onChange={(val) => setFormData({ ...formData, sub_category: val })}
+                    options={currentSubCats}
+                  />
                 </div>
 
                 {/* Project Name */}
