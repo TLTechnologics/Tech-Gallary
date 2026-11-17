@@ -18,8 +18,8 @@ from app.config import settings
 router = APIRouter(prefix="/api/admin", tags=["Admin Portal"])
 
 @router.post("/login", response_model=Token)
-def admin_login(payload: AdminLogin, db: Session = Depends(get_db)):
-    # 1. Check environment root admin
+def admin_login(payload: AdminLogin):
+    # 1. Check environment root admin (independent of database availability)
     if payload.email.strip().lower() == settings.ADMIN_EMAIL.lower() and payload.password == settings.ADMIN_PASSWORD:
         token = create_access_token({"sub": settings.ADMIN_EMAIL, "role": "superadmin"})
         return Token(
@@ -29,16 +29,24 @@ def admin_login(payload: AdminLogin, db: Session = Depends(get_db)):
             role="superadmin"
         )
     
-    # 2. Check AdminUser table
-    admin = db.query(AdminUser).filter(AdminUser.email == payload.email.strip().lower()).first()
-    if admin and verify_password(payload.password, admin.hashed_password):
-        token = create_access_token({"sub": admin.email, "role": admin.role})
-        return Token(
-            access_token=token,
-            admin_email=admin.email,
-            admin_name=admin.full_name,
-            role=admin.role
-        )
+    # 2. Check AdminUser table in DB
+    try:
+        from app.database import SessionLocal
+        db = SessionLocal()
+        try:
+            admin = db.query(AdminUser).filter(AdminUser.email == payload.email.strip().lower()).first()
+            if admin and verify_password(payload.password, admin.hashed_password):
+                token = create_access_token({"sub": admin.email, "role": admin.role})
+                return Token(
+                    access_token=token,
+                    admin_email=admin.email,
+                    admin_name=admin.full_name,
+                    role=admin.role
+                )
+        finally:
+            db.close()
+    except Exception as e:
+        print(f"Notice: Database check during admin login: {e}")
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
