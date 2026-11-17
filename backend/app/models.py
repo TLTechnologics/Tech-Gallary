@@ -138,10 +138,10 @@ class FestivalSettings(Base):
     tagline = Column(String(255), default="Where Ideas Meet Innovation.")
     start_date = Column(String(20), default="2027-01-18")
     end_date = Column(String(20), default="2027-01-24")
-    our_college_name = Column(String(200), default="Tech Gallery Engineering College")
+    our_college_name = Column(String(200), default="LJCCA")
     official_email = Column(String(150), default="contact@techgallery2027.edu")
     phone = Column(String(50), default="+91 98765 43210")
-    address = Column(Text, default="Innovation Campus, Tech Gallery Block, University Road, Sector 5")
+    address = Column(Text, default="LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015")
     instagram_url = Column(String(255), default="https://instagram.com/techgallery2027")
     updated_at = Column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
 

@@ -1,19 +1,22 @@
 import React from 'react';
+import { MapPin } from 'lucide-react';
 
 interface ContactSectionProps {
-  collegeName: string;
-  officialEmail: string;
-  phone: string;
-  address: string;
-  instagramUrl: string;
+  collegeName?: string;
+  officialEmail?: string;
+  phone?: string;
+  address?: string;
+  instagramUrl?: string;
+  mapUrl?: string;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
-  collegeName,
+  collegeName = 'LJCCA',
   officialEmail = 'hello@techgallery.example',
   phone = '+91 98765 43210',
-  address = 'Main Auditorium & Innovation Lab, College Campus',
+  address = 'LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015',
   instagramUrl = 'https://instagram.com/techgallery2027',
+  mapUrl = 'https://share.google/wWJlNwjeWMOJeZC5y',
 }) => {
   const shareWhatsApp = () => {
     const text = encodeURIComponent(
@@ -21,6 +24,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
   };
+
+  // Ensure venue address displays full official address
+  const fullAddress = 'LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015';
+  const displayAddress =
+    address && address.includes('Vastrapur')
+      ? address
+      : fullAddress;
 
   return (
     <section className="s" id="contact">
@@ -69,7 +79,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
             <div>
               <span className="mono">Venue &amp; Campus</span>
-              <p>{collegeName ? `${collegeName}, ${address}` : address}</p>
+              <p style={{ margin: '0.35rem 0 0.75rem', lineHeight: '1.5' }}>
+                {displayAddress}
+              </p>
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chip"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  fontSize: '0.82rem',
+                }}
+              >
+                <MapPin className="w-3.5 h-3.5" style={{ color: 'var(--lime, #cdff2b)' }} />
+                <span>Google Maps Location Reference →</span>
+              </a>
             </div>
           </div>
         </div>

@@ -322,7 +322,7 @@ const DEFAULT_SETTINGS: FestivalSettings = {
   our_college_name: 'LJCCA',
   official_email: 'contact@techgallery2027.edu',
   phone: '+91 98765 43210',
-  address: 'Innovation Campus, Tech Gallery Block, University Road, Sector 5',
+  address: 'LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015',
   instagram_url: 'https://instagram.com/techgallery2027',
 };
 

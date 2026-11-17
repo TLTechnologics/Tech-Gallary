@@ -4,6 +4,7 @@ import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types'
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
 import { GlassSelect } from '../common/GlassSelect';
+import { MapPin } from 'lucide-react';
 
 const YEAR_SEMESTER_OPTIONS = [
   '1st Year / Semester 1',
@@ -267,9 +268,19 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 </label>
               </div>
 
-              <p className="mono" style={{ marginBottom: '1.5rem' }}>
-                All festival registrations are 100% Free · Main Campus 18–24 Jan 2027.
-              </p>
+              <div className="mono" style={{ marginBottom: '1.5rem', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                <span>All festival registrations are 100% Free · LJCCA, Vastrapur, Ahmedabad · 18–24 Jan 2027</span>
+                <a
+                  href="https://share.google/wWJlNwjeWMOJeZC5y"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="chip"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', padding: '0.2rem 0.55rem', fontSize: '0.72rem', textDecoration: 'none' }}
+                >
+                  <MapPin className="w-3 h-3" style={{ color: 'var(--lime, #cdff2b)' }} />
+                  <span>Map Reference →</span>
+                </a>
+              </div>
 
               {/* Workflow Notice */}
               <div

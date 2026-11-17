@@ -179,7 +179,9 @@ def create_registration(payload: RegistrationCreate, db: Session = Depends(get_d
             f"🎫 *Pass Type:* Project Showcasing (Free)\n"
             f"⚠️ *Status:* Pending Admin Approval\n\n"
             f"Once our faculty committee reviews and approves your registration, you will receive project submission access to upload your hardware/software prototype.\n\n"
-            f"📍 *Venue:* Main Campus | 18–24 Jan 2027"
+            f"📍 *Venue:* LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015\n"
+            f"🗺️ *Location:* https://share.google/wWJlNwjeWMOJeZC5y\n"
+            f"📅 *Dates:* 18–24 Jan 2027"
         )
     else:
         whatsapp_msg = (
@@ -189,7 +191,8 @@ def create_registration(payload: RegistrationCreate, db: Session = Depends(get_d
             f"📋 *Registration ID:* {registration.reg_code}\n"
             f"🎪 *Event:* {registration.event_name}\n"
             f"📅 *Dates:* 18–24 January 2027\n"
-            f"📍 *Venue:* Main Auditorium & Exhibition Pavilion\n\n"
+            f"📍 *Venue:* LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015\n"
+            f"🗺️ *Location:* https://share.google/wWJlNwjeWMOJeZC5y\n\n"
             f"Show this Registration ID at the welcome desk on campus. See you there!"
         )
 

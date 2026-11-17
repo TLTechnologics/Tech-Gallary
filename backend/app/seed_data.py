@@ -275,10 +275,10 @@ def seed_database(db: Session):
             tagline="Where Ideas Meet Innovation.",
             start_date="2027-01-18",
             end_date="2027-01-24",
-            our_college_name="Tech Gallery Engineering College",
+            our_college_name="LJCCA",
             official_email="contact@techgallery2027.edu",
             phone="+91 98765 43210",
-            address="Innovation Campus, Tech Gallery Block, University Road, Sector 5",
+            address="LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015",
             instagram_url="https://instagram.com/techgallery2027"
         )
         db.add(settings_obj)
