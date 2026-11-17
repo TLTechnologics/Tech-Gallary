@@ -55,6 +55,7 @@ def root():
         "docs_url": "/docs"
     }
 
+@app.get("/health")
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy", "service": "techgallery-api"}
