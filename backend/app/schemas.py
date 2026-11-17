@@ -8,7 +8,7 @@ class EventBase(BaseModel):
     id: str
     name: str
     date_display: str
-    date_iso: str
+    date_iso: Union[str, date]
     tagline: Optional[str] = None
     description: str
     eligibility: str
@@ -21,6 +21,10 @@ class EventBase(BaseModel):
     is_workshop: bool = False
     is_showcase: bool = False
     display_order: int = 0
+
+    @field_serializer('date_iso')
+    def serialize_date_iso(self, v: Union[str, date]) -> str:
+        return str(v)
 
 class EventUpdate(BaseModel):
     name: Optional[str] = None

@@ -2,22 +2,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.database import engine, Base, SessionLocal
-from app.seed_data import seed_database
 from app.routers import events, registrations, projects, gallery, faqs, contact, admin
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Ensure database schema exists and initial seed is present
-    try:
-        Base.metadata.create_all(bind=engine)
-        db = SessionLocal()
-        try:
-            seed_database(db)
-        finally:
-            db.close()
-    except Exception as e:
-        print(f"Warning: Database startup check encountered an issue: {e}")
+    # Schema and tables are initialized on-demand via database.py ensure_tables()
     yield
 
 app = FastAPI(
