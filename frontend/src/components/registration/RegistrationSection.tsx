@@ -53,21 +53,31 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
     (e) => e.registration_status !== 'announced' && e.eligibility_type !== 'results_only'
   );
 
-  useEffect(() => {
-    if (selectedPass === 'showcasing') {
-      const showcaseEvent = registrableEvents.find((e) => e.is_showcase);
-      if (showcaseEvent) {
-        setSelectedEventId(showcaseEvent.id);
-        return;
-      }
-    }
+  const showcaseEvents = registrableEvents.filter((e) => e.is_showcase);
+  const availableEvents =
+    !isInternalCollege || selectedPass === 'showcasing'
+      ? showcaseEvents
+      : registrableEvents;
 
-    if (preselectedEventId && registrableEvents.some((e) => e.id === preselectedEventId)) {
-      setSelectedEventId(preselectedEventId);
-    } else if (registrableEvents.length > 0 && !selectedEventId) {
-      setSelectedEventId(registrableEvents[0].id);
-    }
-  }, [preselectedEventId, registrableEvents, selectedPass]);
+  useEffect(() => {
+    const validEvents =
+      !isInternalCollege || selectedPass === 'showcasing'
+        ? showcaseEvents
+        : registrableEvents;
+
+    setSelectedEventId((prev) => {
+      // If a preselected event was provided and it's valid for this student type, use it
+      if (preselectedEventId && validEvents.some((e) => e.id === preselectedEventId)) {
+        return preselectedEventId;
+      }
+      // If current selection is still valid among the available events, keep it
+      if (prev && validEvents.some((e) => e.id === prev)) {
+        return prev;
+      }
+      // Otherwise fallback to the first valid event
+      return validEvents[0]?.id || '';
+    });
+  }, [preselectedEventId, registrableEvents, selectedPass, isInternalCollege]);
 
   const currentEvent = events.find((e) => e.id === selectedEventId);
   const isInternalOnly = currentEvent?.eligibility_type === 'internal_only';
@@ -83,6 +93,11 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
       setCollegeName('');
       setDepartment('Computer Science & Engineering');
       setRollNumber('');
+      if (!showcaseEvents.some((e) => e.id === selectedEventId)) {
+        if (showcaseEvents.length > 0) {
+          setSelectedEventId(showcaseEvents[0].id);
+        }
+      }
     }
   };
 
@@ -124,6 +139,13 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
     }
 
     // Strict Eligibility Rule Enforcement
+    if (!isInternalCollege && !currentEvent?.is_showcase) {
+      const msg = `External college students can only select from Tech Showcase days. Please select Day 1 or Day 2 of the Tech Showcase.`;
+      setFormFeedback({ isError: true, message: msg });
+      showNotification('error', 'Participation Restricted', msg);
+      return;
+    }
+
     if (isInternalOnly && !isInternalCollege) {
       const msg = `${currentEvent?.name || 'This event'} is strictly reserved for students of our college. External students can participate ONLY in the Tech Showcase.`;
       setFormFeedback({ isError: true, message: msg });
@@ -279,19 +301,19 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 <select
                   value={selectedEventId}
                   onChange={(e) => setSelectedEventId(e.target.value)}
-                  disabled={selectedPass === 'showcasing'}
                   className="glass-select"
                 >
-                  {selectedPass === 'showcasing' ? (
-                    <option value={selectedEventId}>Tech Showcase – Flagship Project Exhibition</option>
-                  ) : (
-                    registrableEvents.map((ev) => (
-                      <option key={ev.id} value={ev.id}>
-                        {ev.date_display} — {ev.name} ({ev.eligibility})
-                      </option>
-                    ))
-                  )}
+                  {availableEvents.map((ev) => (
+                    <option key={ev.id} value={ev.id}>
+                      {ev.date_display} — {ev.name} ({ev.eligibility})
+                    </option>
+                  ))}
                 </select>
+                {!isInternalCollege && (
+                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem', display: 'block' }}>
+                    External college students can only select from Tech Showcase days (Day 1 &amp; Day 2).
+                  </span>
+                )}
               </label>
 
               {/* College Affiliation Selector */}

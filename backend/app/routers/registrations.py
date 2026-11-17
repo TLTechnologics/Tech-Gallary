@@ -89,15 +89,13 @@ def create_registration(payload: RegistrationCreate, db: Session = Depends(get_d
 
     is_internal = is_our_college(payload.college_name, our_college_name)
 
-    # 4. Strict Eligibility Enforcement
-    internal_only_events = ["bhavesh-workshop", "thakkar-workshop", "bhavesh-hackathon", "thakkar-hackathon"]
-    if payload.event_id in internal_only_events and not is_internal:
+    # 4. Strict Eligibility Enforcement: External students can only select from Tech Showcase days
+    if not is_internal and not event.is_showcase:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=(
-                f"Participation Restricted: {event.name} is exclusively reserved for enrolled students of our college "
-                f"({our_college_name}). External college students are eligible to participate ONLY in the Tech Showcase "
-                f"by submitting Hardware or Software projects."
+                f"Participation Restricted: External college students can only select from Tech Showcase days. "
+                f"'{event.name}' is reserved for students of our college ({our_college_name})."
             )
         )
 

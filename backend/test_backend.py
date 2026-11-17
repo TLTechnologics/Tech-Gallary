@@ -109,7 +109,7 @@ def run_tests():
     assert r.status_code == 409, f"Expected 409 Conflict for duplicate phone, got {r.status_code}"
     print("✔ Duplicate phone registration prevented for same event (HTTP 409 Conflict).")
 
-    # 4f. External student registering for Tech Showcase -> MUST SUCCEED (201)
+    # 4f. External student registering for Tech Showcase Day 1 -> MUST SUCCEED (201)
     showcase_reg = {
         "full_name": "Priya External",
         "email": f"priya_{timestamp}@nationaltech.edu",
@@ -122,6 +122,34 @@ def run_tests():
     r = client.post("/api/registrations", json=showcase_reg)
     assert r.status_code == 201, f"Expected 201 for external showcase registration, got {r.status_code}: {r.text}"
     print("✔ External student successfully registered for Tech Showcase Day 1.")
+
+    # 4g. External student registering for Tech Showcase Day 2 -> MUST SUCCEED (201)
+    showcase_day2_reg = {
+        "full_name": "Amit External",
+        "email": f"amit_{timestamp}@nationaltech.edu",
+        "phone": f"+9196{str(timestamp)[-8:]}",
+        "college_name": "National Institute of Technology",
+        "department": "Computer Science",
+        "year_semester": "3rd Year",
+        "event_id": "tech-showcase-day-2",
+    }
+    r = client.post("/api/registrations", json=showcase_day2_reg)
+    assert r.status_code == 201, f"Expected 201 for external showcase day 2 registration, got {r.status_code}: {r.text}"
+    print("✔ External student successfully registered for Tech Showcase Day 2.")
+
+    # 4h. External student attempting to register for Parents Workshop -> MUST BE REJECTED (400)
+    parents_workshop_attempt = {
+        "full_name": "External Parent Or Student",
+        "email": f"ext_parent_{timestamp}@othercollege.edu",
+        "phone": f"+9195{str(timestamp)[-8:]}",
+        "college_name": "Other College",
+        "department": "Arts",
+        "year_semester": "1st Year",
+        "event_id": "ai-workshop-parents",
+    }
+    r = client.post("/api/registrations", json=parents_workshop_attempt)
+    assert r.status_code == 400, f"Expected 400 for external student on non-showcase event, got {r.status_code}"
+    print("✔ External student blocked from non-showcase event (HTTP 400).")
 
     # 5. Test Project Submission (Hardware & Software)
     # 5a. Submit Hardware Project
