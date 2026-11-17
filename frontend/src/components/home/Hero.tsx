@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowDown, Cpu } from 'lucide-react';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface HeroProps {
   onOpenSubmission?: () => void;
@@ -62,15 +63,20 @@ export const Hero: React.FC<HeroProps> = () => {
         {/* Exact Title Layout with stacked GALLERY and lime 2027 badge */}
         <h1 className="title" aria-label="Tech Gallery 2027">
           <span className="l1">
-            TECH
+            <LetterReveal text="TECH" as="span" delay={0.1} />
             <span className="yr" style={{ display: 'block' }}>2027</span>
           </span>
-          <span>GALLERY</span>
+          <LetterReveal text="GALLERY" as="span" delay={0.25} />
         </h1>
 
         {/* Foot with Tagline, When & Action CTA buttons */}
         <div className="foot">
-          <p className="tag">Where Ideas Meet Innovation</p>
+          <LetterReveal
+            as="p"
+            className="tag"
+            text="Where Ideas Meet Innovation"
+            delay={0.45}
+          />
 
           <div className="when">
             <div>

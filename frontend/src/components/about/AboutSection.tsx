@@ -1,4 +1,5 @@
 import React from 'react';
+import { LetterReveal } from '../common/LetterReveal';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -7,9 +8,11 @@ export const AboutSection: React.FC = () => {
         <div className="about">
           <span className="mono">About</span>
           <div>
-            <p className="lead">
-              A week where students build, show and test technology in front of the people who will use it.
-            </p>
+            <LetterReveal
+              as="p"
+              className="lead"
+              text="A week where students build, show and test technology in front of the people who will use it."
+            />
             <div className="cols">
               <p>
                 Tech Gallery is our annual exhibition of student work. Think of it as a gallery rather than a contest: every project gets a placard, a place to stand, and a visitor who can ask questions.

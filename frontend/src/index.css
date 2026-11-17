@@ -1097,6 +1097,119 @@ footer.theme-footer .wrap {
   flex-wrap: wrap;
 }
 
+/* ==========================================================================
+   Infinite Horizontal Scrolling Cards Animation (Two-Row Marquee)
+   ========================================================================== */
+
+@keyframes tg-marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes tg-marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.tg-marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.tg-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.6rem 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.tg-marquee-row {
+  width: 100%;
+  overflow: hidden;
+}
+
+.tg-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  will-change: transform;
+}
+
+.tg-marquee-track.scroll-left {
+  animation: tg-marquee-left 45s linear infinite;
+}
+
+.tg-marquee-track.scroll-right {
+  animation: tg-marquee-right 45s linear infinite;
+}
+
+.tg-marquee-wrapper:hover .tg-marquee-track,
+.tg-marquee-wrapper:focus-within .tg-marquee-track {
+  animation-play-state: paused;
+}
+
+.tg-marquee-item {
+  flex: 0 0 350px;
+  width: 350px;
+  max-width: 85vw;
+  display: flex;
+}
+
+.tg-marquee-item .plate {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .tg-marquee-item {
+    flex: 0 0 310px;
+    width: 310px;
+  }
+}
+
+/* Mobile & Small Screens (390px and below / reflow to readable vertical list) */
+@media (max-width: 640px) {
+  .tg-marquee-wrapper {
+    overflow: visible !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    padding: 0 !important;
+  }
+  .tg-marquee-row {
+    overflow: visible !important;
+  }
+  .tg-marquee-track {
+    animation: none !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1.25rem !important;
+  }
+  .tg-marquee-item {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .tg-marquee-duplicate {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;

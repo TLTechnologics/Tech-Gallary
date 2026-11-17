@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface ContactSectionProps {
   collegeName?: string;
@@ -37,7 +38,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div className="wrap">
         <div className="sh">
           <span className="mono">Contact</span>
-          <h2>Talk to us.</h2>
+          <LetterReveal as="h2" text="Talk to us." />
         </div>
 
         <div className="contact">

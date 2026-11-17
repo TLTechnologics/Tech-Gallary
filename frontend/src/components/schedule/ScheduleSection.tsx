@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface SessionItem {
   time: string;
@@ -97,7 +98,7 @@ export const ScheduleSection: React.FC = () => {
       <div className="wrap">
         <div className="sh">
           <span className="mono">Schedule</span>
-          <h2>Seven days, one campus.</h2>
+          <LetterReveal as="h2" text="Seven days, one campus." />
         </div>
 
         {/* 7 Days Tab List matching Tech Gallery 2027.html */}

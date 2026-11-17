@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectRecord } from '../../types';
+import { LetterReveal } from '../common/LetterReveal';
+import { InfiniteCardsMarquee } from '../common/InfiniteCardsMarquee';
 
 interface TechShowcaseSectionProps {
   projects: ProjectRecord[];
@@ -136,12 +138,69 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
     return true;
   });
 
+  const renderPlateCard = (plate: StaticPlacard, uniqueKey?: string) => (
+    <article key={uniqueKey || plate.id} className="plate" data-t={plate.type}>
+      <div className="art">{plate.svg}</div>
+      <div className="pb">
+        <div className="top mono">
+          <span>{plate.code}</span>
+          <span>{plate.category}</span>
+        </div>
+        <h3>{plate.title}</h3>
+        <p>{plate.description}</p>
+        <div className="by mono">{plate.by}</div>
+      </div>
+    </article>
+  );
+
+  const renderDynamicCard = (project: ProjectRecord, idx: number, uniqueKey?: string) => {
+    const isHw = project.category.toLowerCase().includes('hardware');
+    const code = `TG-${isHw ? 'H' : 'S'}${String(idx + 10).padStart(2, '0')}`;
+    return (
+      <article key={uniqueKey || project.id} className="plate" data-t={isHw ? 'hw' : 'sw'}>
+        <div className="art">
+          <svg viewBox="0 0 300 170" aria-hidden="true">
+            <rect x="50" y="50" width="200" height="70" />
+            <circle cx="150" cy="85" r="12" className="f" />
+            <path d="M50 85H138M162 85H250" />
+          </svg>
+        </div>
+        <div className="pb">
+          <div className="top mono">
+            <span>{code}</span>
+            <span>{project.category}</span>
+          </div>
+          <h3>{project.project_name}</h3>
+          <p>{project.description}</p>
+          <div className="by mono">
+            {project.student_name} · {project.college_name}
+          </div>
+        </div>
+      </article>
+    );
+  };
+
+  // Dedicated Rows for Two-Row Infinite Marquee
+  const hwCards = [
+    ...STATIC_PLATES.filter((p) => p.type === 'hw').map((plate) => renderPlateCard(plate, `hw-${plate.id}`)),
+    ...projects
+      .filter((p) => p.category.toLowerCase().includes('hardware'))
+      .map((proj, idx) => renderDynamicCard(proj, idx, `hw-dyn-${proj.id}`)),
+  ];
+
+  const swCards = [
+    ...STATIC_PLATES.filter((p) => p.type === 'sw').map((plate) => renderPlateCard(plate, `sw-${plate.id}`)),
+    ...projects
+      .filter((p) => !p.category.toLowerCase().includes('hardware'))
+      .map((proj, idx) => renderDynamicCard(proj, idx, `sw-dyn-${proj.id}`)),
+  ];
+
   return (
     <section className="s" id="showcase">
       <div className="wrap">
         <div className="sh">
           <span className="mono">Tech showcase</span>
-          <h2>On display this year.</h2>
+          <LetterReveal as="h2" text="On display this year." />
         </div>
 
         {/* Action Header Strip */}
@@ -194,51 +253,19 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
           “Students from all colleges are welcome to exhibit their hardware and software projects. Register below with a Project Showcasing pass to unlock your project submission upon admin review.”
         </p>
 
-        {/* Exact Plates Grid */}
-        <div className="plates">
-          {filteredStatic.map((plate) => (
-            <article key={plate.id} className="plate" data-t={plate.type}>
-              <div className="art">{plate.svg}</div>
-              <div className="pb">
-                <div className="top mono">
-                  <span>{plate.code}</span>
-                  <span>{plate.category}</span>
-                </div>
-                <h3>{plate.title}</h3>
-                <p>{plate.description}</p>
-                <div className="by mono">{plate.by}</div>
-              </div>
-            </article>
-          ))}
-
-          {/* Dynamic Approved Submissions from Supabase/FastAPI */}
-          {filteredDynamic.map((project, idx) => {
-            const isHw = project.category.toLowerCase().includes('hardware');
-            const code = `TG-${isHw ? 'H' : 'S'}${String(idx + 10).padStart(2, '0')}`;
-            return (
-              <article key={project.id} className="plate" data-t={isHw ? 'hw' : 'sw'}>
-                <div className="art">
-                  <svg viewBox="0 0 300 170" aria-hidden="true">
-                    <rect x="50" y="50" width="200" height="70" />
-                    <circle cx="150" cy="85" r="12" className="f" />
-                    <path d="M50 85H138M162 85H250" />
-                  </svg>
-                </div>
-                <div className="pb">
-                  <div className="top mono">
-                    <span>{code}</span>
-                    <span>{project.category}</span>
-                  </div>
-                  <h3>{project.project_name}</h3>
-                  <p>{project.description}</p>
-                  <div className="by mono">
-                    {project.student_name} · {project.college_name}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        {/* Card Collections: 2-Row Infinite Marquee on 'All' / Filtered Grid on Specific Selection */}
+        {filter === 'all' ? (
+          <InfiniteCardsMarquee
+            row1Cards={hwCards}
+            row2Cards={swCards}
+            speedSeconds={40}
+          />
+        ) : (
+          <div className="plates">
+            {filteredStatic.map((plate) => renderPlateCard(plate))}
+            {filteredDynamic.map((project, idx) => renderDynamicCard(project, idx))}
+          </div>
+        )}
 
         {/* Disciplines Specification Breakdown */}
         <div

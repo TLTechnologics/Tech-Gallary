@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GalleryItem } from '../../types';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface GallerySectionProps {
   items: GalleryItem[];
@@ -27,7 +28,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ items }) => {
       <div className="wrap">
         <div className="sh">
           <span className="mono">Archives</span>
-          <h2>Festival gallery.</h2>
+          <LetterReveal as="h2" text="Festival gallery." />
         </div>
 
         {/* Filter Chips */}

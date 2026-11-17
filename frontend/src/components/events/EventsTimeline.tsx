@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { EventItem } from '../../types';
 import { EventDetailModal } from './EventDetailModal';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface EventsTimelineProps {
   events: EventItem[];
@@ -20,7 +21,7 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({
       <div className="wrap">
         <div className="sh">
           <span className="mono">Events</span>
-          <h2>Learn, build, show.</h2>
+          <LetterReveal as="h2" text="Learn, build, show." />
         </div>
 
         {/* 3 Main Track Cards matching Tech Gallery 2027.html */}

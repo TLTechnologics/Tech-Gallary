@@ -4,6 +4,7 @@ import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types'
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
 import { GlassSelect } from '../common/GlassSelect';
+import { LetterReveal } from '../common/LetterReveal';
 import { MapPin } from 'lucide-react';
 
 const YEAR_SEMESTER_OPTIONS = [
@@ -217,7 +218,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
       <div className="wrap">
         <div className="sh">
           <span className="mono">Registration</span>
-          <h2>Save your place.</h2>
+          <LetterReveal as="h2" text="Save your place." />
         </div>
 
         {confirmedRegistration ? (

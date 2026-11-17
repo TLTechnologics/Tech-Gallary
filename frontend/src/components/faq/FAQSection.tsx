@@ -1,5 +1,6 @@
 import React from 'react';
 import { FAQItem } from '../../types';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface FAQSectionProps {
   faqs: FAQItem[];
@@ -70,7 +71,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
       <div className="wrap">
         <div className="sh">
           <span className="mono">FAQ</span>
-          <h2>Good to know.</h2>
+          <LetterReveal as="h2" text="Good to know." />
         </div>
 
         <div className="faq">

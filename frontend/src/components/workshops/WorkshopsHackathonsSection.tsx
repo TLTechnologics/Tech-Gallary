@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Flame, Users, Calendar, Clock, MapPin, ChevronDown, ChevronUp, AlertCircle, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { EventItem } from '../../types';
+import { LetterReveal } from '../common/LetterReveal';
 
 interface WorkshopsHackathonsSectionProps {
   events: EventItem[];
@@ -46,9 +47,11 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
           <span className="font-mono text-xs uppercase tracking-widest text-brand-lime block mb-2">
             // 04. Intensive Tracks
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight uppercase">
-            WORKSHOPS & HACKATHONS
-          </h2>
+          <LetterReveal
+            as="h2"
+            className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight uppercase"
+            text="WORKSHOPS & HACKATHONS"
+          />
           <p className="font-mono text-xs uppercase tracking-wider text-neutral-400 mt-2">
             Deep-dive technical training, 24-hr code sprints, and our dedicated parent workshop
           </p>
