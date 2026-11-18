@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { EventItem } from '../../types';
 import { EventDetailModal } from './EventDetailModal';
-import { LetterReveal } from '../common/LetterReveal';
+import { EventCard } from './EventCard';
+import { Terminal, Code2, Cpu } from 'lucide-react';
 
 interface EventsTimelineProps {
   events: EventItem[];
@@ -16,166 +17,161 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({
 }) => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
 
+  const tracks = [
+    {
+      title: 'Workshops',
+      tag: 'TRACK // 01',
+      icon: <Terminal className="w-6 h-6 text-[#3155E7]" />,
+      accent: '#3155E7',
+      bg: '#FFFFFF',
+      desc: 'Hands-on technical sessions led by faculty, seniors, and industry guests. Bring a laptop; we provide the hardware kits.',
+      topics: ['Embedded systems with ESP32', 'On-device machine learning', 'PCB design basics', 'Prototyping in Figma'],
+      format: '2–3 hour sessions',
+      seats: 'College Exclusive (LJCCA)',
+    },
+    {
+      title: 'Hackathons',
+      tag: 'TRACK // 02',
+      icon: <Code2 className="w-6 h-6 text-[#FF7139]" />,
+      accent: '#FF7139',
+      bg: '#FAF8F3',
+      desc: 'Form a team of up to four and engineer working prototypes from undisclosed problem statements released live.',
+      topics: ['24-hour build sprint', 'Continuous mentor check-ins', 'Live prototype demos to jury', 'Hardware and software tracks'],
+      format: 'Teams of 2–4 students',
+      seats: '18–23 January window',
+    },
+    {
+      title: 'Tech Showcase',
+      tag: 'TRACK // 03',
+      icon: <Cpu className="w-6 h-6 text-[#202020]" />,
+      accent: '#FFD85A',
+      bg: '#FFD85A',
+      desc: 'National open exhibition where innovators present working hardware and software projects to visitors, faculty and judges.',
+      topics: ['Robotics & IoT prototypes', 'AI, apps & SaaS platforms', 'Public community voting', 'Distinguished jury awards'],
+      format: 'Stall-based live exhibition',
+      seats: 'Open to All External Colleges',
+    },
+  ];
+
   return (
-    <section className="s" id="events">
-      <div className="wrap">
-        <div className="sh">
-          <span className="mono">Events</span>
-          <LetterReveal as="h2" text="Learn, build, show." />
-        </div>
+    <section className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F8F5EC] overflow-hidden" id="events">
+      {/* Background Architectural Grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(#202020 1px, transparent 1px), linear-gradient(90deg, #202020 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+        aria-hidden="true"
+      />
 
-        {/* 3 Main Track Cards matching Tech Gallery 2027.html */}
-        <div className="grid3">
-          <article className="ev">
-            <div className="glyph">
-              <svg viewBox="0 0 72 72" aria-hidden="true">
-                <rect x="6" y="14" width="60" height="44" />
-                <path d="M6 26H66" />
-                <rect className="f" x="14" y="34" width="18" height="16" />
-              </svg>
-            </div>
-            <h3>Workshops</h3>
-            <p>
-              Hands-on sessions led by seniors, alumni and industry guests. Bring a laptop; we provide the kits.
-            </p>
-            <ul>
-              <li>Embedded systems with ESP32</li>
-              <li>On-device machine learning</li>
-              <li>PCB design basics</li>
-              <li>Prototyping in Figma</li>
-            </ul>
-            <dl>
-              <dt>Format</dt>
-              <dd>2–3 hour sessions</dd>
-              <dt>Seats</dt>
-              <dd>40 per workshop</dd>
-            </dl>
-          </article>
-
-          <article className="ev">
-            <div className="glyph">
-              <svg viewBox="0 0 72 72" aria-hidden="true">
-                <circle cx="20" cy="52" r="6" className="f" />
-                <circle cx="52" cy="20" r="6" />
-                <path d="M20 46V30H46M52 26V40H36" />
-              </svg>
-            </div>
-            <h3>Hackathons</h3>
-            <p>
-              Form a team of up to four and build a working prototype from a problem statement revealed on day one.
-            </p>
-            <ul>
-              <li>36-hour build sprint</li>
-              <li>Mentor check-ins</li>
-              <li>Live demos to a panel</li>
-              <li>Hardware and software tracks</li>
-            </ul>
-            <dl>
-              <dt>Format</dt>
-              <dd>Teams of 2–4</dd>
-              <dt>Window</dt>
-              <dd>18–23 January</dd>
-            </dl>
-          </article>
-
-          <article className="ev">
-            <div className="glyph">
-              <svg viewBox="0 0 72 72" aria-hidden="true">
-                <path d="M10 60V18H62V60" />
-                <path d="M10 38H62" />
-                <circle className="f" cx="36" cy="28" r="6" />
-                <circle cx="24" cy="49" r="6" />
-                <circle cx="48" cy="49" r="6" />
-              </svg>
-            </div>
-            <h3>Tech Showcase</h3>
-            <p>
-              An open exhibition where teams present finished projects to visitors, faculty and judges.
-            </p>
-            <ul>
-              <li>Hardware and robotics</li>
-              <li>Apps, tools and AI</li>
-              <li>Visitor voting</li>
-              <li>Jury awards</li>
-            </ul>
-            <dl>
-              <dt>Format</dt>
-              <dd>Stall-based display</dd>
-              <dt>Open</dt>
-              <dd>21–24 January</dd>
-            </dl>
-          </article>
-        </div>
-
-        {/* 8 Official Festival Events Grid with Rules & Details */}
-        <div style={{ marginTop: '3.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '1.2rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-            <span className="mono" style={{ textTransform: 'uppercase' }}>Official Festival Program (8 Core Events)</span>
-            <span className="mono">Click any event to inspect eligibility &amp; rules</span>
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
+            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+              FESTIVAL PROGRAM // 3 CORE TRACKS
+            </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1px',
-              border: '1px solid var(--line)',
-              background: 'var(--line)',
-            }}
-          >
-            {events.map((ev) => (
-              <div
-                key={ev.id}
-                onClick={() => setSelectedEvent(ev)}
-                style={{
-                  background: 'var(--card)',
-                  padding: '1.3rem 1.2rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.7rem',
-                  transition: 'background 0.2s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--card)')}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="mono">
-                  <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>{ev.date_display}</span>
-                  <span
-                    style={{
-                      border: '1px solid var(--line)',
-                      padding: '0.15rem 0.5rem',
-                      borderRadius: '100px',
-                      fontSize: '0.72rem',
-                      color: ev.eligibility_type === 'internal_only' ? 'var(--mute)' : 'var(--lime)',
-                    }}
-                  >
-                    {ev.eligibility_type === 'internal_only' ? 'College Only' : ev.eligibility_type === 'parents_only' ? 'Parents' : 'All Colleges'}
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#202020] tracking-tight leading-tight">
+            Learn. Build. <span className="text-[#3155E7] underline decoration-[#FF7139] decoration-wavy decoration-2">Showcase.</span>
+          </h2>
+        </div>
+
+        {/* 3 Main Track Hero Cards: Tactile Paper Placards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+          {tracks.map((t, idx) => (
+            <div
+              key={idx}
+              className="p-7 rounded-sm border-2 border-[#202020] shadow-[5px_5px_0px_#202020] hover:shadow-[7px_7px_0px_#202020] hover:-translate-y-1 flex flex-col justify-between transition-all duration-200 relative"
+              style={{ backgroundColor: t.bg }}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020]">
+                    {t.icon}
+                  </div>
+                  <span className="font-mono text-xs font-bold tracking-wider text-[#202020] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFFFFF]">
+                    {t.tag}
                   </span>
                 </div>
-                <h4 style={{ margin: 0, fontFamily: 'var(--h)', fontSize: '1.2rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
-                  {ev.name}
-                </h4>
-                <p style={{ margin: 0, color: 'var(--mute)', fontSize: '0.9rem', lineHeight: 1.4 }}>
-                  {ev.tagline || ev.description.slice(0, 80) + '...'}
+
+                <h3 className="font-display text-2xl font-black text-[#202020] mb-2">
+                  {t.title}
+                </h3>
+                <p className="font-body text-sm text-[#5F5B52] leading-relaxed mb-6">
+                  {t.desc}
                 </p>
-                <div style={{ marginTop: 'auto', paddingTop: '0.6rem', borderTop: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="mono">
-                  <span style={{ fontSize: '0.75rem' }}>View details →</span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--ink)' }}>{ev.timing || 'Campus Lab'}</span>
+
+                <div className="border-t-2 border-dashed border-[#202020]/20 pt-4 mb-6">
+                  <span className="font-mono text-[10px] text-[#202020] uppercase font-bold tracking-wider block mb-2.5">
+                    Curriculum Pillars
+                  </span>
+                  <ul className="space-y-1.5">
+                    {t.topics.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-xs text-[#202020] font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-[#202020]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
+
+              <div className="border-t border-[#202020]/20 pt-4 flex items-center justify-between font-mono text-xs">
+                <div>
+                  <span className="text-[#625E56] block text-[10px] font-semibold">FORMAT</span>
+                  <span className="text-[#202020] font-bold">{t.format}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[#625E56] block text-[10px] font-semibold">ELIGIBILITY</span>
+                  <span className="font-bold text-[#3155E7]">{t.seats}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 8 Official Festival Events Section */}
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span className="font-mono text-xs text-[#3155E7] tracking-wider uppercase font-bold">
+                CHRONOLOGICAL RUNTIME // 18–24 JANUARY 2027
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-[#202020] mt-1">
+                The 8 Official Festival Events
+              </h3>
+            </div>
+            <span className="font-mono text-xs font-bold text-[#625E56] px-3 py-1 bg-[#FFFFFF] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] rounded-sm">
+              CLICK ANY EVENT TO INSPECT RULES &amp; VENUE
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {events.map((ev) => (
+              <EventCard
+                key={ev.id}
+                event={ev}
+                onViewDetails={(item) => setSelectedEvent(item)}
+                onRegister={(eventId) => onSelectRegister(eventId)}
+              />
             ))}
           </div>
         </div>
       </div>
 
+      {/* Event Details Modal */}
       {selectedEvent && (
         <EventDetailModal
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
-          onSelectRegister={(eventId: string) => {
+          onSelectRegister={(evId) => {
             setSelectedEvent(null);
-            onSelectRegister(eventId);
+            onSelectRegister(evId);
           }}
           onSelectShowcase={() => {
             setSelectedEvent(null);

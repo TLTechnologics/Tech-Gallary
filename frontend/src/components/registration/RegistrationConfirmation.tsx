@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Copy, Share2, Printer, ArrowRight, Clock, Cpu } from 'lucide-react';
+import { CheckCircle2, Copy, Printer, ArrowRight, Clock, Cpu } from 'lucide-react';
 import { RegistrationRecord } from '../../types';
 import { copyToClipboard } from '../../utils/helpers';
 import { useNotification } from '../../context/NotificationContext';
@@ -36,182 +36,127 @@ export const RegistrationConfirmation: React.FC<RegistrationConfirmationProps> =
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="tech-card bg-dark-900 p-6 sm:p-8 max-w-2xl mx-auto shadow-2xl relative overflow-hidden"
-      style={{
-        border: '1px solid var(--line)',
-        borderTop: isPending ? '4px solid #EAB308' : '4px solid var(--lime)',
-        background: 'var(--card)',
-      }}
+      className="p-6 sm:p-8 max-w-2xl mx-auto relative rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[8px_8px_0px_#202020] text-[#202020]"
     >
+      {/* Washi Tape Accent */}
+      <div
+        className="paper-tape"
+        style={{
+          top: '-12px',
+          left: '20%',
+          width: '75px',
+          transform: 'rotate(-3deg)',
+        }}
+      />
+
       {/* Header Badge */}
       <div className="flex items-center gap-4 mb-6">
-        <div
-          style={{
-            width: '48px',
-            height: '48px',
-            background: isPending ? '#EAB30815' : 'var(--bg)',
-            border: isPending ? '1px solid #EAB308' : '1px solid var(--line)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: isPending ? '#EAB308' : 'var(--accent-text)',
-          }}
-        >
-          {isPending ? <Clock className="w-6 h-6" /> : <CheckCircle2 className="w-6 h-6" />}
+        <div className="w-12 h-12 rounded-sm bg-[#FAF8F3] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] flex items-center justify-center text-[#3155E7]">
+          {isPending ? <Clock className="w-6 h-6 text-[#FF7139]" /> : <CheckCircle2 className="w-6 h-6 text-[#3155E7]" />}
         </div>
         <div>
-          <span
-            className="mono"
-            style={{
-              color: isPending ? '#EAB308' : 'var(--accent-text)',
-              fontWeight: 700,
-              fontSize: '0.8rem',
-            }}
-          >
+          <span className="font-mono font-bold text-xs tracking-wider text-[#3155E7] uppercase block">
             {isPending
               ? 'REGISTRATION PENDING ADMIN APPROVAL'
               : isApproved
               ? 'SHOWCASING REGISTRATION APPROVED'
-              : 'CONFIRMED VISITOR PASS (FREE)'}
+              : 'CONFIRMED VISITOR PASS (100% FREE)'}
           </span>
-          <h3
-            style={{
-              margin: '0.2rem 0 0',
-              fontFamily: 'var(--h)',
-              fontSize: '1.4rem',
-              color: 'var(--ink)',
-            }}
-          >
-            {isPending ? 'Request Received' : 'Pass Reserved Successfully'}
+          <h3 className="font-display font-black text-2xl sm:text-3xl text-[#202020]">
+            {isPending ? 'Request Received' : 'Festival Pass Reserved'}
           </h3>
         </div>
       </div>
 
       {/* Description Advisory */}
-      <p className="mono" style={{ fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.5' }}>
+      <p className="font-mono text-xs text-[#5F5B52] mb-6 leading-relaxed font-medium">
         {isPending ? (
           <span>
-            Your request for <strong>Project Showcasing</strong> has been sent to the festival administrators for review. Once verified, you will receive project submission access.
+            Your request for <strong className="text-[#202020]">Project Showcasing</strong> has been sent to the festival administrators for review. Once verified, you will receive project submission access.
           </span>
         ) : isApproved ? (
-          <span style={{ color: 'var(--ink)' }}>
+          <span className="text-[#202020] font-bold">
             Congratulations! Your registration has been approved. You can now submit your hardware or software project for Tech Gallery 2027.
           </span>
         ) : (
           <span>
-            Your Visitor Pass is reserved with <strong>Free Entry</strong>. Please save your Registration ID below or open WhatsApp confirmation.
+            Your Visitor Pass is reserved with <strong className="text-[#202020]">Free Entry</strong>. Please save your Registration ID below or open WhatsApp confirmation.
           </span>
         )}
       </p>
 
-      {/* Pass Box Card */}
-      <div
-        style={{
-          background: 'var(--bg)',
-          border: '1px solid var(--line)',
-          padding: '1.2rem 1.4rem',
-          marginBottom: '1.5rem',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingBottom: '0.8rem',
-            borderBottom: '1px solid var(--line)',
-            flexWrap: 'wrap',
-            gap: '0.6rem',
-          }}
-        >
+      {/* Pass Box Card: Perforated Ticket Aesthetics */}
+      <div className="bg-[#FAF8F3] border-2 border-[#202020] p-5 sm:p-6 mb-6 rounded-sm shadow-[3.5px_3.5px_0px_#202020]">
+        <div className="flex justify-between items-center pb-4 border-b-2 border-dashed border-[#202020]/25 flex-wrap gap-3">
           <div>
-            <span className="mono" style={{ fontSize: '0.75rem', display: 'block' }}>
+            <span className="font-mono text-[10px] text-[#625E56] font-bold tracking-widest uppercase block">
               OFFICIAL REGISTRATION ID
             </span>
-            <span
-              style={{
-                fontFamily: 'var(--h)',
-                fontSize: '1.6rem',
-                fontWeight: 800,
-                color: 'var(--accent-text)',
-                letterSpacing: '0.04em',
-              }}
-            >
+            <span className="font-display text-2xl sm:text-3xl font-black text-[#3155E7] tracking-wider">
               {registration.reg_code}
             </span>
           </div>
 
           <button
             onClick={handleCopyCode}
-            className="chip"
-            style={{ fontSize: '0.75rem', padding: '0.3rem 0.8rem' }}
+            className="px-3 py-1.5 rounded-sm font-mono text-xs font-bold bg-[#FFFFFF] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] text-[#202020] hover:bg-[#FAF8F2] flex items-center gap-1.5 transition-all"
           >
-            <Copy className="w-3.5 h-3.5 inline mr-1" />
-            Copy ID
+            <Copy className="w-3.5 h-3.5" />
+            <span>Copy ID</span>
           </button>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '0.8rem 1.2rem',
-            paddingTop: '0.8rem',
-            fontSize: '0.88rem',
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-mono">
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               PARTICIPANT NAME
             </span>
-            <strong style={{ color: 'var(--ink)' }}>{registration.full_name}</strong>
+            <strong className="text-[#202020] font-bold text-sm">{registration.full_name}</strong>
           </div>
 
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               PASS TYPE &amp; COST
             </span>
-            <strong style={{ color: 'var(--ink)' }}>
+            <strong className="text-[#3155E7] font-bold text-sm">
               {isShowcasing ? 'Project Showcasing (Free)' : 'Visitor Pass (Free)'}
             </strong>
           </div>
 
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               INSTITUTION
             </span>
-            <span style={{ color: 'var(--mute)' }}>{registration.college_name}</span>
+            <span className="text-[#202020] font-bold">{registration.college_name}</span>
             {registration.roll_number && (
-              <span className="mono" style={{ display: 'block', fontSize: '0.75rem', color: 'var(--accent-text)', marginTop: '0.15rem' }}>
+              <span className="block text-[11px] text-[#FF7139] font-bold mt-0.5">
                 Roll: {registration.roll_number}
               </span>
             )}
           </div>
 
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               REGISTERED EVENT
             </span>
-            <span style={{ color: 'var(--mute)' }}>{registration.event_name}</span>
+            <span className="text-[#202020] font-bold">{registration.event_name}</span>
           </div>
 
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               PHONE (WHATSAPP)
             </span>
-            <span style={{ color: 'var(--mute)' }}>{registration.phone}</span>
+            <span className="text-[#202020] font-bold">{registration.phone}</span>
           </div>
 
           <div>
-            <span className="mono" style={{ fontSize: '0.72rem', display: 'block' }}>
+            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
               STATUS
             </span>
             <span
-              style={{
-                color: isPending ? '#EAB308' : 'var(--accent-text)',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-              }}
+              className={`font-black uppercase ${
+                isPending ? 'text-[#FF7139]' : 'text-[#3155E7]'
+              }`}
             >
               {registration.status}
             </span>
@@ -219,13 +164,12 @@ export const RegistrationConfirmation: React.FC<RegistrationConfirmationProps> =
         </div>
       </div>
 
-      {/* Prominent Action for Approved Showcasing */}
+      {/* Action for Approved Showcasing */}
       {isApproved && onOpenSubmission && (
-        <div style={{ marginBottom: '1.5rem' }}>
+        <div className="mb-6">
           <button
             onClick={() => onOpenSubmission(registration)}
-            className="btn fill"
-            style={{ width: '100%', justifyContent: 'center', padding: '1rem', fontSize: '1rem' }}
+            className="w-full justify-center p-4 text-sm font-mono font-bold text-white bg-[#3155E7] border-2 border-[#202020] shadow-[4px_4px_0px_#202020] hover:shadow-[5.5px_5.5px_0px_#202020] hover:-translate-y-0.5 transition-all flex items-center gap-2 rounded-sm"
           >
             <Cpu className="w-4 h-4 mr-1.5" />
             Submit Your Project Details Now →
@@ -234,52 +178,35 @@ export const RegistrationConfirmation: React.FC<RegistrationConfirmationProps> =
       )}
 
       {/* Confirmation Actions Strip */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '0.8rem',
-        }}
-      >
-        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+      <div className="flex justify-between items-center flex-wrap gap-4 pt-4 border-t-2 border-dashed border-[#202020]/25">
+        <div className="flex gap-3 flex-wrap">
           {/* WhatsApp Direct Confirmation Button */}
           {registration.whatsapp_url && (
             <a
               href={registration.whatsapp_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn"
-              style={{
-                background: '#25D366',
-                color: '#FFFFFF',
-                borderColor: '#25D366',
-                padding: '0.5rem 1rem',
-                fontSize: '0.85rem',
-              }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-sm font-mono font-bold text-xs text-white bg-[#25D366] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all"
             >
-              <span>📱 Open WhatsApp Confirmation</span>
+              <span>📱 Open WhatsApp Pass</span>
             </a>
           )}
 
           <button
             onClick={handlePrint}
-            className="chip"
-            style={{ padding: '0.5rem 1rem' }}
+            className="px-4 py-2 rounded-sm font-mono font-bold text-xs text-[#202020] bg-[#FFFFFF] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all flex items-center gap-1.5"
           >
-            <Printer className="w-3.5 h-3.5 inline mr-1" />
-            Print Pass
+            <Printer className="w-3.5 h-3.5" />
+            <span>Print Pass</span>
           </button>
         </div>
 
         <button
           onClick={onReset}
-          className="btn"
-          style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
+          className="px-4 py-2 rounded-sm font-mono font-bold text-xs text-[#202020] bg-[#FFD85A] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all flex items-center gap-1.5"
         >
-          <span>Register another</span>
-          <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+          <span>Register Another</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
     </motion.div>

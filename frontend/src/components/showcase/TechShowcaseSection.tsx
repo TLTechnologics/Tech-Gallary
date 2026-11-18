@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ProjectRecord } from '../../types';
 import { LetterReveal } from '../common/LetterReveal';
 import { InfiniteCardsMarquee } from '../common/InfiniteCardsMarquee';
+import { Cpu, Code2, ArrowUpRight } from 'lucide-react';
 
 interface TechShowcaseSectionProps {
   projects: ProjectRecord[];
@@ -30,9 +31,9 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Electronics Society',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <path d="M30 130H110V70H190V40H270" />
-        <circle cx="110" cy="70" r="6" className="f" />
-        <circle cx="270" cy="40" r="6" />
+        <path d="M30 130H110V70H190V40H270" stroke="#202020" strokeWidth="2.5" fill="none" />
+        <circle cx="110" cy="70" r="7" fill="#FFD85A" stroke="#202020" strokeWidth="2" />
+        <circle cx="270" cy="40" r="7" fill="#3155E7" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -46,8 +47,8 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Computer Science, Year 3',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <path d="M110 55L70 85L110 115M190 55L230 85L190 115" />
-        <rect x="132" y="70" width="36" height="30" className="f" />
+        <path d="M110 55L70 85L110 115M190 55L230 85L190 115" stroke="#202020" strokeWidth="2.5" fill="none" />
+        <rect x="132" y="70" width="36" height="30" fill="#FF7139" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -61,9 +62,9 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Robotics Club',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <rect x="90" y="40" width="120" height="90" />
-        <path d="M90 70H210M120 40V130" />
-        <circle cx="165" cy="100" r="10" className="f" />
+        <rect x="90" y="40" width="120" height="90" fill="#FAF8F3" stroke="#202020" strokeWidth="2" />
+        <path d="M90 70H210M120 40V130" stroke="#202020" strokeWidth="2" />
+        <circle cx="165" cy="100" r="10" fill="#3155E7" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -77,12 +78,12 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Information Technology',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <circle cx="150" cy="85" r="8" className="f" />
-        <circle cx="80" cy="50" r="5" />
-        <circle cx="220" cy="55" r="5" />
-        <circle cx="90" cy="125" r="5" />
-        <circle cx="215" cy="120" r="5" />
-        <path d="M150 85L80 50M150 85L220 55M150 85L90 125M150 85L215 120" />
+        <circle cx="150" cy="85" r="9" fill="#FFD85A" stroke="#202020" strokeWidth="2" />
+        <circle cx="80" cy="50" r="6" fill="#3155E7" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="220" cy="55" r="6" fill="#FF7139" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="90" cy="125" r="6" fill="#FAF8F3" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="215" cy="120" r="6" fill="#FAF8F3" stroke="#202020" strokeWidth="1.5" />
+        <path d="M150 85L80 50M150 85L220 55M150 85L90 125M150 85L215 120" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -96,8 +97,8 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Biomedical Engineering',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <path d="M60 120Q110 30 150 85T240 50" />
-        <rect x="138" y="73" width="24" height="24" className="f" />
+        <path d="M60 120Q110 30 150 85T240 50" stroke="#202020" strokeWidth="2.5" fill="none" />
+        <rect x="138" y="73" width="24" height="24" fill="#E94B50" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -111,9 +112,9 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'AI & Data Science',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <rect x="70" y="45" width="160" height="80" />
-        <path d="M70 65H230M90 85H150M90 100H190" />
-        <rect x="170" y="80" width="40" height="10" className="f" />
+        <rect x="70" y="45" width="160" height="80" fill="#FAF8F3" stroke="#202020" strokeWidth="2" />
+        <path d="M70 65H230M90 85H150M90 100H190" stroke="#202020" strokeWidth="2" />
+        <rect x="170" y="80" width="40" height="10" fill="#3155E7" stroke="#202020" strokeWidth="1.5" />
       </svg>
     ),
   },
@@ -121,7 +122,6 @@ const STATIC_PLATES: StaticPlacard[] = [
 
 export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
   projects,
-  onOpenSubmission,
 }) => {
   const [filter, setFilter] = useState<'all' | 'hw' | 'sw'>('all');
 
@@ -139,44 +139,60 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
   });
 
   const renderPlateCard = (plate: StaticPlacard, uniqueKey?: string) => (
-    <article key={uniqueKey || plate.id} className="plate" data-t={plate.type}>
-      <div className="art">{plate.svg}</div>
+    <div key={uniqueKey || plate.id} className="plate" data-t={plate.type}>
+      <div className="art">
+        <div className="tech-badge-overlay mono">
+          <span className="font-bold text-[#202020]">{plate.code}</span>
+          <span className="inline-flex items-center gap-1.5 font-bold text-[#202020]">
+            <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
+            {plate.type === 'hw' ? 'HW // PLACARD' : 'SW // PLACARD'}
+          </span>
+        </div>
+        {plate.svg}
+      </div>
       <div className="pb">
         <div className="top mono">
-          <span>{plate.code}</span>
-          <span>{plate.category}</span>
+          <span className="code-tag">{plate.code}</span>
+          <span className="cat-pill">{plate.category}</span>
         </div>
-        <h3>{plate.title}</h3>
-        <p>{plate.description}</p>
-        <div className="by mono">{plate.by}</div>
+        <h3 className="font-display font-black text-xl text-[#202020]">{plate.title}</h3>
+        <p className="font-body text-xs text-[#5F5B52] leading-relaxed">{plate.description}</p>
+        <div className="by mono text-xs font-bold text-[#202020]">{plate.by}</div>
       </div>
-    </article>
+    </div>
   );
 
   const renderDynamicCard = (project: ProjectRecord, idx: number, uniqueKey?: string) => {
     const isHw = project.category.toLowerCase().includes('hardware');
     const code = `TG-${isHw ? 'H' : 'S'}${String(idx + 10).padStart(2, '0')}`;
     return (
-      <article key={uniqueKey || project.id} className="plate" data-t={isHw ? 'hw' : 'sw'}>
+      <div key={uniqueKey || project.id} className="plate" data-t={isHw ? 'hw' : 'sw'}>
         <div className="art">
+          <div className="tech-badge-overlay mono">
+            <span className="font-bold text-[#202020]">{code}</span>
+            <span className="inline-flex items-center gap-1.5 font-bold text-[#202020]">
+              <span className="w-2 h-2 rounded-full bg-[#FF7139]" />
+              {isHw ? 'HW // PLACARD' : 'SW // PLACARD'}
+            </span>
+          </div>
           <svg viewBox="0 0 300 170" aria-hidden="true">
-            <rect x="50" y="50" width="200" height="70" />
-            <circle cx="150" cy="85" r="12" className="f" />
-            <path d="M50 85H138M162 85H250" />
+            <rect x="50" y="50" width="200" height="70" fill="#FAF8F3" stroke="#202020" strokeWidth="2" />
+            <circle cx="150" cy="85" r="14" fill="#FFD85A" stroke="#202020" strokeWidth="2" />
+            <path d="M50 85H136M164 85H250" stroke="#202020" strokeWidth="2" />
           </svg>
         </div>
         <div className="pb">
           <div className="top mono">
-            <span>{code}</span>
-            <span>{project.category}</span>
+            <span className="code-tag">{code}</span>
+            <span className="cat-pill">{project.category}</span>
           </div>
-          <h3>{project.project_name}</h3>
-          <p>{project.description}</p>
-          <div className="by mono">
+          <h3 className="font-display font-black text-xl text-[#202020]">{project.project_name}</h3>
+          <p className="font-body text-xs text-[#5F5B52] leading-relaxed">{project.description}</p>
+          <div className="by mono text-xs font-bold text-[#202020]">
             {project.student_name} · {project.college_name}
           </div>
         </div>
-      </article>
+      </div>
     );
   };
 
@@ -196,62 +212,57 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
   ];
 
   return (
-    <section className="s" id="showcase">
-      <div className="wrap">
-        <div className="sh">
-          <span className="mono">Tech showcase</span>
+    <section className="relative py-24 bg-[#F8F5EC] overflow-hidden" id="showcase">
+      <div className="wrap max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#FFD85A]" />
+            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+              NATIONAL INNOVATION PAVILION
+            </span>
+          </div>
           <LetterReveal as="h2" text="On display this year." />
         </div>
 
         {/* Action Header Strip */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1rem',
-            marginBottom: '1.6rem',
-          }}
-        >
-          {/* Exact Filter Chips */}
+        <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
+          {/* Tactile Filter Chips */}
           <div className="filters" role="group" aria-label="Filter projects" style={{ marginBottom: 0 }}>
             <button
               className="chip"
               aria-pressed={filter === 'all'}
               onClick={() => setFilter('all')}
             >
-              All
+              All Exhibits
             </button>
             <button
               className="chip"
               aria-pressed={filter === 'hw'}
               onClick={() => setFilter('hw')}
             >
-              Hardware
+              Hardware Prototypes
             </button>
             <button
               className="chip"
               aria-pressed={filter === 'sw'}
               onClick={() => setFilter('sw')}
             >
-              Software
+              Software Systems
             </button>
           </div>
 
           <a
             href="#register"
-            className="btn"
-            style={{ padding: '0.55rem 1.1rem', fontSize: '0.9rem' }}
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020] hover:-translate-y-0.5 transition-all"
           >
-            Exhibit your project →
+            Exhibit Your Project <ArrowUpRight size={14} />
           </a>
         </div>
 
         {/* Official Banner Note */}
-        <p className="mono" style={{ marginBottom: '1.5rem', color: 'var(--ink)' }}>
-          “Students from all colleges are welcome to exhibit their hardware and software projects. Register below with a Project Showcasing pass to unlock your project submission upon admin review.”
-        </p>
+        <div className="p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[3px_3px_0px_#202020] mb-8 font-mono text-xs text-[#202020] font-medium">
+          “Students from all external and host colleges are welcome to exhibit their hardware and software projects. Register below with a Project Showcasing pass to unlock your project submission upon admin review.”
+        </div>
 
         {/* Card Collections: 2-Row Infinite Marquee on 'All' / Filtered Grid on Specific Selection */}
         {filter === 'all' ? (
@@ -267,44 +278,45 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
           </div>
         )}
 
-        {/* Disciplines Specification Breakdown */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '3.5rem',
-            paddingTop: '2.5rem',
-            borderTop: '1px solid var(--line)',
-          }}
-        >
-          <div style={{ background: 'var(--card)', padding: '1.5rem', border: '1px solid var(--line)' }}>
-            <h4 style={{ margin: '0 0 0.8rem', fontFamily: 'var(--h)', fontSize: '1.15rem' }}>
-              Hardware Showcase
-            </h4>
-            <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--mute)', fontSize: '0.9rem', lineHeight: '1.7' }}>
-              <li>Robotics</li>
-              <li>IoT (Internet of Things)</li>
-              <li>ESP32 and Arduino projects</li>
-              <li>Smart Home Automation</li>
-              <li>Embedded Systems</li>
-              <li>Electronic Prototypes</li>
-              <li>Innovative Hardware Products</li>
+        {/* Disciplines Specification Breakdown: Technical Spec Dossiers */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14 pt-10 border-t-2 border-dashed border-[#202020]/25">
+          <div className="p-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[5px_5px_0px_#202020]">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2.5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020]">
+                <Cpu className="w-5 h-5 text-[#3155E7]" />
+              </div>
+              <h4 className="font-display text-xl font-black text-[#202020]">
+                Hardware Showcase Track
+              </h4>
+            </div>
+            <ul className="space-y-2 font-mono text-xs text-[#5F5B52]">
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Robotics &amp; Autonomous Vehicles</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> IoT (Internet of Things) Distributed Nodes</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> ESP32, STM32 &amp; Arduino Hardware Projects</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Smart Home &amp; Industrial Automation</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Embedded Systems &amp; Firmware Architectures</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Custom Electronic Prototypes &amp; PCB Assemblies</li>
+              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Innovative Hardware Products &amp; Energy Systems</li>
             </ul>
           </div>
 
-          <div style={{ background: 'var(--card)', padding: '1.5rem', border: '1px solid var(--line)' }}>
-            <h4 style={{ margin: '0 0 0.8rem', fontFamily: 'var(--h)', fontSize: '1.15rem' }}>
-              Software Showcase
-            </h4>
-            <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--mute)', fontSize: '0.9rem', lineHeight: '1.7' }}>
-              <li>Artificial Intelligence</li>
-              <li>Machine Learning</li>
-              <li>Web Applications</li>
-              <li>Android Applications</li>
-              <li>AI Assistants</li>
-              <li>SaaS Products</li>
-              <li>Desktop Applications &amp; Automation Software</li>
+          <div className="p-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[5px_5px_0px_#FFD85A]">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2.5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020]">
+                <Code2 className="w-5 h-5 text-[#FF7139]" />
+              </div>
+              <h4 className="font-display text-xl font-black text-[#202020]">
+                Software Showcase Track
+              </h4>
+            </div>
+            <ul className="space-y-2 font-mono text-xs text-[#5F5B52]">
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Artificial Intelligence &amp; LLM Orchestrations</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Machine Learning Models &amp; Neural Pipelines</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Next-Gen Web Applications &amp; Micro-Frontends</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Android &amp; Cross-Platform Native Applications</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Autonomous AI Assistants &amp; Agent Swarms</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Enterprise SaaS Products &amp; Cloud APIs</li>
+              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Desktop Applications &amp; Security Automation Tools</li>
             </ul>
           </div>
         </div>

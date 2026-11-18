@@ -19,6 +19,10 @@ import { Footer } from './components/layout/Footer';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { NotificationToast } from './components/layout/NotificationToast';
+import { TechnicalSeparator } from './components/common/TechnicalSeparator';
+import { ScrollReveal } from './components/common/ScrollReveal';
+import { CustomCursor } from './components/common/CustomCursor';
+import { TechLoaderOverlay } from './components/common/TechLoaderOverlay';
 
 // Default static fallback data (strictly matching the prompt requirements) in case backend is initializing
 const DEFAULT_EVENTS: EventItem[] = [
@@ -326,10 +330,85 @@ const DEFAULT_SETTINGS: FestivalSettings = {
   instagram_url: 'https://instagram.com/techgallery2027',
 };
 
+const DEFAULT_PROJECTS: ProjectRecord[] = [
+  {
+    id: 'proj-1',
+    project_code: 'TG27-HW-081',
+    student_name: 'Aarav Patel & Team',
+    college_name: 'LJCCA',
+    email: 'aarav@ljcca.edu',
+    phone: '+91 98765 00001',
+    project_name: 'Autonomous Agricultural Rover',
+    category: 'Hardware',
+    sub_category: 'Robotics & IoT',
+    description: 'Solar-powered autonomous rover using ESP32 & LiDAR for precision soil analysis and environmental telemetry.',
+    technologies_used: 'ESP32, LiDAR, Python, ROS2',
+    num_team_members: 3,
+    status: 'approved',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    images: [],
+  },
+  {
+    id: 'proj-2',
+    project_code: 'TG27-SW-042',
+    student_name: 'Priya Sharma',
+    college_name: 'IIT Gandhinagar',
+    email: 'priya@iitgn.ac.in',
+    phone: '+91 98765 00002',
+    project_name: 'NeuroVision Edge AI',
+    category: 'Software',
+    sub_category: 'Computer Vision & AI',
+    description: 'Ultra-low latency edge computer vision pipeline detecting real-time anomalies on high-speed assembly lines.',
+    technologies_used: 'PyTorch, TensorRT, FastAPI, React',
+    num_team_members: 2,
+    status: 'approved',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    images: [],
+  },
+  {
+    id: 'proj-3',
+    project_code: 'TG27-HW-119',
+    student_name: 'Devansh Joshi',
+    college_name: 'Nirma University',
+    email: 'devansh@nirma.edu',
+    phone: '+91 98765 00003',
+    project_name: 'Bionic Myoelectric Arm',
+    category: 'Hardware',
+    sub_category: 'Biomedical & Prosthetics',
+    description: '3D-printed lightweight prosthetic arm controlled via electromyographic surface sensors and haptic feedback.',
+    technologies_used: 'Arduino, EMG Sensors, Servo Controllers',
+    num_team_members: 1,
+    status: 'approved',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    images: [],
+  },
+  {
+    id: 'proj-4',
+    project_code: 'TG27-SW-203',
+    student_name: 'Rohan Mehta & Ananya Dave',
+    college_name: 'LJCCA',
+    email: 'rohan@ljcca.edu',
+    phone: '+91 98765 00004',
+    project_name: 'Decentralized Microgrid Optimizer',
+    category: 'Software',
+    sub_category: 'Smart Energy & P2P',
+    description: 'P2P renewable energy trading protocol built with smart contracts and predictive grid demand balancing.',
+    technologies_used: 'Solidity, Web3.js, Next.js, Node.js',
+    num_team_members: 2,
+    status: 'approved',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    images: [],
+  },
+];
+
 export const App: React.FC = () => {
   const { isAdmin } = useAuth();
   const [events, setEvents] = useState<EventItem[]>(DEFAULT_EVENTS);
-  const [projects, setProjects] = useState<ProjectRecord[]>([]);
+  const [projects, setProjects] = useState<ProjectRecord[]>(DEFAULT_PROJECTS);
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>(DEFAULT_GALLERY);
   const [faqs, setFaqs] = useState<FAQItem[]>(DEFAULT_FAQS);
   const [settings, setSettings] = useState<FestivalSettings>(DEFAULT_SETTINGS);
@@ -345,14 +424,14 @@ export const App: React.FC = () => {
     try {
       const [eventsData, projectsData, galleryData, faqsData, settingsData] = await Promise.all([
         api.getEvents().catch(() => DEFAULT_EVENTS),
-        api.getPublicProjects().catch(() => []),
+        api.getPublicProjects().catch(() => DEFAULT_PROJECTS),
         api.getGallery().catch(() => DEFAULT_GALLERY),
         api.getFAQs().catch(() => DEFAULT_FAQS),
         api.getSettings().catch(() => DEFAULT_SETTINGS),
       ]);
 
       if (eventsData && eventsData.length > 0) setEvents(eventsData);
-      if (projectsData) setProjects(projectsData);
+      if (projectsData && projectsData.length > 0) setProjects(projectsData);
       if (galleryData && galleryData.length > 0) setGalleryItems(galleryData);
       if (faqsData && faqsData.length > 0) setFaqs(faqsData);
       if (settingsData) setSettings(settingsData);
@@ -423,56 +502,105 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ position: 'relative', overflowX: 'hidden' }}>
+      {/* Cybernetic Boot Sequence Loader */}
+      <TechLoaderOverlay />
+
+      {/* Custom Interactive Desktop Cursor */}
+      <CustomCursor />
+
+      {/* Background Interactive Constellation Grid */}
+      <TechBackground />
+
       {/* Header & Sticky Nav */}
       <Navbar onOpenAdmin={handleOpenAdmin} />
 
       {/* Main Content Sections */}
-      <main id="top">
+      <main id="top" style={{ position: 'relative', zIndex: 1 }}>
         {/* A. Hero */}
         <Hero />
 
+        <TechnicalSeparator label="SYS // EXPO OVERVIEW" code="MODULE // 01.ABOUT" />
+
         {/* B. About */}
-        <AboutSection />
+        <ScrollReveal>
+          <AboutSection />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // TRACK MATRIX" code="MODULE // 02.PROGRAM" />
 
         {/* C. Events (Track Overview & 8 Events Program) */}
-        <EventsTimeline
-          events={events}
-          onSelectRegister={handleSelectRegister}
-          onSelectShowcase={handleSelectShowcase}
-        />
+        <ScrollReveal>
+          <EventsTimeline
+            events={events}
+            onSelectRegister={handleSelectRegister}
+            onSelectShowcase={handleSelectShowcase}
+          />
+        </ScrollReveal>
+
+        {/* C.2 Intensive Workshops & Hackathons */}
+        <ScrollReveal>
+          <WorkshopsHackathonsSection
+            events={events}
+            onRegister={handleSelectRegister}
+          />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // INNOVATION SHOWCASE" code="MODULE // 03.EXHIBITS" />
 
         {/* D. Tech Showcase */}
-        <TechShowcaseSection projects={projects} />
+        <ScrollReveal>
+          <TechShowcaseSection projects={projects} />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // 7-DAY TIMELINE" code="MODULE // 04.SCHEDULE" />
 
         {/* E. 7-Day Schedule with Days Tabs & Session Rows */}
-        <ScheduleSection />
+        <ScrollReveal>
+          <ScheduleSection />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // ACCREDITATION PASSES" code="MODULE // 05.ACCESS" />
 
         {/* F. Registration Section */}
-        <RegistrationSection
-          events={events}
-          preselectedEventId={preselectedEventId}
-          ourCollegeName={settings.our_college_name}
-          onOpenSubmission={(reg) => {
-            setInitialRegForSubmission(reg || null);
-            setIsSubmissionOpen(true);
-          }}
-        />
+        <ScrollReveal>
+          <RegistrationSection
+            events={events}
+            preselectedEventId={preselectedEventId}
+            ourCollegeName={settings.our_college_name}
+            onOpenSubmission={(reg) => {
+              setInitialRegForSubmission(reg || null);
+              setIsSubmissionOpen(true);
+            }}
+          />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // VISUAL ARCHIVE" code="MODULE // 06.GALLERY" />
 
         {/* G. Gallery */}
-        <GallerySection items={galleryItems} />
+        <ScrollReveal>
+          <GallerySection items={galleryItems} />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // INTELLIGENCE BASE" code="MODULE // 07.FAQS" />
 
         {/* H. FAQ */}
-        <FAQSection faqs={faqs} />
+        <ScrollReveal>
+          <FAQSection faqs={faqs} />
+        </ScrollReveal>
+
+        <TechnicalSeparator label="SYS // COMMUNICATIONS" code="MODULE // 08.DISPATCH" />
 
         {/* I. Contact */}
-        <ContactSection
-          collegeName={settings.our_college_name}
-          officialEmail={settings.official_email}
-          phone={settings.phone}
-          address={settings.address}
-          instagramUrl={settings.instagram_url}
-        />
+        <ScrollReveal>
+          <ContactSection
+            collegeName={settings.our_college_name}
+            officialEmail={settings.official_email}
+            phone={settings.phone}
+            address={settings.address}
+            instagramUrl={settings.instagram_url}
+          />
+        </ScrollReveal>
       </main>
 
       {/* Footer */}

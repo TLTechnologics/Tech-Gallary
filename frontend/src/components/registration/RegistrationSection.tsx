@@ -4,8 +4,7 @@ import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types'
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
 import { GlassSelect } from '../common/GlassSelect';
-import { LetterReveal } from '../common/LetterReveal';
-import { MapPin } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 const YEAR_SEMESTER_OPTIONS = [
   '1st Year / Semester 1',
@@ -28,7 +27,6 @@ interface RegistrationSectionProps {
 export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   events,
   preselectedEventId,
-  ourCollegeName = 'LJCCA',
   onOpenSubmission,
 }) => {
   const { showNotification } = useNotification();
@@ -214,11 +212,31 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   };
 
   return (
-    <section className="s" id="register">
-      <div className="wrap">
-        <div className="sh">
-          <span className="mono">Registration</span>
-          <LetterReveal as="h2" text="Save your place." />
+    <section className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F8F5EC] overflow-hidden" id="register">
+      {/* Background Architectural Grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(#202020 1px, transparent 1px), linear-gradient(90deg, #202020 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
+            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+              REGISTRATION PORTAL // 100% FREE PASSES
+            </span>
+          </div>
+
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#202020] tracking-tight leading-tight">
+            Reserve Your <span className="text-[#3155E7] underline decoration-[#FFD85A] decoration-wavy decoration-2">Place.</span>
+          </h2>
         </div>
 
         {confirmedRegistration ? (
@@ -231,86 +249,132 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
             onOpenSubmission={(reg) => onOpenSubmission(reg)}
           />
         ) : (
-          <div className="reg">
-            {/* Left Column: 2 Types of Free Passes */}
-            <div>
-              <h3>Choose a pass</h3>
-              <div className="tiers" id="tiers">
-                {/* Type 1: Visitor */}
-                <label className="tier">
-                  <input
-                    type="radio"
-                    name="pass"
-                    value="visitor"
-                    checked={selectedPass === 'visitor'}
-                    onChange={() => setSelectedPass('visitor')}
-                  />
-                  <div>
-                    <b>Visitor</b>
-                    <span>Showcase exhibition and open talks</span>
-                  </div>
-                  <em>Free</em>
-                </label>
-
-                {/* Type 2: Project Showcasing */}
-                <label className="tier">
-                  <input
-                    type="radio"
-                    name="pass"
-                    value="showcasing"
-                    checked={selectedPass === 'showcasing'}
-                    onChange={() => setSelectedPass('showcasing')}
-                  />
-                  <div>
-                    <b>Project Showcasing</b>
-                    <span>Hardware &amp; Software stall (Requires Admin Approval)</span>
-                  </div>
-                  <em>Free</em>
-                </label>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Column: Choose Pass Tier & Guidance (Perforated Pass Cards) */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <div>
+                <h3 className="font-display text-2xl font-black text-[#202020] mb-2">
+                  Select Your Festival Pass
+                </h3>
+                <p className="font-body text-sm text-[#5F5B52] leading-relaxed font-medium">
+                  Both passes grant 100% free admission to the festival grounds at LJCCA, Vastrapur, Ahmedabad.
+                </p>
               </div>
 
-              <div className="mono" style={{ marginBottom: '1.5rem', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                <span>All festival registrations are 100% Free · LJCCA, Vastrapur, Ahmedabad · 18–24 Jan 2027</span>
-                <a
-                  href="https://share.google/wWJlNwjeWMOJeZC5y"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="chip"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', padding: '0.2rem 0.55rem', fontSize: '0.72rem', textDecoration: 'none' }}
+              {/* Pass Tier Selection Cards: Perforated Paper Passes */}
+              <div className="space-y-4">
+                {/* Tier 1: Visitor */}
+                <div
+                  onClick={() => setSelectedPass('visitor')}
+                  className={`p-5 rounded-sm border-2 border-[#202020] transition-all duration-200 cursor-pointer flex items-start justify-between gap-4 ${
+                    selectedPass === 'visitor'
+                      ? 'bg-[#FFD85A] shadow-[5px_5px_0px_#202020] -translate-y-1'
+                      : 'bg-[#FFFFFF] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020]'
+                  }`}
                 >
-                  <MapPin className="w-3 h-3" style={{ color: 'var(--lime, #cdff2b)' }} />
-                  <span>Map Reference →</span>
-                </a>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1">
+                      <input
+                        type="radio"
+                        name="pass-type"
+                        value="visitor"
+                        checked={selectedPass === 'visitor'}
+                        onChange={() => setSelectedPass('visitor')}
+                        className="accent-[#3155E7] w-4 h-4 cursor-pointer"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-display font-black text-lg text-[#202020]">
+                        Visitor Pass
+                      </div>
+                      <div className="font-body text-xs text-[#5F5B52] font-medium mt-1">
+                        Access to open talks, demonstration exhibits, and public viewing
+                      </div>
+                    </div>
+                  </div>
+                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#FFFFFF] text-[#202020] border-1.5 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                    FREE
+                  </span>
+                </div>
+
+                {/* Tier 2: Project Showcasing */}
+                <div
+                  onClick={() => setSelectedPass('showcasing')}
+                  className={`p-5 rounded-sm border-2 border-[#202020] transition-all duration-200 cursor-pointer flex items-start justify-between gap-4 ${
+                    selectedPass === 'showcasing'
+                      ? 'bg-[#FFD85A] shadow-[5px_5px_0px_#202020] -translate-y-1'
+                      : 'bg-[#FFFFFF] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020]'
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1">
+                      <input
+                        type="radio"
+                        name="pass-type"
+                        value="showcasing"
+                        checked={selectedPass === 'showcasing'}
+                        onChange={() => setSelectedPass('showcasing')}
+                        className="accent-[#3155E7] w-4 h-4 cursor-pointer"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-display font-black text-lg text-[#202020]">
+                        Project Showcasing Pass
+                      </div>
+                      <div className="font-body text-xs text-[#5F5B52] font-medium mt-1">
+                        Hardware &amp; Software booth exhibition stall (Requires Admin Verification)
+                      </div>
+                    </div>
+                  </div>
+                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#FFFFFF] text-[#202020] border-1.5 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                    FREE
+                  </span>
+                </div>
               </div>
 
-              {/* Workflow Notice */}
-              <div
-                style={{
-                  border: '1px solid var(--line)',
-                  padding: '1.2rem',
-                  background: 'var(--card)',
-                  fontSize: '0.85rem',
-                }}
-              >
-                <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: 'var(--ink)' }}>
-                  How Project Showcasing Works:
+              {/* Location Reference Badge */}
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#625E56] bg-[#FFFFFF] p-3 rounded-sm border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020]">
+                <MapPin className="w-4 h-4 text-[#FF7139]" />
+                <span>LJCCA, Vastrapur, Ahmedabad · 18–24 Jan 2027</span>
+              </div>
+
+              {/* Showcasing Workflow Advisory */}
+              <div className="p-5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[3px_3px_0px_#202020] font-mono text-xs text-[#5F5B52]">
+                <div className="font-black text-[#202020] mb-2 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
+                  <span>How Project Showcasing Works:</span>
                 </div>
-                <ol style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--mute)', lineHeight: '1.6' }}>
-                  <li>Select <strong>Project Showcasing</strong> and submit your details.</li>
-                  <li>The festival administrator receives an email notification with your credentials.</li>
-                  <li>Upon admin approval, your registration is confirmed and you receive the option to submit your project details.</li>
-                  <li>A confirmation and status update is sent directly to your WhatsApp number.</li>
+                <ol className="list-decimal list-inside space-y-1.5 leading-relaxed font-medium">
+                  <li>Select <strong>Project Showcasing</strong> and submit your team details.</li>
+                  <li>Festival review administrators verify your submission via admin portal.</li>
+                  <li>Upon approval, you receive a direct link to submit prototype specifications.</li>
+                  <li>Real-time confirmation dispatch is sent to your WhatsApp number.</li>
                 </ol>
               </div>
             </div>
 
-            {/* Right Column: Registration Form */}
-            <form onSubmit={handleSubmit} noValidate>
-              <h3>Your details</h3>
+            {/* Right Column: Registration Form in Pure Paper Dossier */}
+            <form onSubmit={handleSubmit} noValidate className="lg:col-span-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] p-6 sm:p-8 shadow-[6px_6px_0px_#202020] relative">
+              {/* Washi Tape Strip */}
+              <div
+                className="paper-tape"
+                style={{
+                  top: '-12px',
+                  right: '15%',
+                  width: '65px',
+                  transform: 'rotate(4deg)',
+                }}
+              />
 
-              {/* Event Dropdown */}
-              <div className="field">
-                <span className="field-label">Selected Festival Event *</span>
+              <h3 className="font-display font-black text-2xl text-[#202020] mb-6">
+                Enter Registration Details
+              </h3>
+
+              {/* Festival Event Dropdown */}
+              <div className="mb-5">
+                <label className="block font-mono text-xs text-[#202020] mb-2 font-bold uppercase tracking-wider">
+                  Selected Festival Event *
+                </label>
                 <GlassSelect
                   value={selectedEventId}
                   onChange={setSelectedEventId}
@@ -322,131 +386,153 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   }))}
                 />
                 {!isInternalCollege && (
-                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.35rem', display: 'block' }}>
+                  <span className="block font-mono text-[11px] text-[#625E56] font-medium mt-1.5">
                     External college students can only select from Tech Showcase days (Day 1 &amp; Day 2).
                   </span>
                 )}
               </div>
 
               {/* College Affiliation Selector */}
-              <div style={{ marginBottom: '1.1rem' }}>
-                <span className="mono" style={{ display: 'block', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
+              <div className="mb-5">
+                <label className="block font-mono text-xs text-[#202020] mb-2 font-bold uppercase tracking-wider">
                   Student Affiliation *
-                </span>
-                <div style={{ display: 'flex', gap: '0.8rem' }}>
+                </label>
+                <div className="grid grid-cols-2 gap-3 font-mono text-xs">
                   <button
                     type="button"
-                    className="chip"
-                    aria-pressed={isInternalCollege}
                     onClick={() => handleCollegeToggle(true)}
+                    className={`py-2.5 px-4 rounded-sm border-2 border-[#202020] font-black transition-all ${
+                      isInternalCollege
+                        ? 'bg-[#3155E7] text-white shadow-[3px_3px_0px_#202020]'
+                        : 'bg-[#FAF8F3] text-[#202020] hover:bg-[#FFFFFF]'
+                    }`}
                   >
                     Our College Student
                   </button>
                   <button
                     type="button"
-                    className="chip"
-                    aria-pressed={!isInternalCollege}
                     onClick={() => handleCollegeToggle(false)}
+                    className={`py-2.5 px-4 rounded-sm border-2 border-[#202020] font-black transition-all ${
+                      !isInternalCollege
+                        ? 'bg-[#3155E7] text-white shadow-[3px_3px_0px_#202020]'
+                        : 'bg-[#FAF8F3] text-[#202020] hover:bg-[#FFFFFF]'
+                    }`}
                   >
                     External College Student
                   </button>
                 </div>
               </div>
 
-              {/* Full Name */}
-              <label className="field">
-                <span>Full name *</span>
-                <input
-                  type="text"
-                  required
-                  autoComplete="name"
-                  placeholder="e.g. Jane Doe"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-              </label>
-
-              {/* Email */}
-              <label className="field">
-                <span>Email address *</span>
-                <input
-                  type="email"
-                  required
-                  autoComplete="email"
-                  placeholder="name@college.edu"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-
-              {/* Phone Number (Explicit WhatsApp confirmation indicator) */}
-              <label className="field">
-                <span>Phone number (WhatsApp for Confirmation) *</span>
-                <input
-                  type="tel"
-                  required
-                  autoComplete="tel"
-                  placeholder="+91 98765 43210"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <span className="mono" style={{ fontSize: '0.75rem', marginTop: '0.3rem', color: 'var(--mute)' }}>
-                  We will send your pass confirmation and approval updates via WhatsApp.
-                </span>
-              </label>
-
-              {/* College Name */}
-              <label className="field">
-                <span>College name *</span>
-                <input
-                  type="text"
-                  required
-                  value={collegeName}
-                  onChange={(e) => setCollegeName(e.target.value)}
-                  placeholder="College / University Name"
-                  readOnly={isInternalCollege}
-                  style={isInternalCollege ? { opacity: 0.9, cursor: 'not-allowed', background: 'rgba(255,255,255,0.04)' } : undefined}
-                />
-                {isInternalCollege && (
-                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem' }}>
-                    Locked to host institution (LJCCA).
-                  </span>
-                )}
-              </label>
-
-              {/* Roll Number (Shown and required when Our College / LJCCA is selected) */}
-              {isInternalCollege && (
-                <label className="field">
-                  <span>Roll number (LJCCA) *</span>
+              {/* Full Name & Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    Full Name *
+                  </label>
                   <input
                     type="text"
                     required
-                    value={rollNumber}
-                    onChange={(e) => setRollNumber(e.target.value)}
-                    placeholder="e.g. 23BCA101 or Roll No."
-                    autoComplete="off"
+                    autoComplete="name"
+                    placeholder="e.g. Jane Doe"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
                   />
-                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--mute)', marginTop: '0.25rem' }}>
-                    Required for student identity verification at campus entry.
-                  </span>
-                </label>
-              )}
+                </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <label className="field">
-                  <span>Department {isInternalCollege ? '(Locked to BCA)' : ''}</span>
+                <div>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="name@college.edu"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
+                  />
+                </div>
+              </div>
+
+              {/* Phone (WhatsApp) & College Name */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    Phone (WhatsApp) *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    placeholder="+91 98765 43210"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    College Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={collegeName}
+                    onChange={(e) => setCollegeName(e.target.value)}
+                    placeholder="College / University Name"
+                    readOnly={isInternalCollege}
+                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] text-[#202020] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#202020] ${
+                      isInternalCollege
+                        ? 'bg-[#FAF8F3] text-[#625E56] cursor-not-allowed'
+                        : 'bg-[#FFFFFF] focus:border-[#3155E7]'
+                    }`}
+                  />
+                </div>
+              </div>
+
+              {/* Roll Number (for internal) & Department & Semester */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                {isInternalCollege && (
+                  <div>
+                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                      Roll Number (LJCCA) *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={rollNumber}
+                      onChange={(e) => setRollNumber(e.target.value)}
+                      placeholder="e.g. 23BCA101"
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
+                    />
+                  </div>
+                )}
+
+                <div className={!isInternalCollege ? 'sm:col-span-1' : ''}>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    Department {isInternalCollege ? '(Locked to BCA)' : ''}
+                  </label>
                   <input
                     type="text"
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
-                    placeholder="e.g. BCA or Computer Science"
+                    placeholder="e.g. Computer Science"
                     readOnly={isInternalCollege}
-                    style={isInternalCollege ? { opacity: 0.9, cursor: 'not-allowed', background: 'rgba(255,255,255,0.04)' } : undefined}
+                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] text-[#202020] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#202020] ${
+                      isInternalCollege
+                        ? 'bg-[#FAF8F3] text-[#625E56] cursor-not-allowed'
+                        : 'bg-[#FFFFFF] focus:border-[#3155E7]'
+                    }`}
                   />
-                </label>
+                </div>
 
-                <div className="field">
-                  <span className="field-label">Year / Semester *</span>
+                <div className={!isInternalCollege ? 'sm:col-span-2' : ''}>
+                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    Year / Semester *
+                  </label>
                   <GlassSelect
                     value={yearSemester}
                     onChange={setYearSemester}
@@ -457,68 +543,75 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
               {/* Team Name for Showcasing or Hackathons */}
               {(selectedPass === 'showcasing' || isHackathon) && (
-                <div style={{ borderTop: '1px solid var(--line)', paddingTop: '1rem', marginTop: '0.5rem' }}>
-                  <label className="field">
-                    <span>Team / Project Name {selectedPass === 'showcasing' ? '(Optional)' : '*'}</span>
+                <div className="border-t-2 border-dashed border-[#202020]/25 pt-4 mt-4 space-y-4">
+                  <div>
+                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                      Team / Project Name {selectedPass === 'showcasing' ? '(Optional)' : '*'}
+                    </label>
                     <input
                       type="text"
                       placeholder="e.g. Quantum Innovators"
                       value={teamName}
                       onChange={(e) => setTeamName(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
                     />
-                  </label>
+                  </div>
 
-                  <label className="field">
-                    <span>Team member names (if group project)</span>
+                  <div>
+                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                      Team Member Names (if group project)
+                    </label>
                     <input
                       type="text"
                       placeholder="e.g. Alice Smith, Bob Chen"
                       value={teamMembers}
                       onChange={(e) => setTeamMembers(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#3155E7] transition-colors shadow-[2px_2px_0px_#202020]"
                     />
-                  </label>
+                  </div>
                 </div>
               )}
 
               {/* Conditional Parent Checkbox */}
               {isParentWorkshop && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.2rem', cursor: 'pointer' }}>
+                <div className="my-4 p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2.5px_2.5px_0px_#202020] flex items-center gap-3">
                   <input
                     type="checkbox"
+                    id="parent-check"
                     checked={isParentAttendee}
                     onChange={(e) => setIsParentAttendee(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: 'var(--ink)' }}
+                    className="accent-[#E94B50] w-4 h-4 cursor-pointer"
                   />
-                  <span style={{ fontSize: '0.9rem' }}>
-                    I confirm that I am attending as a parent or guardian.
-                  </span>
-                </label>
+                  <label htmlFor="parent-check" className="font-body text-xs sm:text-sm text-[#202020] font-bold cursor-pointer">
+                    I confirm that I am attending as a parent or guardian of a student.
+                  </label>
+                </div>
               )}
 
-              {/* Submit Button */}
+              {/* Submit CTA */}
               <button
-                className="btn fill"
                 type="submit"
                 disabled={isSubmitting}
-                style={{ width: '100%', justifyContent: 'center' }}
+                className="w-full mt-6 py-4 px-6 rounded-sm font-mono font-bold text-sm text-white bg-[#3155E7] border-2 border-[#202020] shadow-[4.5px_4.5px_0px_#202020] hover:shadow-[6px_6px_0px_#202020] hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isSubmitting
-                  ? 'Submitting registration...'
-                  : selectedPass === 'showcasing'
-                  ? 'Request Project Showcasing Pass (Free) →'
-                  : 'Reserve Visitor Pass (Free) →'}
+                <span>
+                  {isSubmitting
+                    ? 'PROCESSING REGISTRATION...'
+                    : selectedPass === 'showcasing'
+                    ? 'REQUEST PROJECT SHOWCASING PASS (FREE) →'
+                    : 'RESERVE VISITOR PASS (FREE) →'}
+                </span>
               </button>
 
-              {/* Feedback alert box */}
+              {/* Form Feedback Alert Box */}
               {formFeedback && (
                 <div
-                  className="ok show"
                   role="status"
-                  style={{
-                    background: formFeedback.isError ? 'var(--card)' : 'var(--lime)',
-                    color: formFeedback.isError ? '#D6331F' : 'var(--limeink)',
-                    borderColor: formFeedback.isError ? '#D6331F' : 'var(--ink)',
-                  }}
+                  className={`mt-4 p-4 rounded-sm border-2 border-[#202020] font-mono text-xs font-bold leading-relaxed shadow-[3px_3px_0px_#202020] ${
+                    formFeedback.isError
+                      ? 'bg-[#FFECEC] text-[#E94B50]'
+                      : 'bg-[#FFD85A] text-[#202020]'
+                  }`}
                 >
                   {formFeedback.message}
                 </div>

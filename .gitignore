@@ -53,3 +53,14 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 .system_generated/
+
+# Backup & workspace temporary root files
+/TechGallery/
+/paper_prompt.txt
+/frontend_backup_temp/
+/src/
+/*.js
+/*.py
+/*.txt
+/*.html
+/index.css

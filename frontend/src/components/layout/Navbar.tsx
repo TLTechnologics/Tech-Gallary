@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Sun, Moon } from 'lucide-react';
+import { Shield, Sun, Moon, ArrowUpRight, Menu, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 interface NavbarProps {
@@ -9,111 +9,160 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [scrollPercent, setScrollPercent] = useState(0);
+  const [activeSection, setActiveSection] = useState('top');
   const { isAdmin } = useAuth();
 
   useEffect(() => {
-    // Detect system preference or stored theme
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = prefersDark ? 'dark' : 'dark'; // default to dark as per design spec
-    document.documentElement.setAttribute('data-theme', initialTheme);
-    setIsDark(initialTheme === 'dark');
+    // Scroll progress tracker and active section spy
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollPercent(Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100)));
+      }
+
+      const sections = ['top', 'about', 'events', 'showcase', 'schedule', 'register', 'faq', 'contact'];
+      for (const sectionId of [...sections].reverse()) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 140) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
     setIsDark(!isDark);
   };
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Events', href: '#events' },
-    { name: 'Showcase', href: '#showcase' },
-    { name: 'Schedule', href: '#schedule' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '#about', id: 'about' },
+    { name: 'Events', href: '#events', id: 'events' },
+    { name: 'Showcase', href: '#showcase', id: 'showcase' },
+    { name: 'Schedule', href: '#schedule', id: 'schedule' },
+    { name: 'FAQ', href: '#faq', id: 'faq' },
+    { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   return (
-    <header>
-      <div className="wrap">
-        <nav>
-          <a className="logo" href="#top">
-            <i aria-hidden="true" />
-            <span>Tech Gallery 2027</span>
+    <header className="sticky top-3.5 mx-auto max-w-6xl w-[calc(100%-28px)] z-50 bg-[#FFFFFF]/95 backdrop-blur-md border-2 border-[#202020] rounded-md shadow-[4px_4px_0px_#202020] transition-all">
+      {/* Scroll-triggered progress indicator */}
+      <div 
+        className="scroll-progress-bar" 
+        style={{ 
+          width: `${scrollPercent}%`,
+          background: 'linear-gradient(90deg, #3155E7, #FF7139, #FFD85A)' 
+        }} 
+        aria-hidden="true" 
+      />
+
+      <div className="wrap max-w-full px-4">
+        <nav className="h-16 flex items-center justify-between">
+          <a className="logo flex items-center gap-2.5 text-decoration-none group" href="#top">
+            <span className="w-7 h-7 rounded-sm bg-[#3155E7] border-1.5 border-[#202020] shadow-[2px_2px_0px_#202020] flex items-center justify-center transition-transform group-hover:-translate-y-0.5">
+              <span className="w-2.5 h-2.5 bg-[#FFD85A] rounded-xs" />
+            </span>
+            <span className="font-display font-black text-lg tracking-tight text-[#202020] flex items-center gap-1.5">
+              Tech Gallery
+              <span className="px-1.5 py-0.5 rounded-xs bg-[#FFD85A] border border-[#202020] text-xs font-mono font-bold text-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                2027
+              </span>
+            </span>
           </a>
 
+          {/* Mobile hamburger button */}
           <button
-            className="menu"
+            className="md:hidden flex items-center justify-center p-2 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] text-[#202020]"
             aria-expanded={menuOpen}
-            aria-controls="links"
+            aria-label="Toggle navigation menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? 'Close' : 'Menu'}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          <div className={`links ${menuOpen ? 'open' : ''}`} id="links">
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`font-sans text-sm font-bold tracking-tight transition-all relative py-1 px-1.5 ${
+                    isActive ? 'text-[#3155E7]' : 'text-[#625E56] hover:text-[#202020]'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3155E7] rounded-full" />
+                  )}
+                </a>
+              );
+            })}
+
+            <a
+              href="#register"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] hover:-translate-y-0.5 transition-all"
+            >
+              Pass Ticket
+              <ArrowUpRight size={14} />
+            </a>
+
+            <button
+              onClick={() => onOpenAdmin()}
+              aria-label="Admin Portal"
+              title="Admin Portal"
+              className={`p-2 rounded-sm border-2 border-[#202020] flex items-center justify-center transition-all ${
+                isAdmin 
+                  ? 'bg-[#FFD85A] text-[#202020] shadow-[2.5px_2.5px_0px_#202020]' 
+                  : 'bg-[#FFFFFF] text-[#625E56] shadow-[2px_2px_0px_#202020] hover:text-[#202020]'
+              }`}
+            >
+              <Shield size={16} />
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile dropdown drawer */}
+        {menuOpen && (
+          <div className="md:hidden pt-3 pb-5 border-t-2 border-dashed border-[#202020]/20 flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
+                className="font-sans font-bold text-base text-[#202020] py-1.5 px-2 rounded hover:bg-[#FAF8F2]"
               >
                 {link.name}
               </a>
             ))}
-
-            <a
-              className="btn fill"
-              href="#register"
-              onClick={() => setMenuOpen(false)}
-            >
-              Register
-            </a>
-
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle light/dark theme"
-              title="Toggle theme"
-              style={{
-                background: 'none',
-                border: '1px solid var(--line)',
-                color: 'var(--ink)',
-                cursor: 'pointer',
-                padding: '0.45rem',
-                borderRadius: 'var(--r)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {isDark ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                onOpenAdmin();
-              }}
-              aria-label="Admin Portal"
-              title="Admin Portal"
-              style={{
-                background: isAdmin ? 'var(--lime)' : 'none',
-                border: '1px solid ' + (isAdmin ? 'var(--lime)' : 'var(--line)'),
-                color: isAdmin ? 'var(--limeink)' : 'var(--ink)',
-                cursor: 'pointer',
-                padding: '0.45rem',
-                borderRadius: 'var(--r)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Shield size={15} />
-            </button>
+            <div className="pt-2 flex items-center justify-between border-t border-[#202020]/15">
+              <a
+                href="#register"
+                onClick={() => setMenuOpen(false)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020]"
+              >
+                Pass Ticket <ArrowUpRight size={14} />
+              </a>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenAdmin();
+                }}
+                className="p-2 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] text-[#202020]"
+              >
+                <Shield size={16} />
+              </button>
+            </div>
           </div>
-        </nav>
+        )}
       </div>
     </header>
   );

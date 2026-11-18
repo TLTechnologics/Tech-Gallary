@@ -4,6 +4,11 @@ export const TechBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -20,9 +25,9 @@ export const TechBackground: React.FC = () => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Particle nodes
-    const particleCount = Math.min(Math.floor(width / 22), 55);
-    interface Particle {
+    // Drifting paper fibres and confetti specks
+    const particleCount = Math.min(Math.floor(width / 32), 40);
+    interface PaperParticle {
       x: number;
       y: number;
       vx: number;
@@ -30,20 +35,26 @@ export const TechBackground: React.FC = () => {
       size: number;
       color: string;
       alpha: number;
+      rotation: number;
+      rotSpeed: number;
+      isSquare: boolean;
     }
 
-    const particles: Particle[] = [];
-    const colors = ['#ccff00', '#00f0ff', '#ffffff'];
+    const particles: PaperParticle[] = [];
+    const paperColors = ['#3155E7', '#FF7139', '#FFD85A', '#E94B50', '#B7A5E8', '#202020'];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        size: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.2 + 0.05,
+        size: Math.random() * 3.5 + 1.2,
+        color: paperColors[Math.floor(Math.random() * paperColors.length)],
+        alpha: Math.random() * 0.35 + 0.15,
+        rotation: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.02,
+        isSquare: Math.random() > 0.5,
       });
     }
 
@@ -53,88 +64,92 @@ export const TechBackground: React.FC = () => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle grid points
-      const gridSize = 60;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.025)';
+      // Warm editorial daylight gradient
+      const grad = ctx.createRadialGradient(
+        width * 0.5,
+        height * 0.25,
+        120,
+        width * 0.5,
+        height * 0.6,
+        Math.max(width, height) * 0.9
+      );
+      grad.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
+      grad.addColorStop(0.6, 'rgba(248, 245, 236, 0.4)');
+      grad.addColorStop(1, 'rgba(234, 227, 213, 0.5)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Subtle editorial dot grid (printing registration mark aesthetics)
+      const gridSize = 48;
+      ctx.fillStyle = 'rgba(32, 32, 32, 0.035)';
       for (let x = 0; x < width; x += gridSize) {
         for (let y = 0; y < height; y += gridSize) {
-          ctx.fillRect(x, y, 1.5, 1.5);
+          ctx.beginPath();
+          ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
 
-      // Update and draw particles & links
+      // Update and draw floating paper confetti specks
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
+        p.rotation += p.rotSpeed;
 
         if (p.x < 0) p.x = width;
         else if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
         else if (p.y > height) p.y = 0;
 
-        // Draw particle
-        ctx.fillStyle = p.color;
+        // Interactive mouse avoidance
+        const dx = p.x - mouseX;
+        const dy = p.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 110) {
+          p.x += (dx / dist) * 1.5;
+          p.y += (dy / dist) * 1.5;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
         ctx.globalAlpha = p.alpha;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillStyle = p.color;
 
-        // Connect nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 140) {
-            ctx.strokeStyle = p.color === '#ccff00' ? 'rgba(204, 255, 0, 0.15)' : 'rgba(0, 240, 255, 0.12)';
-            ctx.lineWidth = 0.8;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-
-        // Mouse interaction
-        const mdx = p.x - mouseX;
-        const mdy = p.y - mouseY;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < 120) {
-          ctx.strokeStyle = 'rgba(204, 255, 0, 0.25)';
-          ctx.lineWidth = 1;
+        if (p.isSquare) {
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        } else {
           ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouseX, mouseY);
-          ctx.stroke();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
         }
+        ctx.restore();
       }
 
-      ctx.globalAlpha = 1;
       animationFrameId = requestAnimationFrame(render);
     };
 
     render();
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-70"
+      className="absolute inset-0 pointer-events-none z-0"
+      style={{ opacity: 0.95 }}
       aria-hidden="true"
     />
   );
 };
-

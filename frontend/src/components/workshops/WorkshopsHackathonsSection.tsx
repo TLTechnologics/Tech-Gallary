@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Flame, Users, Calendar, Clock, MapPin, ChevronDown, ChevronUp, AlertCircle, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Terminal, Flame, Users, Clock, MapPin, ChevronDown, ChevronUp, ArrowUpRight, ShieldAlert } from 'lucide-react';
 import { EventItem } from '../../types';
-import { LetterReveal } from '../common/LetterReveal';
 
 interface WorkshopsHackathonsSectionProps {
   events: EventItem[];
@@ -15,8 +14,6 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
 }) => {
   const [expandedId, setExpandedId] = useState<string | null>('bhavesh-workshop');
 
-  // Specific 5 curated sessions requested by user:
-  // Bhavesh Workshop (18 Jan), Thakkar Workshop (19 Jan), Bhavesh Hackathon (20 Jan), Thakkar Hackathon (23 Jan), AI Workshop for Parents (24 Jan)
   const targetIds = [
     'bhavesh-workshop',
     'thakkar-workshop',
@@ -33,186 +30,221 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
-  const getIcon = (event: EventItem) => {
-    if (event.is_hackathon) return <Flame className="w-5 h-5 text-amber-400" />;
-    if (event.eligibility_type === 'parents_only') return <Users className="w-5 h-5 text-purple-400" />;
-    return <Terminal className="w-5 h-5 text-brand-lime" />;
+  const getAccentDetails = (event: EventItem) => {
+    if (event.is_hackathon) {
+      return {
+        color: '#FF7139',
+        badgeBg: '#FAF8F3',
+        typeLabel: '24H SPRINT HACKATHON',
+        icon: <Flame className="w-5 h-5 text-[#FF7139]" />,
+      };
+    }
+    if (event.eligibility_type === 'parents_only') {
+      return {
+        color: '#E94B50',
+        badgeBg: '#FAF8F3',
+        typeLabel: 'FAMILY LITERACY TRACK',
+        icon: <Users className="w-5 h-5 text-[#E94B50]" />,
+      };
+    }
+    return {
+      color: '#3155E7',
+      badgeBg: '#FFFFFF',
+      typeLabel: 'TECHNICAL WORKSHOP',
+      icon: <Terminal className="w-5 h-5 text-[#3155E7]" />,
+    };
   };
 
   return (
-    <section id="workshops" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-neutral-800 pb-8 gap-6">
-        <div>
-          <span className="font-mono text-xs uppercase tracking-widest text-brand-lime block mb-2">
-            // 04. Intensive Tracks
-          </span>
-          <LetterReveal
-            as="h2"
-            className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight uppercase"
-            text="WORKSHOPS & HACKATHONS"
-          />
-          <p className="font-mono text-xs uppercase tracking-wider text-neutral-400 mt-2">
-            Deep-dive technical training, 24-hr code sprints, and our dedicated parent workshop
-          </p>
+    <section id="workshops" className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F2EBDD] overflow-hidden">
+      {/* Background Architectural Grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(#202020 1px, transparent 1px), linear-gradient(90deg, #202020 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-8 border-b-2 border-dashed border-[#202020]/25 gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#FF7139]" />
+              <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+                INTENSIVE LABS &amp; CODE SPRINTS
+              </span>
+            </div>
+
+            <h2 className="font-display text-4xl sm:text-5xl font-black text-[#202020] tracking-tight leading-tight">
+              Workshops &amp; <span className="text-[#3155E7] underline decoration-[#FFD85A] decoration-wavy decoration-2">Hackathons.</span>
+            </h2>
+
+            <p className="font-body text-sm sm:text-base text-[#5F5B52] mt-2 max-w-2xl leading-relaxed font-medium">
+              Hands-on technical immersion, rapid prototype engineering sprints, and our dedicated parent AI workshop.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
+            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFFFFF] px-3.5 py-1.5 rounded-sm border-2 border-[#202020] shadow-[2px_2px_0px_#202020]">
+              <span className="w-2 h-2 bg-[#FF7139] rounded-full" />
+              College Exclusive (LJCCA)
+            </span>
+            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFD85A] px-3.5 py-1.5 rounded-sm border-2 border-[#202020] shadow-[2px_2px_0px_#202020]">
+              <span className="w-2 h-2 bg-[#E94B50] rounded-full" />
+              Parents Track
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3 font-mono text-xs">
-          <span className="flex items-center gap-1.5 text-amber-400">
-            <span className="w-2 h-2 bg-amber-400 rounded-full" />
-            Internal College Exclusive
-          </span>
-          <span className="text-neutral-600">|</span>
-          <span className="flex items-center gap-1.5 text-purple-400">
-            <span className="w-2 h-2 bg-purple-400 rounded-full" />
-            Parents Only
-          </span>
-        </div>
-      </div>
+        {/* Exhibition Accordion Dossier Folders */}
+        <div className="space-y-5">
+          {sessions.map((event) => {
+            const isExpanded = expandedId === event.id;
+            const accent = getAccentDetails(event);
+            const isInternal = event.eligibility_type === 'internal_only';
+            const isParents = event.eligibility_type === 'parents_only';
 
-      {/* Accordion List */}
-      <div className="space-y-4">
-        {sessions.map((event) => {
-          const isExpanded = expandedId === event.id;
-          const isInternal = event.eligibility_type === 'internal_only';
-          const isParents = event.eligibility_type === 'parents_only';
-
-          return (
-            <div
-              key={event.id}
-              className={`tech-card border transition-all ${
-                isExpanded
-                  ? 'border-brand-lime/50 bg-dark-900 shadow-xl'
-                  : 'border-neutral-800 bg-dark-900/80 hover:border-neutral-700'
-              }`}
-            >
-              {/* Accordion Bar Header */}
-              <button
-                onClick={() => toggleExpand(event.id)}
-                className="w-full p-6 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none"
+            return (
+              <div
+                key={event.id}
+                className={`transition-all duration-200 rounded-sm overflow-hidden border-2 border-[#202020] ${
+                  isExpanded
+                    ? 'bg-[#FFFFFF] shadow-[6px_6px_0px_#202020]'
+                    : 'bg-[#FAF8F3] hover:bg-[#FFFFFF] shadow-[4px_4px_0px_#202020]'
+                }`}
               >
-                <div className="flex items-start sm:items-center gap-4">
-                  <div className="p-3 bg-dark-850 border border-neutral-800 flex-shrink-0">
-                    {getIcon(event)}
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="font-mono text-xs text-brand-lime font-bold">
-                        {event.date_display}
-                      </span>
-                      <span className="text-neutral-600">•</span>
-                      <span
-                        className={`text-[11px] font-mono uppercase px-2 py-0.5 border ${
-                          isInternal
-                            ? 'border-amber-400/40 text-amber-400 bg-amber-400/10'
-                            : 'border-purple-400/40 text-purple-400 bg-purple-400/10'
-                        }`}
-                      >
-                        {event.eligibility}
-                      </span>
+                {/* Accordion Bar Header */}
+                <button
+                  type="button"
+                  onClick={() => toggleExpand(event.id)}
+                  className="w-full p-6 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none cursor-pointer"
+                >
+                  <div className="flex items-start sm:items-center gap-4">
+                    <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2px_2px_0px_#202020] flex-shrink-0">
+                      {accent.icon}
                     </div>
-                    <h3 className="font-display font-black text-xl sm:text-2xl text-white">
-                      {event.name}
-                    </h3>
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-4 flex-shrink-0">
-                  <span className="font-mono text-xs text-neutral-400 hidden md:block">
-                    {event.timing}
-                  </span>
-                  <div className="p-2 border border-neutral-800 text-neutral-400">
-                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </div>
-                </div>
-              </button>
-
-              {/* Expanded Content Drawer */}
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden border-t border-neutral-800/80"
-                  >
-                    <div className="p-6 sm:p-8 space-y-6">
-                      {/* Logistical Details */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-dark-850 border border-neutral-800 text-xs font-mono">
-                        <div className="flex items-center gap-2 text-neutral-300">
-                          <Calendar className="w-4 h-4 text-brand-lime" />
-                          <span>{event.date_display}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-neutral-300">
-                          <Clock className="w-4 h-4 text-brand-blue" />
-                          <span>{event.timing}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-neutral-300">
-                          <MapPin className="w-4 h-4 text-emerald-400" />
-                          <span>{event.venue}</span>
-                        </div>
-                      </div>
-
-                      {/* Description & Notice */}
-                      <div className="space-y-4">
-                        <h4 className="font-display font-bold text-lg text-white">
-                          Session Overview
-                        </h4>
-                        <p className="text-sm text-neutral-300 leading-relaxed max-w-4xl">
-                          {event.description}
-                        </p>
-
-                        <div className="p-4 bg-dark-850 border-l-4 border-amber-400 text-xs font-mono text-neutral-300 space-y-1">
-                          <span className="text-amber-400 font-bold uppercase block">
-                            Participation Policy:
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                        <span className="font-mono text-xs font-black text-[#202020]">
+                          {event.date_display}
+                        </span>
+                        <span className="text-[#202020]/40">•</span>
+                        <span
+                          className="font-mono text-[10px] px-2.5 py-0.5 rounded-sm border-1.5 border-[#202020] font-black uppercase tracking-wider"
+                          style={{
+                            color: '#202020',
+                            backgroundColor: accent.color === '#FFD85A' ? '#FFD85A' : `${accent.color}20`,
+                          }}
+                        >
+                          {accent.typeLabel}
+                        </span>
+                        {isInternal && (
+                          <span className="font-mono text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFFFFF] font-bold text-[#625E56]">
+                            LJCCA Only
                           </span>
-                          {isInternal ? (
-                            <p>
-                              Strictly exclusive to enrolled students of our college. External college students cannot register for this track. External students are encouraged to register their hardware or software prototypes in the Tech Showcase track.
-                            </p>
-                          ) : (
-                            <p>
-                              This session is tailored specially for parents and guardians. Plain-English conversational guidance, interactive demonstrations, and open Q&A.
-                            </p>
-                          )}
-                        </div>
-
-                        {event.rules && (
-                          <div className="p-4 bg-dark-950 border border-neutral-800">
-                            <span className="font-mono text-xs uppercase tracking-wider text-neutral-200 font-bold block mb-2">
-                              Rules & Requirements:
-                            </span>
-                            <div className="text-xs text-neutral-400 font-mono whitespace-pre-line space-y-1 leading-relaxed">
-                              {event.rules}
-                            </div>
-                          </div>
+                        )}
+                        {isParents && (
+                          <span className="font-mono text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFD85A] font-bold text-[#202020]">
+                            Parents &amp; Guardians
+                          </span>
                         )}
                       </div>
 
-                      {/* Action Bar */}
-                      <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-neutral-800">
-                        <span className="text-xs font-mono text-neutral-400">
-                          Registration Status: <strong className="text-emerald-400 uppercase">{event.registration_status}</strong>
-                        </span>
-
-                        <button
-                          onClick={() => onRegister(event.id)}
-                          className="btn-primary w-full sm:w-auto text-xs py-2.5 px-6 flex items-center justify-center gap-2"
-                        >
-                          <span>Register For {event.name}</span>
-                          <ArrowUpRight className="w-4 h-4" />
-                        </button>
-                      </div>
+                      <h3 className="font-display font-black text-xl sm:text-2xl text-[#202020]">
+                        {event.name}
+                      </h3>
+                      {event.tagline && (
+                        <p className="font-mono text-xs text-[#625E56] font-medium mt-0.5">
+                          {event.tagline}
+                        </p>
+                      )}
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+                  </div>
+
+                  <div className="flex items-center gap-4 flex-shrink-0">
+                    <span className="hidden sm:inline-flex font-mono text-xs font-bold text-[#625E56] bg-[#FFFFFF] px-2.5 py-1 rounded-sm border border-[#202020]">
+                      {event.timing}
+                    </span>
+                    <div className="p-2 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[1.5px_1.5px_0px_#202020] text-[#202020]">
+                      {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    </div>
+                  </div>
+                </button>
+
+                {/* Collapsible Content */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="px-6 pb-6 pt-2 border-t-2 border-dashed border-[#202020]/20 bg-[#FAF8F3]"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4">
+                        {/* Description & Overview */}
+                        <div className="md:col-span-7 flex flex-col justify-between">
+                          <div>
+                            <span className="font-mono text-xs text-[#202020] uppercase tracking-wider block mb-2 font-bold">
+                              Overview &amp; Scope
+                            </span>
+                            <p className="font-body text-sm text-[#5F5B52] leading-relaxed mb-6">
+                              {event.description}
+                            </p>
+
+                            <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#625E56]">
+                              <span className="flex items-center gap-1.5 font-bold text-[#202020]">
+                                <Clock className="w-4 h-4 text-[#FF7139]" />
+                                <span>{event.timing}</span>
+                              </span>
+                              <span className="flex items-center gap-1.5 font-bold text-[#202020]">
+                                <MapPin className="w-4 h-4 text-[#3155E7]" />
+                                <span>{event.venue}</span>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="mt-6 pt-4 border-t-2 border-dashed border-[#202020]/20 flex items-center gap-3">
+                            <button
+                              type="button"
+                              onClick={() => onRegister(event.id)}
+                              className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[3.5px_3.5px_0px_#202020] hover:shadow-[5px_5px_0px_#202020] hover:-translate-y-0.5 transition-all"
+                            >
+                              <span>REGISTER FOR THIS TRACK</span>
+                              <ArrowUpRight size={14} />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Rules & Eligibility Panel */}
+                        <div className="md:col-span-5 p-5 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[3px_3px_0px_#202020] font-mono text-xs">
+                          <div className="flex items-center gap-2 text-[#202020] font-black mb-3 uppercase tracking-wider">
+                            <ShieldAlert size={15} className="text-[#3155E7]" />
+                            <span>Rules &amp; Eligibility Directive</span>
+                          </div>
+
+                          <div className="text-[#5F5B52] whitespace-pre-line leading-relaxed mb-4 font-medium">
+                            {event.rules}
+                          </div>
+
+                          <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FFD85A] text-[11px] text-[#202020] font-bold">
+                            Accreditation Note: Verified attendance certificates are awarded during the closing ceremony on 24 January 2027.
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 };
-

@@ -106,19 +106,18 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
     }
   };
 
-  const handleSelect = (optValue: string, isOptDisabled?: boolean) => {
-    if (isOptDisabled || disabled) return;
-    onChange(optValue);
+  const handleSelect = (optionValue: string, isDisabled?: boolean) => {
+    if (isDisabled) return;
+    onChange(optionValue);
     setIsOpen(false);
   };
 
   return (
     <div
       ref={containerRef}
-      className={`glass-dropdown-container relative w-full ${className}`}
-      style={{ userSelect: 'none' }}
+      className={`relative w-full ${className}`}
     >
-      {/* Trigger Button with Frosted Glassmorphism Styling */}
+      {/* Trigger Button with Tactile Paper Styling */}
       <button
         type="button"
         id={selectId}
@@ -129,77 +128,48 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
         disabled={disabled}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
-        className={`glass-dropdown-trigger flex items-center justify-between w-full px-4 py-3 text-left transition-all duration-200 outline-none ${
-          disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-        } ${triggerClassName}`}
-        style={{
-          background: 'rgba(22, 27, 24, 0.72)',
-          backdropFilter: 'blur(16px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-          border: isOpen
-            ? '1px solid rgba(205, 255, 43, 0.65)'
-            : '1px solid rgba(255, 255, 255, 0.16)',
-          borderRadius: '12px',
-          boxShadow: isOpen
-            ? '0 0 0 3px rgba(205, 255, 43, 0.2), 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2)'
-            : '0 4px 18px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.12)',
-          color: 'var(--ink, #edf0ec)',
-          minHeight: '46px',
-        }}
+        className={`flex items-center justify-between w-full px-4 py-3 text-left transition-all duration-150 outline-none rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] ${
+          isOpen ? 'shadow-[4px_4px_0px_#3155E7] border-[#3155E7]' : ''
+        } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${triggerClassName}`}
       >
         <div className="flex-1 truncate mr-2">
           {selectedOption ? (
             <div className="flex items-center gap-2">
-              {selectedOption.icon && <span className="flex-shrink-0">{selectedOption.icon}</span>}
+              {selectedOption.icon && <span className="flex-shrink-0 text-[#3155E7]">{selectedOption.icon}</span>}
               <div className="truncate">
-                <span className="font-medium text-sm leading-tight text-white block truncate">
+                <span className="font-bold text-sm leading-tight text-[#202020] block truncate">
                   {selectedOption.label}
                 </span>
                 {selectedOption.sublabel && (
-                  <span
-                    className="font-mono text-xs block text-neutral-400 mt-0.5 truncate"
-                    style={{ fontSize: '0.72rem' }}
-                  >
+                  <span className="font-mono text-xs block text-[#625E56] font-medium mt-0.5 truncate">
                     {selectedOption.sublabel}
                   </span>
                 )}
               </div>
             </div>
           ) : (
-            <span className="text-sm text-neutral-400 font-mono">{placeholder}</span>
+            <span className="text-sm text-[#625E56] font-mono">{placeholder}</span>
           )}
         </div>
 
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="flex-shrink-0 text-neutral-300 ml-1"
+          transition={{ duration: 0.18, ease: 'easeOut' }}
+          className="flex-shrink-0 text-[#202020] ml-1"
         >
-          <ChevronDown className="w-4 h-4" style={{ color: isOpen ? 'var(--lime, #cdff2b)' : 'rgba(255, 255, 255, 0.7)' }} />
+          <ChevronDown className="w-4 h-4" />
         </motion.div>
       </button>
 
-      {/* Floating Glassmorphic Dropdown Listbox */}
+      {/* Floating Paper Dropdown Listbox */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -6, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.98 }}
-            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className={`glass-dropdown-menu absolute left-0 right-0 z-50 mt-2 ${dropdownClassName}`}
-            style={{
-              background: 'rgba(18, 24, 21, 0.85)',
-              backdropFilter: 'blur(24px) saturate(190%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(190%)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              borderRadius: '18px',
-              boxShadow:
-                '0 24px 48px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.3)',
-              padding: '7px',
-              maxHeight: '340px',
-              overflowY: 'auto',
-            }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className={`absolute left-0 right-0 z-50 mt-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[6px_6px_0px_#202020] p-1.5 max-h-[300px] overflow-y-auto ${dropdownClassName}`}
           >
             <ul
               ref={listboxRef}
@@ -216,74 +186,34 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
                     role="option"
                     aria-selected={isSelected}
                     onClick={() => handleSelect(opt.value, opt.disabled)}
-                    className={`glass-dropdown-item group relative flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer transition-all duration-150 ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-sm cursor-pointer transition-all duration-150 ${
                       opt.disabled
                         ? 'opacity-40 cursor-not-allowed'
                         : isSelected
-                        ? 'glass-item-active'
-                        : 'hover:bg-white/10 active:bg-white/15'
+                        ? 'bg-[#FFD85A] text-[#202020] font-bold border border-[#202020] shadow-[1.5px_1.5px_0px_#202020]'
+                        : 'text-[#202020] hover:bg-[#FAF8F3]'
                     }`}
-                    style={
-                      isSelected
-                        ? {
-                            background:
-                              'linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.11) 100%)',
-                            border: '1px solid rgba(255, 255, 255, 0.22)',
-                            boxShadow:
-                              '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35)',
-                            borderRadius: '12px',
-                          }
-                        : {
-                            border: '1px solid transparent',
-                            borderRadius: '12px',
-                          }
-                    }
                   >
                     <div className="flex items-center gap-2.5 min-w-0 flex-1">
                       {opt.icon && (
-                        <span
-                          className={`flex-shrink-0 ${
-                            isSelected ? 'text-white' : 'text-neutral-400 group-hover:text-white'
-                          }`}
-                        >
+                        <span className="flex-shrink-0 text-[#3155E7]">
                           {opt.icon}
                         </span>
                       )}
 
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span
-                            className={`text-sm font-medium leading-snug truncate ${
-                              isSelected
-                                ? 'text-white font-semibold'
-                                : 'text-neutral-200 group-hover:text-white'
-                            }`}
-                          >
+                          <span className="text-sm font-bold leading-snug truncate">
                             {opt.label}
                           </span>
                           {opt.badge && (
-                            <span
-                              className="mono flex-shrink-0 text-[10px] px-2 py-0.5 rounded-full border leading-tight"
-                              style={{
-                                background: isSelected
-                                  ? 'rgba(205, 255, 43, 0.15)'
-                                  : 'rgba(255, 255, 255, 0.05)',
-                                color: isSelected ? 'var(--lime, #cdff2b)' : 'var(--mute, #8a908c)',
-                                borderColor: isSelected
-                                  ? 'rgba(205, 255, 43, 0.4)'
-                                  : 'rgba(255, 255, 255, 0.12)',
-                              }}
-                            >
+                            <span className="font-mono text-[9px] px-1.5 py-0.5 rounded-xs border border-[#202020] font-black uppercase tracking-wider bg-[#FFFFFF] text-[#202020]">
                               {opt.badge}
                             </span>
                           )}
                         </div>
-
                         {opt.sublabel && (
-                          <span
-                            className="mono text-xs block text-neutral-400 mt-0.5 truncate"
-                            style={{ fontSize: '0.72rem' }}
-                          >
+                          <span className="font-mono text-xs block text-[#625E56] font-medium truncate mt-0.5">
                             {opt.sublabel}
                           </span>
                         )}
@@ -291,22 +221,7 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
                     </div>
 
                     {isSelected && (
-                      <motion.div
-                        initial={{ scale: 0.6, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="flex-shrink-0 ml-2"
-                      >
-                        <div
-                          className="w-5 h-5 rounded-full flex items-center justify-center"
-                          style={{
-                            background: 'var(--lime, #cdff2b)',
-                            color: '#101312',
-                            boxShadow: '0 0 10px rgba(205, 255, 43, 0.5)',
-                          }}
-                        >
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </div>
-                      </motion.div>
+                      <Check className="w-4 h-4 text-[#202020] flex-shrink-0 ml-2" />
                     )}
                   </li>
                 );
