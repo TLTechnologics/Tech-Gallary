@@ -520,14 +520,24 @@ export const App: React.FC = () => {
         {/* A. Hero */}
         <Hero />
 
-        <TechnicalSeparator label="SYS // EXPO OVERVIEW" code="MODULE // 01.ABOUT" />
+        <TechnicalSeparator
+          label="SYS // EXPO OVERVIEW"
+          code="MODULE // 01.ABOUT"
+          fromBg="#F8F5EC"
+          toBg="#F6EFE6"
+        />
 
         {/* B. About */}
         <ScrollReveal>
           <AboutSection />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // TRACK MATRIX" code="MODULE // 02.PROGRAM" />
+        <TechnicalSeparator
+          label="SYS // TRACK MATRIX"
+          code="MODULE // 02.PROGRAM"
+          fromBg="#F6EFE6"
+          toBg="#EDE5F7"
+        />
 
         {/* C. Events (Track Overview & 8 Events Program) */}
         <ScrollReveal>
@@ -538,6 +548,13 @@ export const App: React.FC = () => {
           />
         </ScrollReveal>
 
+        <TechnicalSeparator
+          label="SYS // INTENSIVE LABS"
+          code="MODULE // 02.SPRINTS"
+          fromBg="#EDE5F7"
+          toBg="#FDEEE3"
+        />
+
         {/* C.2 Intensive Workshops & Hackathons */}
         <ScrollReveal>
           <WorkshopsHackathonsSection
@@ -546,21 +563,36 @@ export const App: React.FC = () => {
           />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // INNOVATION SHOWCASE" code="MODULE // 03.EXHIBITS" />
+        <TechnicalSeparator
+          label="SYS // INNOVATION SHOWCASE"
+          code="MODULE // 03.EXHIBITS"
+          fromBg="#FDEEE3"
+          toBg="#E2EFFC"
+        />
 
         {/* D. Tech Showcase */}
         <ScrollReveal>
           <TechShowcaseSection projects={projects} />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // 7-DAY TIMELINE" code="MODULE // 04.SCHEDULE" />
+        <TechnicalSeparator
+          label="SYS // 7-DAY TIMELINE"
+          code="MODULE // 04.SCHEDULE"
+          fromBg="#E2EFFC"
+          toBg="#E3F5EB"
+        />
 
         {/* E. 7-Day Schedule with Days Tabs & Session Rows */}
         <ScrollReveal>
           <ScheduleSection />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // ACCREDITATION PASSES" code="MODULE // 05.ACCESS" />
+        <TechnicalSeparator
+          label="SYS // ACCREDITATION PASSES"
+          code="MODULE // 05.ACCESS"
+          fromBg="#E3F5EB"
+          toBg="#FEEAE6"
+        />
 
         {/* F. Registration Section */}
         <ScrollReveal>
@@ -575,21 +607,38 @@ export const App: React.FC = () => {
           />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // VISUAL ARCHIVE" code="MODULE // 06.GALLERY" />
+        <TechnicalSeparator
+          label="SYS // VISUAL ARCHIVE"
+          code="MODULE // 06.GALLERY"
+          fromBg="#FEEAE6"
+          toBg="#FCE7F3"
+        />
 
         {/* G. Gallery */}
         <ScrollReveal>
           <GallerySection items={galleryItems} />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // INTELLIGENCE BASE" code="MODULE // 07.FAQS" />
+        <TechnicalSeparator
+          label="SYS // INTELLIGENCE BASE"
+          code="MODULE // 07.FAQS"
+          fromBg="#FCE7F3"
+          toBg="#18191E"
+          isDark={true}
+        />
 
         {/* H. FAQ */}
         <ScrollReveal>
           <FAQSection faqs={faqs} />
         </ScrollReveal>
 
-        <TechnicalSeparator label="SYS // COMMUNICATIONS" code="MODULE // 08.DISPATCH" />
+        <TechnicalSeparator
+          label="SYS // COMMUNICATIONS"
+          code="MODULE // 08.DISPATCH"
+          fromBg="#18191E"
+          toBg="#18191E"
+          isDark={true}
+        />
 
         {/* I. Contact */}
         <ScrollReveal>

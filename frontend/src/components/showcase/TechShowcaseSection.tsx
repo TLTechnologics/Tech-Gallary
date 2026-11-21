@@ -32,8 +32,8 @@ const STATIC_PLATES: StaticPlacard[] = [
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
         <path d="M30 130H110V70H190V40H270" stroke="#202020" strokeWidth="2.5" fill="none" />
-        <circle cx="110" cy="70" r="7" fill="#FFD85A" stroke="#202020" strokeWidth="2" />
-        <circle cx="270" cy="40" r="7" fill="#3155E7" stroke="#202020" strokeWidth="2" />
+        <circle cx="110" cy="70" r="7" fill="#00B5D8" stroke="#202020" strokeWidth="2" />
+        <circle cx="270" cy="40" r="7" fill="#1E3A8A" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -48,7 +48,7 @@ const STATIC_PLATES: StaticPlacard[] = [
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
         <path d="M110 55L70 85L110 115M190 55L230 85L190 115" stroke="#202020" strokeWidth="2.5" fill="none" />
-        <rect x="132" y="70" width="36" height="30" fill="#FF7139" stroke="#202020" strokeWidth="2" />
+        <rect x="132" y="70" width="36" height="30" fill="#38BDF8" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -62,9 +62,9 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Robotics Club',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <rect x="90" y="40" width="120" height="90" fill="#FAF8F3" stroke="#202020" strokeWidth="2" />
+        <rect x="90" y="40" width="120" height="90" fill="#F0F9FF" stroke="#202020" strokeWidth="2" />
         <path d="M90 70H210M120 40V130" stroke="#202020" strokeWidth="2" />
-        <circle cx="165" cy="100" r="10" fill="#3155E7" stroke="#202020" strokeWidth="2" />
+        <circle cx="165" cy="100" r="10" fill="#1E3A8A" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -78,11 +78,11 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'Information Technology',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <circle cx="150" cy="85" r="9" fill="#FFD85A" stroke="#202020" strokeWidth="2" />
-        <circle cx="80" cy="50" r="6" fill="#3155E7" stroke="#202020" strokeWidth="1.5" />
-        <circle cx="220" cy="55" r="6" fill="#FF7139" stroke="#202020" strokeWidth="1.5" />
-        <circle cx="90" cy="125" r="6" fill="#FAF8F3" stroke="#202020" strokeWidth="1.5" />
-        <circle cx="215" cy="120" r="6" fill="#FAF8F3" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="150" cy="85" r="9" fill="#38BDF8" stroke="#202020" strokeWidth="2" />
+        <circle cx="80" cy="50" r="6" fill="#1E3A8A" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="220" cy="55" r="6" fill="#0284C7" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="90" cy="125" r="6" fill="#E0F2FE" stroke="#202020" strokeWidth="1.5" />
+        <circle cx="215" cy="120" r="6" fill="#E0F2FE" stroke="#202020" strokeWidth="1.5" />
         <path d="M150 85L80 50M150 85L220 55M150 85L90 125M150 85L215 120" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
@@ -98,7 +98,7 @@ const STATIC_PLATES: StaticPlacard[] = [
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
         <path d="M60 120Q110 30 150 85T240 50" stroke="#202020" strokeWidth="2.5" fill="none" />
-        <rect x="138" y="73" width="24" height="24" fill="#E94B50" stroke="#202020" strokeWidth="2" />
+        <rect x="138" y="73" width="24" height="24" fill="#0284C7" stroke="#202020" strokeWidth="2" />
       </svg>
     ),
   },
@@ -112,9 +112,9 @@ const STATIC_PLATES: StaticPlacard[] = [
     by: 'AI & Data Science',
     svg: (
       <svg viewBox="0 0 300 170" aria-hidden="true">
-        <rect x="70" y="45" width="160" height="80" fill="#FAF8F3" stroke="#202020" strokeWidth="2" />
+        <rect x="70" y="45" width="160" height="80" fill="#F0F9FF" stroke="#202020" strokeWidth="2" />
         <path d="M70 65H230M90 85H150M90 100H190" stroke="#202020" strokeWidth="2" />
-        <rect x="170" y="80" width="40" height="10" fill="#3155E7" stroke="#202020" strokeWidth="1.5" />
+        <rect x="170" y="80" width="40" height="10" fill="#1E3A8A" stroke="#202020" strokeWidth="1.5" />
       </svg>
     ),
   },
@@ -212,16 +212,29 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
   ];
 
   return (
-    <section className="relative py-24 bg-[#F8F5EC] overflow-hidden" id="showcase">
-      <div className="wrap max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#FFD85A]" />
-            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+    <section className="relative py-14 sm:py-16 md:py-20 bg-[#E2EFFC] overflow-hidden" id="showcase">
+      {/* Background Architectural Grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(#1E3A8A 1px, transparent 1px), linear-gradient(90deg, #1E3A8A 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="wrap max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] mb-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00B5D8]" />
+            <span className="font-mono text-[11px] sm:text-xs text-[#202020] tracking-widest uppercase font-bold">
               NATIONAL INNOVATION PAVILION
             </span>
           </div>
-          <LetterReveal as="h2" text="On display this year." />
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#202020] tracking-tight leading-tight">
+            Flagship Innovation <span className="text-[#1E3A8A] underline decoration-[#00B5D8] decoration-wavy decoration-2">Showcase.</span>
+          </h2>
         </div>
 
         {/* Action Header Strip */}
@@ -253,14 +266,14 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
 
           <a
             href="#register"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020] hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-mono font-bold text-xs text-white bg-[#1E3A8A] hover:bg-[#1746A2] border-2 border-[#202020] shadow-[3px_3px_0px_#00B5D8] hover:shadow-[4.5px_4.5px_0px_#00B5D8] hover:-translate-y-0.5 transition-all"
           >
             Exhibit Your Project <ArrowUpRight size={14} />
           </a>
         </div>
 
         {/* Official Banner Note */}
-        <div className="p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[3px_3px_0px_#202020] mb-8 font-mono text-xs text-[#202020] font-medium">
+        <div className="p-4 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[3px_3px_0px_#00B5D8] mb-8 font-mono text-xs text-[#202020] font-medium">
           “Students from all external and host colleges are welcome to exhibit their hardware and software projects. Register below with a Project Showcasing pass to unlock your project submission upon admin review.”
         </div>
 
@@ -279,44 +292,44 @@ export const TechShowcaseSection: React.FC<TechShowcaseSectionProps> = ({
         )}
 
         {/* Disciplines Specification Breakdown: Technical Spec Dossiers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14 pt-10 border-t-2 border-dashed border-[#202020]/25">
-          <div className="p-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[5px_5px_0px_#202020]">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020]">
-                <Cpu className="w-5 h-5 text-[#3155E7]" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 pt-8 border-t-2 border-dashed border-[#202020]/25">
+          <div className="p-5 sm:p-6 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[4px_4px_0px_#1E3A8A]">
+            <div className="flex items-center gap-3 mb-3.5">
+              <div className="p-2 rounded-sm border-2 border-[#202020] bg-[#F0F9FF] shadow-[1.5px_1.5px_0px_#202020]">
+                <Cpu className="w-4 h-4 text-[#1E3A8A]" />
               </div>
-              <h4 className="font-display text-xl font-black text-[#202020]">
+              <h4 className="font-display text-lg sm:text-xl font-black text-[#202020]">
                 Hardware Showcase Track
               </h4>
             </div>
             <ul className="space-y-2 font-mono text-xs text-[#5F5B52]">
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Robotics &amp; Autonomous Vehicles</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> IoT (Internet of Things) Distributed Nodes</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> ESP32, STM32 &amp; Arduino Hardware Projects</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Smart Home &amp; Industrial Automation</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Embedded Systems &amp; Firmware Architectures</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Custom Electronic Prototypes &amp; PCB Assemblies</li>
-              <li className="flex items-center gap-2"><span className="text-[#3155E7] font-bold">▹</span> Innovative Hardware Products &amp; Energy Systems</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> Robotics &amp; Autonomous Vehicles</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> IoT (Internet of Things) Distributed Nodes</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> ESP32, STM32 &amp; Arduino Hardware Projects</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> Smart Home &amp; Industrial Automation</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> Embedded Systems &amp; Firmware Architectures</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> Custom Electronic Prototypes &amp; PCB Assemblies</li>
+              <li className="flex items-center gap-2"><span className="text-[#1E3A8A] font-bold">▹</span> Innovative Hardware Products &amp; Energy Systems</li>
             </ul>
           </div>
 
-          <div className="p-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[5px_5px_0px_#FFD85A]">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020]">
-                <Code2 className="w-5 h-5 text-[#FF7139]" />
+          <div className="p-5 sm:p-6 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[4px_4px_0px_#00B5D8]">
+            <div className="flex items-center gap-3 mb-3.5">
+              <div className="p-2 rounded-sm border-2 border-[#202020] bg-[#F0F9FF] shadow-[1.5px_1.5px_0px_#202020]">
+                <Code2 className="w-4 h-4 text-[#00B5D8]" />
               </div>
-              <h4 className="font-display text-xl font-black text-[#202020]">
+              <h4 className="font-display text-lg sm:text-xl font-black text-[#202020]">
                 Software Showcase Track
               </h4>
             </div>
             <ul className="space-y-2 font-mono text-xs text-[#5F5B52]">
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Artificial Intelligence &amp; LLM Orchestrations</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Machine Learning Models &amp; Neural Pipelines</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Next-Gen Web Applications &amp; Micro-Frontends</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Android &amp; Cross-Platform Native Applications</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Autonomous AI Assistants &amp; Agent Swarms</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Enterprise SaaS Products &amp; Cloud APIs</li>
-              <li className="flex items-center gap-2"><span className="text-[#FF7139] font-bold">▹</span> Desktop Applications &amp; Security Automation Tools</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Artificial Intelligence &amp; LLM Orchestrations</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Machine Learning Models &amp; Neural Pipelines</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Next-Gen Web Applications &amp; Micro-Frontends</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Android &amp; Cross-Platform Native Applications</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Autonomous AI Assistants &amp; Agent Swarms</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Enterprise SaaS Products &amp; Cloud APIs</li>
+              <li className="flex items-center gap-2"><span className="text-[#00B5D8] font-bold">▹</span> Desktop Applications &amp; Security Automation Tools</li>
             </ul>
           </div>
         </div>

@@ -70,7 +70,7 @@
 }
 
 html {
-  scroll-padding-top: calc(88px + env(safe-area-inset-top, 0px));
+  scroll-padding-top: calc(68px + env(safe-area-inset-top, 0px));
   scroll-behavior: smooth;
   background-color: var(--bg);
 }
@@ -83,7 +83,7 @@ body {
   margin: 0;
   background-color: var(--bg);
   color: var(--ink);
-  font: 400 1.0625rem/1.6 var(--b);
+  font: 400 1rem/1.55 var(--b);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
@@ -135,7 +135,7 @@ h1, h2, h3, h4 {
 
 h2 {
   font-weight: 800;
-  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
 }
 
 h3 {

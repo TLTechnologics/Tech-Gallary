@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
   ];
 
   return (
-    <header className="sticky top-3.5 mx-auto max-w-6xl w-[calc(100%-28px)] z-50 bg-[#FFFFFF]/95 backdrop-blur-md border-2 border-[#202020] rounded-md shadow-[4px_4px_0px_#202020] transition-all">
+    <header className="sticky top-2.5 mx-auto max-w-6xl w-[calc(100%-24px)] z-50 bg-[#FFFFFF]/95 backdrop-blur-md border-2 border-[#202020] rounded-sm shadow-[3px_3px_0px_#202020] transition-all">
       {/* Scroll-triggered progress indicator */}
       <div 
         className="scroll-progress-bar" 
@@ -63,15 +63,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
         aria-hidden="true" 
       />
 
-      <div className="wrap max-w-full px-4">
-        <nav className="h-16 flex items-center justify-between">
-          <a className="logo flex items-center gap-2.5 text-decoration-none group" href="#top">
-            <span className="w-7 h-7 rounded-sm bg-[#3155E7] border-1.5 border-[#202020] shadow-[2px_2px_0px_#202020] flex items-center justify-center transition-transform group-hover:-translate-y-0.5">
-              <span className="w-2.5 h-2.5 bg-[#FFD85A] rounded-xs" />
+      <div className="wrap max-w-full px-3.5 sm:px-4">
+        <nav className="h-13 sm:h-14 flex items-center justify-between">
+          <a className="logo flex items-center gap-2 text-decoration-none group" href="#top">
+            <span className="w-6 h-6 rounded-sm bg-[#3155E7] border-1.5 border-[#202020] shadow-[1.5px_1.5px_0px_#202020] flex items-center justify-center transition-transform group-hover:-translate-y-0.5">
+              <span className="w-2 h-2 bg-[#FFD85A] rounded-xs" />
             </span>
-            <span className="font-display font-black text-lg tracking-tight text-[#202020] flex items-center gap-1.5">
+            <span className="font-display font-black text-base sm:text-lg tracking-tight text-[#202020] flex items-center gap-1.5">
               Tech Gallery
-              <span className="px-1.5 py-0.5 rounded-xs bg-[#FFD85A] border border-[#202020] text-xs font-mono font-bold text-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+              <span className="px-1.5 py-0.5 rounded-xs bg-[#FFD85A] border border-[#202020] text-[10px] sm:text-xs font-mono font-bold text-[#202020] shadow-[1px_1px_0px_#202020]">
                 2027
               </span>
             </span>
@@ -79,23 +79,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
 
           {/* Mobile hamburger button */}
           <button
-            className="md:hidden flex items-center justify-center p-2 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] text-[#202020]"
+            className="md:hidden flex items-center justify-center p-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[1.5px_1.5px_0px_#202020] text-[#202020]"
             aria-expanded={menuOpen}
             aria-label="Toggle navigation menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-5">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`font-sans text-sm font-bold tracking-tight transition-all relative py-1 px-1.5 ${
+                  className={`font-sans text-xs sm:text-sm font-bold tracking-tight transition-all relative py-1 px-1 ${
                     isActive ? 'text-[#3155E7]' : 'text-[#625E56] hover:text-[#202020]'
                   }`}
                 >
@@ -109,23 +109,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
 
             <a
               href="#register"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] hover:shadow-[3px_3px_0px_#202020] hover:-translate-y-0.5 transition-all"
             >
               Pass Ticket
-              <ArrowUpRight size={14} />
+              <ArrowUpRight size={13} />
             </a>
 
             <button
               onClick={() => onOpenAdmin()}
               aria-label="Admin Portal"
               title="Admin Portal"
-              className={`p-2 rounded-sm border-2 border-[#202020] flex items-center justify-center transition-all ${
+              className={`p-1.5 rounded-sm border-2 border-[#202020] flex items-center justify-center transition-all ${
                 isAdmin 
-                  ? 'bg-[#FFD85A] text-[#202020] shadow-[2.5px_2.5px_0px_#202020]' 
-                  : 'bg-[#FFFFFF] text-[#625E56] shadow-[2px_2px_0px_#202020] hover:text-[#202020]'
+                  ? 'bg-[#FFD85A] text-[#202020] shadow-[2px_2px_0px_#202020]' 
+                  : 'bg-[#FFFFFF] text-[#625E56] shadow-[1.5px_1.5px_0px_#202020] hover:text-[#202020]'
               }`}
             >
-              <Shield size={16} />
+              <Shield size={15} />
             </button>
           </div>
         </nav>

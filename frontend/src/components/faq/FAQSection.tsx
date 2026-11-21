@@ -73,13 +73,13 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
   };
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F2EBDD] overflow-hidden" id="faq">
+    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#18191E] overflow-hidden text-white" id="faq">
       {/* Background Architectural Grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.05] z-0"
         style={{
           backgroundImage:
-            'linear-gradient(#202020 1px, transparent 1px), linear-gradient(90deg, #202020 1px, transparent 1px)',
+            'linear-gradient(#3A3D4D 1px, transparent 1px), linear-gradient(90deg, #3A3D4D 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden="true"
@@ -87,21 +87,21 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header */}
-        <div className="mb-14 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
-            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+        <div className="mb-8 sm:mb-10 text-center sm:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#3A3D4D] bg-[#22242D] shadow-[2px_2px_0px_#0A0A0D] mb-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" />
+            <span className="font-mono text-[11px] sm:text-xs text-neutral-200 tracking-widest uppercase font-bold">
               INTELLIGENCE BASE // FAQ
             </span>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#202020] tracking-tight leading-tight">
-            Frequently Asked <span className="text-[#3155E7] underline decoration-[#FF7139] decoration-wavy decoration-2">Questions.</span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            Frequently Asked <span className="text-[#00E5FF] underline decoration-[#C6FF32] decoration-wavy decoration-2">Questions.</span>
           </h2>
         </div>
 
         {/* Paper Folder Accordions */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {displayFaqs.map((faq, idx) => {
             const currentId = faq.id || `faq-${idx}`;
             const isOpen = openId === currentId;
@@ -109,28 +109,28 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
             return (
               <div
                 key={currentId}
-                className={`rounded-sm border-2 border-[#202020] transition-all duration-200 overflow-hidden ${
+                className={`rounded-sm border-2 transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? 'bg-[#FFFFFF] shadow-[5px_5px_0px_#202020]'
-                    : 'bg-[#FAF8F3] hover:bg-[#FFFFFF] shadow-[3px_3px_0px_#202020]'
+                    ? 'bg-[#252833] border-[#00E5FF]/70 shadow-[4px_4px_0px_#0A0A0D]'
+                    : 'bg-[#22242D] border-[#3A3D4D] hover:bg-[#282B36] shadow-[2.5px_2.5px_0px_#0A0A0D]'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(currentId)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                  className="w-full p-4 sm:p-4.5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <span className="font-mono text-xs font-black px-2.5 py-0.5 rounded-sm border-1.5 border-[#202020] bg-[#FFD85A] text-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-sm border-1.5 border-[#0A0A0D] bg-[#C6FF32] text-[#0A0A0D] shadow-[1px_1px_0px_#0A0A0D]">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="font-display font-black text-base sm:text-lg text-[#202020]">
+                    <h3 className="font-display font-black text-sm sm:text-base text-white">
                       {faq.question}
                     </h3>
                   </div>
 
-                  <div className="p-2 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] text-[#202020] shadow-[1.5px_1.5px_0px_#202020] flex-shrink-0">
-                    {isOpen ? <Minus size={16} className="text-[#3155E7]" /> : <Plus size={16} />}
+                  <div className="p-1.5 rounded-sm bg-[#18191E] border-2 border-[#3A3D4D] text-[#00E5FF] shadow-[1px_1px_0px_#0A0A0D] flex-shrink-0">
+                    {isOpen ? <Minus size={14} className="text-[#00E5FF]" /> : <Plus size={14} className="text-[#C6FF32]" />}
                   </div>
                 </button>
 
@@ -141,7 +141,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="px-6 pb-6 pt-1 font-body text-sm sm:text-base text-[#5F5B52] font-medium leading-relaxed border-t-2 border-dashed border-[#202020]/20 bg-[#FAF8F3]"
+                      className="px-4 pb-4 pt-1.5 font-body text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed border-t-2 border-dashed border-[#3A3D4D] bg-[#1C1E26]"
                     >
                       {faq.answer}
                     </motion.div>

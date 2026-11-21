@@ -33,30 +33,30 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
   const getAccentDetails = (event: EventItem) => {
     if (event.is_hackathon) {
       return {
-        color: '#FF7139',
-        badgeBg: '#FAF8F3',
+        color: '#E05326',
+        badgeBg: '#FFF7ED',
         typeLabel: '24H SPRINT HACKATHON',
-        icon: <Flame className="w-5 h-5 text-[#FF7139]" />,
+        icon: <Flame className="w-5 h-5 text-[#E05326]" />,
       };
     }
     if (event.eligibility_type === 'parents_only') {
       return {
-        color: '#E94B50',
-        badgeBg: '#FAF8F3',
+        color: '#EA580C',
+        badgeBg: '#FFF7ED',
         typeLabel: 'FAMILY LITERACY TRACK',
-        icon: <Users className="w-5 h-5 text-[#E94B50]" />,
+        icon: <Users className="w-5 h-5 text-[#EA580C]" />,
       };
     }
     return {
-      color: '#3155E7',
+      color: '#E05326',
       badgeBg: '#FFFFFF',
       typeLabel: 'TECHNICAL WORKSHOP',
-      icon: <Terminal className="w-5 h-5 text-[#3155E7]" />,
+      icon: <Terminal className="w-5 h-5 text-[#E05326]" />,
     };
   };
 
   return (
-    <section id="workshops" className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F2EBDD] overflow-hidden">
+    <section id="workshops" className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#FDEEE3] overflow-hidden">
       {/* Background Architectural Grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
@@ -70,38 +70,38 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-8 border-b-2 border-dashed border-[#202020]/25 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 pb-5 sm:pb-6 border-b-2 border-dashed border-[#202020]/25 gap-5">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#FF7139]" />
-              <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] mb-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E05326]" />
+              <span className="font-mono text-[11px] sm:text-xs text-[#202020] tracking-widest uppercase font-bold">
                 INTENSIVE LABS &amp; CODE SPRINTS
               </span>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl font-black text-[#202020] tracking-tight leading-tight">
-              Workshops &amp; <span className="text-[#3155E7] underline decoration-[#FFD85A] decoration-wavy decoration-2">Hackathons.</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#202020] tracking-tight leading-tight">
+              Workshops &amp; <span className="text-[#E05326] underline decoration-[#FBBF24] decoration-wavy decoration-2">Hackathons.</span>
             </h2>
 
-            <p className="font-body text-sm sm:text-base text-[#5F5B52] mt-2 max-w-2xl leading-relaxed font-medium">
+            <p className="font-body text-xs sm:text-sm text-[#5F5B52] mt-1.5 max-w-2xl leading-relaxed font-medium">
               Hands-on technical immersion, rapid prototype engineering sprints, and our dedicated parent AI workshop.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
-            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFFFFF] px-3.5 py-1.5 rounded-sm border-2 border-[#202020] shadow-[2px_2px_0px_#202020]">
-              <span className="w-2 h-2 bg-[#FF7139] rounded-full" />
+          <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
+            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFFFFF] px-3 py-1 rounded-sm border-2 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+              <span className="w-1.5 h-1.5 bg-[#FF7139] rounded-full" />
               College Exclusive (LJCCA)
             </span>
-            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFD85A] px-3.5 py-1.5 rounded-sm border-2 border-[#202020] shadow-[2px_2px_0px_#202020]">
-              <span className="w-2 h-2 bg-[#E94B50] rounded-full" />
+            <span className="flex items-center gap-2 text-[#202020] font-bold bg-[#FFD85A] px-3 py-1 rounded-sm border-2 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+              <span className="w-1.5 h-1.5 bg-[#E94B50] rounded-full" />
               Parents Track
             </span>
           </div>
         </div>
 
         {/* Exhibition Accordion Dossier Folders */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           {sessions.map((event) => {
             const isExpanded = expandedId === event.id;
             const accent = getAccentDetails(event);
@@ -113,29 +113,29 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                 key={event.id}
                 className={`transition-all duration-200 rounded-sm overflow-hidden border-2 border-[#202020] ${
                   isExpanded
-                    ? 'bg-[#FFFFFF] shadow-[6px_6px_0px_#202020]'
-                    : 'bg-[#FAF8F3] hover:bg-[#FFFFFF] shadow-[4px_4px_0px_#202020]'
+                    ? 'bg-[#FFFFFF] shadow-[5px_5px_0px_#202020]'
+                    : 'bg-[#FAF8F3] hover:bg-[#FFFFFF] shadow-[3.5px_3.5px_0px_#202020]'
                 }`}
               >
                 {/* Accordion Bar Header */}
                 <button
                   type="button"
                   onClick={() => toggleExpand(event.id)}
-                  className="w-full p-6 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none cursor-pointer"
+                  className="w-full p-4 sm:p-5 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none cursor-pointer"
                 >
-                  <div className="flex items-start sm:items-center gap-4">
-                    <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2px_2px_0px_#202020] flex-shrink-0">
+                  <div className="flex items-start sm:items-center gap-3.5">
+                    <div className="p-2.5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020] flex-shrink-0">
                       {accent.icon}
                     </div>
 
                     <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
                         <span className="font-mono text-xs font-black text-[#202020]">
                           {event.date_display}
                         </span>
                         <span className="text-[#202020]/40">•</span>
                         <span
-                          className="font-mono text-[10px] px-2.5 py-0.5 rounded-sm border-1.5 border-[#202020] font-black uppercase tracking-wider"
+                          className="font-mono text-[9px] sm:text-[10px] px-2 py-0.5 rounded-sm border-1.5 border-[#202020] font-black uppercase tracking-wider"
                           style={{
                             color: '#202020',
                             backgroundColor: accent.color === '#FFD85A' ? '#FFD85A' : `${accent.color}20`,
@@ -144,34 +144,34 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                           {accent.typeLabel}
                         </span>
                         {isInternal && (
-                          <span className="font-mono text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFFFFF] font-bold text-[#625E56]">
+                          <span className="font-mono text-[9px] sm:text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFFFFF] font-bold text-[#625E56]">
                             LJCCA Only
                           </span>
                         )}
                         {isParents && (
-                          <span className="font-mono text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFD85A] font-bold text-[#202020]">
+                          <span className="font-mono text-[9px] sm:text-[10px] px-2 py-0.5 rounded-sm border border-[#202020] bg-[#FFD85A] font-bold text-[#202020]">
                             Parents &amp; Guardians
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-display font-black text-xl sm:text-2xl text-[#202020]">
+                      <h3 className="font-display font-black text-lg sm:text-xl text-[#202020]">
                         {event.name}
                       </h3>
                       {event.tagline && (
-                        <p className="font-mono text-xs text-[#625E56] font-medium mt-0.5">
+                        <p className="font-mono text-[11px] sm:text-xs text-[#625E56] font-medium mt-0.5">
                           {event.tagline}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 flex-shrink-0">
+                  <div className="flex items-center gap-3 flex-shrink-0">
                     <span className="hidden sm:inline-flex font-mono text-xs font-bold text-[#625E56] bg-[#FFFFFF] px-2.5 py-1 rounded-sm border border-[#202020]">
                       {event.timing}
                     </span>
-                    <div className="p-2 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[1.5px_1.5px_0px_#202020] text-[#202020]">
-                      {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    <div className="p-1.5 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[1.5px_1.5px_0px_#202020] text-[#202020]">
+                      {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                     </div>
                   </div>
                 </button>
@@ -184,7 +184,7 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="px-6 pb-6 pt-2 border-t-2 border-dashed border-[#202020]/20 bg-[#FAF8F3]"
+                      className="px-5 pb-5 pt-2 border-t-2 border-dashed border-[#202020]/20 bg-[#FAF8F3]"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4">
                         {/* Description & Overview */}
@@ -199,11 +199,11 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
 
                             <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#625E56]">
                               <span className="flex items-center gap-1.5 font-bold text-[#202020]">
-                                <Clock className="w-4 h-4 text-[#FF7139]" />
+                                <Clock className="w-4 h-4 text-[#E05326]" />
                                 <span>{event.timing}</span>
                               </span>
                               <span className="flex items-center gap-1.5 font-bold text-[#202020]">
-                                <MapPin className="w-4 h-4 text-[#3155E7]" />
+                                <MapPin className="w-4 h-4 text-[#E05326]" />
                                 <span>{event.venue}</span>
                               </span>
                             </div>
@@ -213,7 +213,7 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                             <button
                               type="button"
                               onClick={() => onRegister(event.id)}
-                              className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-mono font-bold text-xs text-white bg-[#3155E7] border-2 border-[#202020] shadow-[3.5px_3.5px_0px_#202020] hover:shadow-[5px_5px_0px_#202020] hover:-translate-y-0.5 transition-all"
+                              className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-mono font-bold text-xs text-white bg-[#E05326] hover:bg-[#C2410C] border-2 border-[#202020] shadow-[3.5px_3.5px_0px_#202020] hover:shadow-[5px_5px_0px_#202020] hover:-translate-y-0.5 transition-all"
                             >
                               <span>REGISTER FOR THIS TRACK</span>
                               <ArrowUpRight size={14} />
@@ -224,7 +224,7 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                         {/* Rules & Eligibility Panel */}
                         <div className="md:col-span-5 p-5 rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[3px_3px_0px_#202020] font-mono text-xs">
                           <div className="flex items-center gap-2 text-[#202020] font-black mb-3 uppercase tracking-wider">
-                            <ShieldAlert size={15} className="text-[#3155E7]" />
+                            <ShieldAlert size={15} className="text-[#E05326]" />
                             <span>Rules &amp; Eligibility Directive</span>
                           </div>
 
@@ -232,7 +232,7 @@ export const WorkshopsHackathonsSection: React.FC<WorkshopsHackathonsSectionProp
                             {event.rules}
                           </div>
 
-                          <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FFD85A] text-[11px] text-[#202020] font-bold">
+                          <div className="p-3 rounded-sm border-2 border-[#202020] bg-[#FDE68A] text-[11px] text-[#202020] font-bold">
                             Accreditation Note: Verified attendance certificates are awarded during the closing ceremony on 24 January 2027.
                           </div>
                         </div>

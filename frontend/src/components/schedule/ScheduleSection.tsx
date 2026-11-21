@@ -92,17 +92,17 @@ const SCHEDULE_DATA: DaySchedule[] = [
 const getTagBadgeStyle = (tag: string) => {
   switch (tag.toLowerCase()) {
     case 'hackathon':
-      return { background: '#FAF8F3', color: '#202020', border: '1.5px solid #202020' };
+      return { background: '#BBF7D0', color: '#14532D', border: '1.5px solid #202020' };
     case 'workshop':
-      return { background: '#EBF1FF', color: '#3155E7', border: '1.5px solid #202020' };
+      return { background: '#DCFCE7', color: '#15803D', border: '1.5px solid #202020' };
     case 'showcase':
-      return { background: '#FFD85A', color: '#202020', border: '1.5px solid #202020' };
+      return { background: '#86EFAC', color: '#14532D', border: '1.5px solid #202020' };
     case 'ceremony':
-      return { background: '#FFECEC', color: '#E94B50', border: '1.5px solid #202020' };
+      return { background: '#FEF3C7', color: '#B45309', border: '1.5px solid #202020' };
     case 'talk':
-      return { background: '#FAF8F3', color: '#202020', border: '1.5px solid #202020' };
+      return { background: '#F0FDF4', color: '#166534', border: '1.5px solid #202020' };
     default:
-      return { background: '#FAF8F3', color: '#625E56', border: '1.5px solid #202020' };
+      return { background: '#F0FDF4', color: '#15803D', border: '1.5px solid #202020' };
   }
 };
 
@@ -112,13 +112,13 @@ export const ScheduleSection: React.FC = () => {
   const activeDay = SCHEDULE_DATA[activeDayIndex];
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 md:px-8 bg-[#F8F5EC] overflow-hidden" id="schedule">
+    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#E3F5EB] overflow-hidden" id="schedule">
       {/* Background Architectural Grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
         style={{
           backgroundImage:
-            'linear-gradient(#202020 1px, transparent 1px), linear-gradient(90deg, #202020 1px, transparent 1px)',
+            'linear-gradient(#15803D 1px, transparent 1px), linear-gradient(90deg, #15803D 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden="true"
@@ -126,21 +126,21 @@ export const ScheduleSection: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#3155E7]" />
-            <span className="font-mono text-xs text-[#202020] tracking-widest uppercase font-bold">
+        <div className="mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] mb-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#15803D]" />
+            <span className="font-mono text-[11px] sm:text-xs text-[#202020] tracking-widest uppercase font-bold">
               CHRONOLOGY // 18–24 JAN 2027
             </span>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#202020] tracking-tight leading-tight">
-            Seven Days, <span className="text-[#3155E7] underline decoration-[#FF7139] decoration-wavy decoration-2">One Campus.</span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#202020] tracking-tight leading-tight">
+            Seven Days, <span className="text-[#15803D] underline decoration-[#86EFAC] decoration-wavy decoration-2">One Campus.</span>
           </h2>
         </div>
 
         {/* 7 Days Tab List Ribbon: Perforated Paper Ticket Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8" role="tablist" aria-label="Festival days">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3 mb-6 sm:mb-8" role="tablist" aria-label="Festival days">
           {SCHEDULE_DATA.map((day, idx) => {
             const isSelected = activeDayIndex === idx;
             return (
@@ -150,20 +150,20 @@ export const ScheduleSection: React.FC = () => {
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setActiveDayIndex(idx)}
-                className={`p-4 rounded-sm font-mono text-left transition-all duration-200 border-2 border-[#202020] flex flex-col justify-between cursor-pointer ${
+                className={`p-2.5 sm:p-3 rounded-sm font-mono text-left transition-all duration-200 border-2 border-[#202020] flex flex-col justify-between cursor-pointer ${
                   isSelected
-                    ? 'bg-[#FFD85A] text-[#202020] shadow-[4.5px_4.5px_0px_#202020] -translate-y-1'
-                    : 'bg-[#FFFFFF] text-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] hover:-translate-y-0.5'
+                    ? 'bg-[#15803D] text-white shadow-[3.5px_3.5px_0px_#202020] -translate-y-0.5'
+                    : 'bg-[#FFFFFF] text-[#202020] shadow-[2px_2px_0px_#202020] hover:bg-[#F0FDF4] hover:shadow-[3px_3px_0px_#202020] hover:-translate-y-0.5'
                 }`}
               >
-                <div className="flex items-center justify-between text-xs font-bold text-[#625E56] mb-1">
+                <div className={`flex items-center justify-between text-[11px] sm:text-xs font-bold mb-1 ${isSelected ? 'text-[#BBF7D0]' : 'text-[#625E56]'}`}>
                   <span>{day.dayName}</span>
-                  {isSelected && <span className="w-2 h-2 rounded-full bg-[#E94B50]" />}
+                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#86EFAC]" />}
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-display text-[#202020]">
+                <div className={`text-xl sm:text-2xl font-black font-display ${isSelected ? 'text-white' : 'text-[#202020]'}`}>
                   {day.dayNumber}
                 </div>
-                <div className="text-[10px] font-bold text-[#625E56] mt-1 tracking-wider uppercase truncate">
+                <div className={`text-[9px] sm:text-[10px] font-bold mt-0.5 tracking-wider uppercase truncate ${isSelected ? 'text-[#BBF7D0]' : 'text-[#625E56]'}`}>
                   JAN 2027
                 </div>
               </button>
@@ -172,24 +172,24 @@ export const ScheduleSection: React.FC = () => {
         </div>
 
         {/* Sessions Panel for the Active Day: Pure Paper Dossier Sheet */}
-        <div className="rounded-sm border-2 border-[#202020] bg-[#FFFFFF] p-6 sm:p-8 shadow-[6px_6px_0px_#202020] relative" role="tabpanel">
+        <div className="rounded-sm border-2 border-[#202020] bg-[#FFFFFF] p-5 sm:p-6 shadow-[5px_5px_0px_#202020] relative" role="tabpanel">
           {/* Washi Tape Corner */}
           <div
             className="paper-tape"
             style={{
-              top: '-12px',
+              top: '-10px',
               right: '12%',
-              width: '65px',
+              width: '56px',
               transform: 'rotate(-4deg)',
             }}
           />
 
-          <div className="flex items-center justify-between border-b-2 border-dashed border-[#202020]/25 pb-4 mb-6">
-            <div className="font-mono text-sm font-black text-[#202020] flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-[#3155E7]" />
+          <div className="flex items-center justify-between border-b-2 border-dashed border-[#202020]/25 pb-3 mb-4 sm:mb-5">
+            <div className="font-mono text-xs sm:text-sm font-black text-[#202020] flex items-center gap-2">
+              <Calendar className="w-3.5 h-3.5 text-[#15803D]" />
               <span>{activeDay.dateStr}</span>
             </div>
-            <span className="font-mono text-xs font-bold text-[#625E56] bg-[#FAF8F3] px-2.5 py-1 rounded-sm border border-[#202020]">
+            <span className="font-mono text-[11px] sm:text-xs font-bold text-[#15803D] bg-[#DCFCE7] px-2 py-0.5 rounded-sm border border-[#202020]">
               {activeDay.sessions.length} SESSIONS SCHEDULED
             </span>
           </div>
@@ -201,7 +201,7 @@ export const ScheduleSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
-              className="space-y-4"
+              className="space-y-3"
             >
               {activeDay.sessions.map((sess, idx) => (
                 <motion.div
@@ -209,20 +209,20 @@ export const ScheduleSection: React.FC = () => {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.25, delay: idx * 0.05 }}
-                  className="p-5 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020] hover:-translate-y-0.5 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                  className="p-3.5 sm:p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] hover:-translate-y-0.5 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
                 >
                   <div className="flex items-start sm:items-center gap-4">
-                    <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-[#3155E7] font-black min-w-[70px] bg-[#FFFFFF] px-2.5 py-1 rounded-sm border border-[#202020]">
-                      <Clock className="w-3.5 h-3.5 text-[#FF7139]" />
+                    <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-[#15803D] font-black min-w-[70px] bg-[#FFFFFF] px-2.5 py-1 rounded-sm border border-[#202020]">
+                      <Clock className="w-3.5 h-3.5 text-[#15803D]" />
                       <span>{sess.time}</span>
                     </div>
 
                     <div>
-                      <h3 className="font-display font-black text-base sm:text-lg text-[#202020] group-hover:text-[#3155E7] transition-colors">
+                      <h3 className="font-display font-black text-base sm:text-lg text-[#202020] group-hover:text-[#15803D] transition-colors">
                         {sess.title}
                       </h3>
                       <div className="flex items-center gap-1.5 font-mono text-xs text-[#625E56] font-medium mt-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#202020]" />
+                        <MapPin className="w-3.5 h-3.5 text-[#15803D]" />
                         <span>{sess.venue}</span>
                       </div>
                     </div>
@@ -243,12 +243,12 @@ export const ScheduleSection: React.FC = () => {
         {/* Bottom Schedule Sub-note */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#625E56]">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#FF7139]" />
+            <span className="w-2 h-2 rounded-full bg-[#15803D]" />
             <span className="font-bold text-[#202020]">All tracks hosted on Main Campus · Timings in Indian Standard Time (IST)</span>
           </div>
           <a
             href="#register"
-            className="text-[#3155E7] hover:text-[#202020] transition-colors font-bold flex items-center gap-1"
+            className="text-[#15803D] hover:text-[#065F46] transition-colors font-bold flex items-center gap-1"
           >
             <span>Register for festival passes</span>
             <ArrowRight className="w-3.5 h-3.5" />

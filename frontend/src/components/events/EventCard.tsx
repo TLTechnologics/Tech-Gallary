@@ -62,20 +62,20 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) =>
         rotateY,
         transformStyle: 'preserve-3d',
       }}
-      className="relative rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[4px_4px_0px_#202020] hover:shadow-[6px_6px_0px_#202020] hover:-translate-y-1 transition-all duration-200 p-6 flex flex-col justify-between overflow-hidden group cursor-pointer"
+      className="relative rounded-sm bg-[#FFFFFF] border-2 border-[#202020] shadow-[3px_3px_0px_#202020] hover:shadow-[4.5px_4.5px_0px_#202020] hover:-translate-y-0.5 transition-all duration-200 p-4 sm:p-4.5 flex flex-col justify-between overflow-hidden group cursor-pointer"
       onClick={() => onViewDetails(event)}
     >
       {/* Folded paper dog-ear corner effect in top right */}
       <div 
-        className="absolute top-0 right-0 w-6 h-6 bg-[#EAE3D5] border-b-2 border-l-2 border-[#202020] pointer-events-none" 
+        className="absolute top-0 right-0 w-5 h-5 bg-[#EAE3D5] border-b-2 border-l-2 border-[#202020] pointer-events-none" 
         style={{ clipPath: 'polygon(100% 0, 0 100%, 100% 100%)' }}
       />
 
       {/* Top Header: Date, Stamped Tag & Eligibility */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between gap-2 mb-4">
+        <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-1.5 font-mono text-xs font-bold text-[#202020]">
-            <Calendar className="w-3.5 h-3.5 text-[#3155E7]" />
+            <Calendar className="w-3 h-3 text-[#3155E7]" />
             <span>{event.date_display}</span>
           </div>
           <span
@@ -90,16 +90,16 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) =>
         </div>
 
         {/* Title & Tagline */}
-        <div className="flex items-start gap-3 mb-3">
-          <div className="p-2 rounded-sm border-1.5 border-[#202020] bg-[#FAF8F3] shadow-[1.5px_1.5px_0px_#202020] mt-0.5 flex-shrink-0">
+        <div className="flex items-start gap-2.5 mb-2.5">
+          <div className="p-1.5 rounded-sm border-1.5 border-[#202020] bg-[#FAF8F3] shadow-[1px_1px_0px_#202020] mt-0.5 flex-shrink-0">
             {accent.icon}
           </div>
           <div>
-            <h3 className="font-display font-black text-xl text-[#202020] leading-snug group-hover:text-[#3155E7] transition-colors">
+            <h3 className="font-display font-black text-base sm:text-lg text-[#202020] leading-snug group-hover:text-[#3155E7] transition-colors">
               {event.name}
             </h3>
             {event.tagline && (
-              <p className="font-mono text-[11px] text-[#625E56] font-medium tracking-wide mt-0.5">
+              <p className="font-mono text-[10px] sm:text-[11px] text-[#625E56] font-medium tracking-wide mt-0.5">
                 {event.tagline}
               </p>
             )}
@@ -107,13 +107,13 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) =>
         </div>
 
         {/* Description snippet */}
-        <p className="font-body text-xs text-[#5F5B52] line-clamp-3 leading-relaxed mb-4">
+        <p className="font-body text-xs text-[#5F5B52] line-clamp-2 sm:line-clamp-3 leading-relaxed mb-3">
           {event.description}
         </p>
       </div>
 
       {/* Footer Info: Venue & Eligibility Directive */}
-      <div className="relative z-10 pt-4 border-t-2 border-dashed border-[#202020]/20 flex flex-col gap-3">
+      <div className="relative z-10 pt-3 border-t-2 border-dashed border-[#202020]/20 flex flex-col gap-2.5">
         <div className="flex items-center justify-between text-xs font-mono text-[#625E56]">
           <span className="flex items-center gap-1.5 truncate max-w-[190px]">
             <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#202020]" />
