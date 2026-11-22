@@ -3,70 +3,82 @@
 @tailwind utilities;
 
 :root {
-  /* Paper Graphic Foundation Palette */
-  --bg: #F8F5EC;          /* Warm Paper White */
-  --bg-ivory: #F2EBDD;    /* Ivory Paper */
-  --bg-cream: #EAE3D5;    /* Soft Cream Paper */
-  --bg-kraft: #D8C6A8;    /* Light Kraft */
-  --bg-kraft-dark: #BAA582;
+  /* ==============================================================================
+     HOGWARTS WIZARDING WORLD & DARK ACADEMIA FOUNDATION PALETTE
+     ============================================================================== */
+  --bg: #100D18;          /* Midnight Wizard Black */
+  --bg-navy: #15182A;     /* Hogwarts Navy */
+  --bg-castle: #211812;   /* Dark Castle Brown */
+  --bg-burgundy: #351522; /* Enchanted Burgundy */
+  --bg-forest: #14291F;   /* Deep Forest Green */
   
-  --surface: #FAF8F2;
-  --surface-2: #F2EBDD;
-  --card: #FFFFFF;
-  --card-warm: #FAF8F3;
-  --graphite: #EAE3D5;
-  --ink: #202020;         /* Deep Ink */
-  --mute: #625E56;        /* Muted Charcoal Ink */
-  --ink-light: #948F85;
-  --line: rgba(32, 32, 32, 0.12);
-  --line-strong: #202020;
+  --surface: #171322;
+  --surface-2: #1E192D;
+  --card: #1B1626;
+  --card-warm: #201A2F;
+  --graphite: #2A2338;
+  --ink: #F4EBDD;         /* Warm Ivory Text */
+  --mute: #C2BDCA;        /* Soft Mystical Grey */
+  --ink-light: #8E8A9E;
+  --line: rgba(214, 179, 106, 0.22);
+  --line-strong: #D6B36A;
   
-  /* Paper Festival Accent Palette */
-  --cobalt: #3155E7;
-  --orange: #FF7139;
-  --yellow: #FFD85A;
-  --cherry: #E94B50;
-  --lavender: #B7A5E8;
+  /* Wizarding Accents */
+  --gold: #D6B36A;        /* Antique Gold */
+  --gold-light: #F3D58A;  /* Magical Gold */
+  --gold-muted: #BFA574;
+  --burgundy: #762E42;    /* Hogwarts Burgundy */
+  --emerald: #245B43;     /* Deep Emerald */
+  --midnight-blue: #293B68;
+  --parchment: #E7D7B5;
+  --parchment-cream: #E9D9B5;
+  --spell-silver: #B8BAC8;
   
-  /* Backward-compatible color mapping */
-  --electric-violet: #3155E7;
-  --ultraviolet: #202020;
-  --laser-aqua: #3155E7;
-  --acid-lime: #FFD85A;
-  --hot-coral: #FF7139;
-  --neon-cyan: #3155E7;
-  --lime: #FFD85A;
-  --limeink: #202020;
-  --accent-text: #3155E7;
+  /* Backward-compatible accent mappings */
+  --cobalt: #D6B36A;
+  --orange: #762E42;
+  --yellow: #F3D58A;
+  --cherry: #762E42;
+  --lavender: #293B68;
+  --electric-violet: #D6B36A;
+  --ultraviolet: #100D18;
+  --laser-aqua: #F3D58A;
+  --acid-lime: #D6B36A;
+  --hot-coral: #762E42;
+  --neon-cyan: #F3D58A;
+  --lime: #F3D58A;
+  --limeink: #100D18;
+  --accent-text: #D6B36A;
   
-  /* Typography */
-  --h: "Sora", "Space Grotesk", sans-serif;
-  --b: "Plus Jakarta Sans", "Manrope", "DM Sans", sans-serif;
+  /* HARRY POTTER / HOGWARTS WIZARDING WORLD TYPOGRAPHY SYSTEM */
+  --h-decorative: "Cinzel Decorative", "Cinzel", "Cormorant Garamond", serif;
+  --h: "Cinzel", "Cormorant Garamond", serif;
+  --b: "Lora", "Plus Jakarta Sans", serif;
   --m: "IBM Plex Mono", monospace;
-  --tech: "Space Grotesk", "Sora", sans-serif;
+  --tech: "Cinzel", "IBM Plex Mono", serif;
   --pad: clamp(20px, 4vw, 56px);
   --r: 6px;
   
-  color-scheme: light;
+  color-scheme: dark;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
 }
 
 :root[data-theme="light"], :root[data-theme="dark"] {
-  --bg: #F8F5EC;
-  --surface: #FAF8F2;
-  --surface-2: #F2EBDD;
-  --card: #FFFFFF;
-  --ink: #202020;
-  --mute: #625E56;
-  --line: rgba(32, 32, 32, 0.12);
-  --line-strong: #202020;
-  --lime: #FFD85A;
-  --limeink: #202020;
-  --accent-text: #3155E7;
-  color-scheme: light;
+  --bg: #100D18;
+  --surface: #171322;
+  --surface-2: #1E192D;
+  --card: #1B1626;
+  --ink: #F4EBDD;
+  --mute: #C2BDCA;
+  --line: rgba(214, 179, 106, 0.22);
+  --line-strong: #D6B36A;
+  --lime: #F3D58A;
+  --limeink: #100D18;
+  --accent-text: #D6B36A;
+  color-scheme: dark;
 }
 
 html {
@@ -88,20 +100,21 @@ body {
   overflow-x: hidden;
   position: relative;
   background-image: 
-    radial-gradient(rgba(32, 32, 32, 0.04) 1px, transparent 1px),
-    linear-gradient(to right, rgba(32, 32, 32, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(32, 32, 32, 0.02) 1px, transparent 1px);
-  background-size: 24px 24px, 48px 48px, 48px 48px;
+    radial-gradient(rgba(243, 213, 138, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(214, 179, 106, 0.025) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(214, 179, 106, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 179, 106, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px, 56px 56px, 56px 56px;
 }
 
-/* Tactile Paper Grain Overlay */
+/* Atmospheric Magical Dust & Stardust Shimmer */
 .paper-grain-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 a {
@@ -109,7 +122,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--cobalt);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
@@ -125,136 +138,190 @@ a {
   letter-spacing: 0.02em;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--h);
+h1 {
+  font-family: var(--h-decorative);
   margin: 0;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.04em;
   color: var(--ink);
 }
 
 h2 {
+  font-family: var(--h);
+  margin: 0;
   font-weight: 800;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3.8vw, 3rem);
+  letter-spacing: 0.03em;
+  line-height: 1.18;
+  color: var(--ink);
 }
 
 h3 {
-  font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-family: var(--h);
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: 0.025em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
-p {
+h4, h5, h6 {
+  font-family: var(--h);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+p, .font-body {
+  font-family: var(--b);
   margin: 0;
   color: var(--mute);
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+.font-display {
+  font-family: var(--h-decorative);
+}
+
+.font-cinzel {
+  font-family: var(--h);
+}
+
+.font-serif {
+  font-family: var(--b);
 }
 
 /* ==============================================================================
-   TACTILE PAPER CRAFT UTILITIES
+   HOGWARTS ENCHANTED VISUAL UTILITIES & BORDERS
    ============================================================================== */
 
-/* Paper Cut Shadows */
+/* Antique Gold Borders & Ambient Glow Shadows */
 .paper-cut-shadow {
-  box-shadow: 4px 4px 0px #202020;
-  border: 1.5px solid #202020;
+  box-shadow: 
+    0 0 15px rgba(214, 179, 106, 0.18),
+    3.5px 3.5px 0px #D6B36A;
+  border: 1.5px solid #D6B36A;
 }
 
 .paper-cut-shadow-sm {
-  box-shadow: 2.5px 2.5px 0px #202020;
-  border: 1.5px solid #202020;
+  box-shadow: 2px 2px 0px #D6B36A;
+  border: 1.5px solid #D6B36A;
 }
 
 .paper-cut-shadow-lg {
-  box-shadow: 6px 6px 0px #202020;
-  border: 2px solid #202020;
+  box-shadow: 
+    0 0 25px rgba(214, 179, 106, 0.25),
+    5px 5px 0px #D6B36A;
+  border: 2px solid #D6B36A;
 }
 
 .paper-cut-shadow-cobalt {
-  box-shadow: 4px 4px 0px #3155E7;
-  border: 1.5px solid #202020;
+  box-shadow: 
+    0 0 15px rgba(243, 213, 138, 0.22),
+    3.5px 3.5px 0px #F3D58A;
+  border: 1.5px solid #D6B36A;
 }
 
 .paper-cut-shadow-orange {
-  box-shadow: 4px 4px 0px #FF7139;
-  border: 1.5px solid #202020;
+  box-shadow: 
+    0 0 15px rgba(118, 46, 66, 0.35),
+    3.5px 3.5px 0px #762E42;
+  border: 1.5px solid #D6B36A;
 }
 
 .paper-cut-shadow-yellow {
-  box-shadow: 4px 4px 0px #FFD85A;
-  border: 1.5px solid #202020;
+  box-shadow: 
+    0 0 18px rgba(243, 213, 138, 0.3),
+    3.5px 3.5px 0px #F3D58A;
+  border: 1.5px solid #D6B36A;
 }
 
-/* Realistic Layered Paper Lift Shadow */
+/* Realistic Layered Enchanted Card Shadow */
 .paper-lift-shadow {
   box-shadow: 
-    0 1px 3px rgba(32, 32, 32, 0.06),
-    0 8px 24px -4px rgba(32, 32, 32, 0.08),
-    0 16px 36px -8px rgba(32, 32, 32, 0.08);
-  border: 1px solid rgba(32, 32, 32, 0.12);
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 12px 32px -4px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(214, 179, 106, 0.12);
+  border: 1px solid rgba(214, 179, 106, 0.25);
+  background-color: #1A1626;
 }
 
 .paper-lift-shadow-hover {
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
 }
 
 .paper-lift-shadow-hover:hover {
   transform: translateY(-5px) rotate(-0.5deg);
   box-shadow: 
-    0 2px 6px rgba(32, 32, 32, 0.06),
-    0 16px 36px -4px rgba(32, 32, 32, 0.12),
-    0 24px 48px -8px rgba(32, 32, 32, 0.10);
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 20px 48px -4px rgba(0, 0, 0, 0.75),
+    0 0 25px rgba(214, 179, 106, 0.3);
+  border-color: #D6B36A;
 }
 
-/* Washi Tape / Paper Masking Tape */
+/* Enchanted Gold / Wax Seal Ribbon Banner (replacing raw yellow tape) */
 .paper-tape {
   position: absolute;
-  height: 24px;
-  background: rgba(255, 216, 90, 0.75);
-  box-shadow: 0 1px 3px rgba(32, 32, 32, 0.15);
-  backdrop-filter: blur(1px);
-  border-left: 2px dashed rgba(32, 32, 32, 0.2);
-  border-right: 2px dashed rgba(32, 32, 32, 0.2);
+  height: 22px;
+  background: linear-gradient(135deg, rgba(214, 179, 106, 0.9), rgba(243, 213, 138, 0.95));
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 8px rgba(214, 179, 106, 0.3);
+  backdrop-filter: blur(2px);
+  border-left: 2px solid #8C6F32;
+  border-right: 2px solid #8C6F32;
   z-index: 10;
   pointer-events: none;
+  border-radius: 2px;
 }
 
 .paper-tape-kraft {
-  background: rgba(216, 198, 168, 0.8);
+  background: linear-gradient(135deg, rgba(118, 46, 66, 0.9), rgba(53, 21, 34, 0.95));
+  border-left: 2px solid #D6B36A;
+  border-right: 2px solid #D6B36A;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 8px rgba(118, 46, 66, 0.3);
 }
 
 .paper-tape-cobalt {
-  background: rgba(49, 85, 231, 0.4);
+  background: linear-gradient(135deg, rgba(33, 49, 87, 0.9), rgba(21, 24, 42, 0.95));
+  border-left: 2px solid #D6B36A;
+  border-right: 2px solid #D6B36A;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 8px rgba(214, 179, 106, 0.25);
 }
 
-/* Rubber Stamp Effect */
+/* Hogwarts Wax Seal / Ministry Stamp Effect */
 .paper-stamp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 4px 12px;
-  border: 2px solid #E94B50;
-  color: #E94B50;
+  border: 1.5px solid #D6B36A;
+  background: rgba(118, 46, 66, 0.4);
+  color: #F3D58A;
   font-family: var(--m);
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: 4px;
-  transform: rotate(-4deg);
-  mask-image: radial-gradient(circle, black 80%, rgba(0,0,0,0.8) 100%);
+  transform: rotate(-3deg);
+  box-shadow: 0 0 10px rgba(214, 179, 106, 0.2);
   user-select: none;
 }
 
 .paper-stamp-cobalt {
-  border-color: #3155E7;
-  color: #3155E7;
+  border-color: #D6B36A;
+  color: #D6B36A;
+  background: rgba(21, 24, 42, 0.6);
   transform: rotate(3deg);
 }
 
-/* Perforated Cut Line */
+/* Perforated Runic / Starry Line */
 .perforated-line {
-  background-image: linear-gradient(to right, #202020 50%, rgba(255,255,255,0) 0%);
+  background-image: linear-gradient(to right, #D6B36A 50%, rgba(214, 179, 106, 0) 0%);
   background-position: bottom;
   background-size: 10px 2px;
   background-repeat: repeat-x;
@@ -262,14 +329,14 @@ p {
 }
 
 .perforated-line-v {
-  background-image: linear-gradient(to bottom, #202020 50%, rgba(255,255,255,0) 0%);
+  background-image: linear-gradient(to bottom, #D6B36A 50%, rgba(214, 179, 106, 0) 0%);
   background-position: right;
   background-size: 2px 10px;
   background-repeat: repeat-y;
   width: 2px;
 }
 
-/* Torn Edge SVG Mask or Clip Path */
+/* Torn Edge / Ancient Parchment Bottom Border */
 .paper-torn-bottom {
   clip-path: polygon(
     0% 0%, 100% 0%, 100% calc(100% - 14px),
@@ -290,7 +357,7 @@ p {
 }
 
 /* ==============================================================================
-   BUTTONS (TACTILE PAPER BUTTONS)
+   BUTTONS (PREMIUM DARK ACADEMIA & WIZARDING BUTTONS)
    ============================================================================== */
 .btn {
   display: inline-flex;
@@ -299,14 +366,16 @@ p {
   gap: 0.6rem;
   font: 700 0.95rem var(--b);
   padding: 0.85rem 1.6rem;
-  border: 2px solid #202020;
+  border: 1.5px solid #D6B36A;
   border-radius: 6px;
-  background: #FFFFFF;
-  color: #202020;
+  background: #181424;
+  color: #F4EBDD;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 3.5px 3.5px 0px #202020;
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 0 12px rgba(214, 179, 106, 0.15),
+    3px 3px 0px rgba(0, 0, 0, 0.75);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
   position: relative;
 }
 
@@ -316,7 +385,10 @@ p {
 
 .btn:hover {
   transform: translate(-1.5px, -1.5px);
-  box-shadow: 5px 5px 0px #202020;
+  background: #201A30;
+  box-shadow: 
+    0 0 20px rgba(214, 179, 106, 0.3),
+    4.5px 4.5px 0px rgba(0, 0, 0, 0.85);
 }
 
 .btn:hover .arrow-icon {
@@ -325,50 +397,62 @@ p {
 
 .btn:active {
   transform: translate(2px, 2px);
-  box-shadow: 1.5px 1.5px 0px #202020;
+  box-shadow: 1.5px 1.5px 0px rgba(0, 0, 0, 0.9);
 }
 
 .btn.fill {
-  background: var(--cobalt);
-  color: #FFFFFF;
-  border-color: #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #D6B36A;
+  color: #100D18;
+  border-color: #F3D58A;
+  box-shadow: 
+    0 0 20px rgba(214, 179, 106, 0.35),
+    3.5px 3.5px 0px rgba(0, 0, 0, 0.8);
 }
 
 .btn.fill:hover {
-  background: #2346D1;
-  color: #FFFFFF;
-  box-shadow: 5.5px 5.5px 0px #202020;
+  background: #F3D58A;
+  color: #100D18;
+  box-shadow: 
+    0 0 30px rgba(243, 213, 138, 0.5),
+    5px 5px 0px rgba(0, 0, 0, 0.9);
 }
 
 .btn.fill-orange {
-  background: var(--orange);
-  color: #FFFFFF;
-  border-color: #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #762E42;
+  color: #F4EBDD;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 0 16px rgba(118, 46, 66, 0.35),
+    3.5px 3.5px 0px #100D18;
 }
 
 .btn.fill-orange:hover {
-  background: #E55822;
+  background: #8E3850;
   color: #FFFFFF;
-  box-shadow: 5.5px 5.5px 0px #202020;
+  box-shadow: 
+    0 0 25px rgba(118, 46, 66, 0.5),
+    5px 5px 0px #100D18;
 }
 
 .btn.fill-yellow {
-  background: var(--yellow);
-  color: #202020;
-  border-color: #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #F3D58A;
+  color: #100D18;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 0 20px rgba(243, 213, 138, 0.4),
+    3.5px 3.5px 0px #100D18;
 }
 
 .btn.fill-yellow:hover {
-  background: #F0C73D;
-  color: #202020;
-  box-shadow: 5.5px 5.5px 0px #202020;
+  background: #FFE485;
+  color: #100D18;
+  box-shadow: 
+    0 0 30px rgba(255, 228, 133, 0.55),
+    5px 5px 0px #100D18;
 }
 
 /* ==============================================================================
-   NAVBAR (FLOATING PAPER RIBBON)
+   NAVBAR (HOGWARTS NAVY / MIDNIGHT GLASS RIBBON)
    ============================================================================== */
 header {
   position: sticky;
@@ -377,12 +461,15 @@ header {
   max-width: 1240px;
   width: calc(100% - 32px);
   z-index: 50;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(21, 24, 42, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 2px solid #202020;
+  border: 1.5px solid rgba(214, 179, 106, 0.4);
   border-radius: 8px;
-  box-shadow: 4px 4px 0px #202020;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(214, 179, 106, 0.15),
+    3px 3px 0px rgba(0, 0, 0, 0.5);
   transition: all 0.25s ease;
 }
 
@@ -392,7 +479,7 @@ header {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #3155E7, #FF7139, #FFD85A);
+  background: linear-gradient(90deg, #D6B36A, #762E42, #F3D58A);
   transition: width 0.1s ease-out;
   z-index: 52;
 }
@@ -412,15 +499,15 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  color: #202020;
+  color: #F4EBDD;
 }
 
 .logo i {
   width: 16px;
   height: 16px;
-  background: #3155E7;
-  border: 1.5px solid #202020;
-  box-shadow: 2px 2px 0px #202020;
+  background: #D6B36A;
+  border: 1.5px solid #F3D58A;
+  box-shadow: 0 0 8px rgba(214, 179, 106, 0.4);
   display: block;
   border-radius: 3px;
 }
@@ -441,7 +528,7 @@ nav {
 }
 
 .links a:hover, .links a.active {
-  color: #202020;
+  color: #F3D58A;
 }
 
 .links a:hover::after, .links a.active::after {
@@ -451,7 +538,8 @@ nav {
   left: 0;
   width: 100%;
   height: 2px;
-  background: #3155E7;
+  background: #D6B36A;
+  box-shadow: 0 0 8px #D6B36A;
 }
 
 /* ==============================================================================
@@ -461,7 +549,7 @@ section {
   position: relative;
 }
 
-/* Event Cards in Paper Style */
+/* Event Cards in Enchanted Grimoire Style */
 .grid3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -470,26 +558,32 @@ section {
 
 .ev {
   padding: clamp(24px, 3vw, 36px);
-  background: #FFFFFF;
-  border: 2px solid #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #1A1726;
+  border: 1.5px solid rgba(214, 179, 106, 0.35);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    3.5px 3.5px 0px rgba(214, 179, 106, 0.3);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
 .ev:hover {
   transform: translateY(-5px) rotate(-0.5deg);
-  box-shadow: 6px 6px 0px #202020;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.65),
+    0 0 25px rgba(214, 179, 106, 0.25),
+    5px 5px 0px #D6B36A;
 }
 
 .ev .glyph {
   height: 96px;
-  border-bottom: 1.5px dashed rgba(32, 32, 32, 0.2);
+  border-bottom: 1.5px dashed rgba(214, 179, 106, 0.3);
   margin: -4px 0 0;
   display: flex;
   align-items: flex-end;
@@ -498,20 +592,20 @@ section {
 .ev .glyph svg {
   height: 72px;
   width: auto;
-  stroke: var(--ink);
+  stroke: var(--gold);
   fill: none;
   stroke-width: 1.5;
 }
 
 .ev .glyph .f {
-  fill: var(--yellow);
+  fill: var(--gold-light);
 }
 
 .ev ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1.5px dashed rgba(32, 32, 32, 0.2);
+  border-top: 1.5px dashed rgba(214, 179, 106, 0.25);
 }
 
 .ev li {
@@ -521,6 +615,7 @@ section {
   justify-content: space-between;
   gap: 1rem;
   font-size: 0.97rem;
+  color: var(--ink);
 }
 
 @media (max-width: 900px) {
@@ -530,7 +625,7 @@ section {
 }
 
 /* ==============================================================================
-   SHOWCASE PLATES (PAPER PLACARDS)
+   SHOWCASE PLATES (ENCHANTED INVENTION FRAMES)
    ============================================================================== */
 .filters {
   display: flex;
@@ -542,25 +637,28 @@ section {
 .chip {
   font: 600 0.875rem var(--m);
   padding: 0.5rem 1.2rem;
-  border: 1.5px solid #202020;
-  background: #FFFFFF;
-  color: #202020;
+  border: 1.5px solid rgba(214, 179, 106, 0.4);
+  background: #181424;
+  color: #F4EBDD;
   border-radius: 6px;
   cursor: pointer;
   letter-spacing: 0.02em;
-  box-shadow: 2.5px 2.5px 0px #202020;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 2.5px 2.5px 0px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .chip:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 3.5px 3.5px 0px #202020;
+  border-color: #D6B36A;
+  box-shadow: 0 0 10px rgba(214, 179, 106, 0.2), 3.5px 3.5px 0px rgba(0, 0, 0, 0.7);
 }
 
 .chip[aria-pressed="true"] {
-  background: #3155E7;
-  color: #FFFFFF;
-  box-shadow: 3.5px 3.5px 0px #202020;
+  background: #D6B36A;
+  color: #100D18;
+  font-weight: 700;
+  border-color: #F3D58A;
+  box-shadow: 0 0 16px rgba(214, 179, 106, 0.35), 3.5px 3.5px 0px rgba(0, 0, 0, 0.7);
 }
 
 .plates {
@@ -570,29 +668,35 @@ section {
 }
 
 .plate {
-  background: #FFFFFF;
-  border: 2px solid #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #1A1626;
+  border: 1.5px solid rgba(214, 179, 106, 0.3);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.5),
+    3.5px 3.5px 0px rgba(214, 179, 106, 0.25);
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
 .plate:hover {
   transform: translateY(-4px);
-  box-shadow: 6px 6px 0px #202020;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.65),
+    0 0 20px rgba(214, 179, 106, 0.25),
+    5px 5px 0px #D6B36A;
 }
 
 .art {
   height: 160px;
-  border-bottom: 2px solid #202020;
+  border-bottom: 1.5px solid rgba(214, 179, 106, 0.3);
   position: relative;
   overflow: hidden;
-  background-color: #FAF8F2;
-  background-image: radial-gradient(rgba(32, 32, 32, 0.08) 1.5px, transparent 1.5px);
+  background-color: #13101E;
+  background-image: radial-gradient(rgba(243, 213, 138, 0.12) 1.5px, transparent 1.5px);
   background-size: 16px 16px;
 }
 
@@ -601,18 +705,18 @@ section {
   inset: 0;
   width: 100%;
   height: 100%;
-  stroke: var(--ink);
+  stroke: var(--gold);
   fill: none;
   stroke-width: 1.5;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .art .f {
-  fill: #FFD85A;
+  fill: #F3D58A;
 }
 
 .code-tag {
-  color: #3155E7;
+  color: #F3D58A;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   font-weight: 700;
@@ -620,10 +724,10 @@ section {
 
 .cat-pill {
   padding: 3px 10px;
-  background: #FAF8F2;
-  border: 1.5px solid #202020;
+  background: #201A2F;
+  border: 1.5px solid rgba(214, 179, 106, 0.35);
   border-radius: 4px;
-  color: #202020;
+  color: #F4EBDD;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -665,7 +769,7 @@ section {
 .pb .by {
   margin-top: auto;
   padding-top: 0.8rem;
-  border-top: 1.5px dashed rgba(32, 32, 32, 0.15);
+  border-top: 1.5px dashed rgba(214, 179, 106, 0.25);
 }
 
 @media (max-width: 900px) {
@@ -681,22 +785,24 @@ section {
 }
 
 /* ==============================================================================
-   SCHEDULE (PERFORATED TICKET STRIPS)
+   SCHEDULE (ENCHANTED WIZARDING CALENDAR)
    ============================================================================== */
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 2px solid #202020;
-  box-shadow: 4px 4px 0px #202020;
+  border: 1.5px solid #D6B36A;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    3.5px 3.5px 0px rgba(214, 179, 106, 0.3);
   border-radius: 8px 8px 0 0;
-  background: #FFFFFF;
+  background: #181424;
   overflow: hidden;
 }
 
 .day {
   background: none;
   border: 0;
-  border-right: 1.5px solid #202020;
+  border-right: 1.5px solid rgba(214, 179, 106, 0.25);
   padding: 1rem 0.6rem;
   color: var(--ink);
   cursor: pointer;
@@ -710,7 +816,7 @@ section {
 }
 
 .day:hover {
-  background: #FAF8F2;
+  background: #221B32;
 }
 
 .day b {
@@ -720,21 +826,24 @@ section {
 }
 
 .day[aria-selected="true"] {
-  background: #FFD85A;
-  color: #202020;
+  background: #D6B36A;
+  color: #100D18;
+  box-shadow: inset 0 0 12px rgba(243, 213, 138, 0.5);
 }
 
 .day[aria-selected="true"] .mono {
-  color: #202020;
+  color: #100D18;
   font-weight: 700;
 }
 
 .sess {
-  border: 2px solid #202020;
+  border: 1.5px solid #D6B36A;
   border-top: 0;
-  box-shadow: 4px 4px 0px #202020;
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.6),
+    3.5px 3.5px 0px rgba(214, 179, 106, 0.25);
   border-radius: 0 0 8px 8px;
-  background: #FFFFFF;
+  background: #161222;
 }
 
 .row {
@@ -742,7 +851,7 @@ section {
   grid-template-columns: 130px 1fr 180px 120px;
   gap: 1rem;
   padding: 1.3rem 1.4rem;
-  border-bottom: 1.5px dashed rgba(32, 32, 32, 0.18);
+  border-bottom: 1.5px dashed rgba(214, 179, 106, 0.2);
   align-items: baseline;
   transition: background 0.2s;
 }
@@ -752,22 +861,23 @@ section {
 }
 
 .row:hover {
-  background: #FAF8F2;
+  background: #1E192D;
 }
 
 .row h3 {
   font-size: 1.25rem;
   letter-spacing: -0.015em;
+  color: #F4EBDD;
 }
 
 .tg {
   justify-self: start;
   font: 600 0.75rem var(--m);
-  border: 1.5px solid #202020;
+  border: 1.5px solid rgba(214, 179, 106, 0.4);
   padding: 0.2rem 0.65rem;
   border-radius: 4px;
-  color: #202020;
-  background: #F8F5EC;
+  color: #F3D58A;
+  background: #201A2F;
 }
 
 @media (max-width: 760px) {
@@ -790,7 +900,7 @@ section {
 }
 
 /* ==============================================================================
-   REGISTRATION & TICKET FORMS
+   REGISTRATION (HOGWARTS ADMISSION LETTER FORMS)
    ============================================================================== */
 .reg {
   display: grid;
@@ -810,27 +920,34 @@ section {
   gap: 1rem;
   align-items: center;
   padding: 1.2rem 1.3rem;
-  border: 2px solid #202020;
+  border: 1.5px solid rgba(214, 179, 106, 0.35);
   border-radius: 6px;
-  background: #FFFFFF;
-  box-shadow: 3px 3px 0px #202020;
+  background: #1A1626;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    3px 3px 0px rgba(0, 0, 0, 0.6);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .tier:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 4.5px 4.5px 0px #202020;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 0 15px rgba(214, 179, 106, 0.2),
+    4px 4px 0px rgba(0, 0, 0, 0.7);
 }
 
 .tier:has(input:checked) {
-  background: #FAF8F2;
-  border-color: #3155E7;
-  box-shadow: 4px 4px 0px #3155E7;
+  background: #221B32;
+  border-color: #D6B36A;
+  box-shadow: 
+    0 0 20px rgba(214, 179, 106, 0.25),
+    3.5px 3.5px 0px #D6B36A;
 }
 
 .tier input {
-  accent-color: #3155E7;
+  accent-color: #D6B36A;
   width: 18px;
   height: 18px;
   margin: 0;
@@ -838,7 +955,7 @@ section {
 
 .tier b {
   font: 800 1.15rem var(--h);
-  color: #202020;
+  color: #F4EBDD;
 }
 
 .tier span {
@@ -850,7 +967,7 @@ section {
 .tier em {
   font: 700 1.15rem var(--m);
   font-style: normal;
-  color: #3155E7;
+  color: #F3D58A;
 }
 
 .field {
@@ -863,64 +980,64 @@ section {
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
-  color: #202020;
+  color: #F4EBDD;
 }
 
 .field input, .field select, .field textarea {
   width: 100%;
   font: inherit;
   padding: 0.85rem 1rem;
-  background: #FFFFFF;
-  color: #202020;
-  border: 1.5px solid #202020;
+  background: #181424;
+  color: #F4EBDD;
+  border: 1.5px solid rgba(214, 179, 106, 0.35);
   border-radius: 6px;
-  box-shadow: 2px 2px 0px #202020;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
   transition: all 0.2s;
 }
 
 .field input:focus, .field textarea:focus {
   outline: none;
-  border-color: #3155E7;
-  box-shadow: 3px 3px 0px #3155E7;
+  border-color: #D6B36A;
+  box-shadow: 0 0 15px rgba(214, 179, 106, 0.3), 3px 3px 0px rgba(0, 0, 0, 0.8);
 }
 
 select, .field select, .glass-select {
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
-  background-color: #FFFFFF !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23202020' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-color: #181424 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23D6B36A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 0.85rem center !important;
   background-size: 1.1rem !important;
   padding-right: 2.6rem !important;
-  border: 1.5px solid #202020 !important;
-  box-shadow: 2px 2px 0px #202020 !important;
+  border: 1.5px solid rgba(214, 179, 106, 0.35) !important;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6) !important;
   border-radius: 6px;
-  color: #202020 !important;
+  color: #F4EBDD !important;
   cursor: pointer;
 }
 
 select:focus, .field select:focus {
   outline: none !important;
-  border-color: #3155E7 !important;
-  box-shadow: 3px 3px 0px #3155E7 !important;
+  border-color: #D6B36A !important;
+  box-shadow: 0 0 15px rgba(214, 179, 106, 0.35), 3px 3px 0px rgba(0, 0, 0, 0.8) !important;
 }
 
 select option, .field select option {
-  background-color: #FFFFFF !important;
-  color: #202020 !important;
+  background-color: #181424 !important;
+  color: #F4EBDD !important;
   padding: 0.75rem 1rem !important;
 }
 
 .ok {
   display: none;
-  border: 2px solid #202020;
+  border: 1.5px solid #D6B36A;
   padding: 1.2rem;
   margin-top: 1.2rem;
-  background: #FFD85A;
-  color: #202020;
-  box-shadow: 4px 4px 0px #202020;
+  background: #241D33;
+  color: #F4EBDD;
+  box-shadow: 0 0 20px rgba(214, 179, 106, 0.25), 3.5px 3.5px 0px #D6B36A;
   border-radius: 6px;
 }
 
@@ -938,11 +1055,11 @@ select option, .field select option {
    FAQ & CONTACT
    ============================================================================== */
 .faq {
-  border-top: 2px solid #202020;
+  border-top: 1.5px solid rgba(214, 179, 106, 0.35);
 }
 
 details {
-  border-bottom: 1.5px dashed rgba(32, 32, 32, 0.2);
+  border-bottom: 1.5px dashed rgba(214, 179, 106, 0.25);
 }
 
 summary {
@@ -954,7 +1071,12 @@ summary {
   padding: 1.4rem 0;
   font: 700 clamp(1.15rem, 2vw, 1.45rem) / 1.2 var(--h);
   letter-spacing: -0.015em;
-  color: #202020;
+  color: #F4EBDD;
+  transition: color 0.2s ease;
+}
+
+summary:hover {
+  color: #F3D58A;
 }
 
 summary::-webkit-details-marker {
@@ -964,12 +1086,13 @@ summary::-webkit-details-marker {
 summary::after {
   content: "+";
   font: 700 1.6rem/1 var(--m);
-  color: #3155E7;
+  color: #D6B36A;
   transition: transform 0.25s;
 }
 
 details[open] summary::after {
   transform: rotate(45deg);
+  color: #F3D58A;
 }
 
 details p {
@@ -990,14 +1113,15 @@ details p {
   letter-spacing: -0.04em;
   text-decoration: none;
   word-break: break-word;
-  color: #202020;
-  border-bottom: 3px solid #FFD85A;
+  color: #F4EBDD;
+  border-bottom: 3px solid #D6B36A;
   transition: all 0.2s;
 }
 
 .big:hover {
-  background: #FFD85A;
-  color: #202020;
+  color: #F3D58A;
+  border-bottom-color: #F3D58A;
+  text-shadow: 0 0 20px rgba(243, 213, 138, 0.4);
 }
 
 .cl {
@@ -1007,7 +1131,7 @@ details p {
 }
 
 .cl div {
-  border-top: 1.5px dashed rgba(32, 32, 32, 0.2);
+  border-top: 1.5px dashed rgba(214, 179, 106, 0.25);
   padding-top: 0.8rem;
 }
 
@@ -1018,12 +1142,12 @@ details p {
 }
 
 /* ==============================================================================
-   FOOTER (PAPER COLLAGE CLOSING)
+   FOOTER (HOGWARTS MIDNIGHT CASTLE)
    ============================================================================== */
 footer.theme-footer {
   padding: 36px 0 48px;
-  border-top: 2px solid #202020;
-  background: #FAF8F2;
+  border-top: 1.5px solid rgba(214, 179, 106, 0.35);
+  background: #0B0912;
 }
 
 footer.theme-footer .wrap {
@@ -1034,7 +1158,7 @@ footer.theme-footer .wrap {
 }
 
 /* ==============================================================================
-   MARQUEE (HORIZONTAL SCROLLING PAPER CARDS)
+   MARQUEE (HORIZONTAL SCROLLING ENCHANTED INVENTIONS)
    ============================================================================== */
 @keyframes tg-marquee-left {
   0% { transform: translate3d(0, 0, 0); }

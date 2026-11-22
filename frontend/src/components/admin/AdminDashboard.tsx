@@ -243,7 +243,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </nav>
 
           <div className="p-3 bg-dark-950 border border-neutral-800 text-[10px] font-mono text-neutral-400">
-            <span className="text-brand-lime block mb-0.5 font-bold">TECH GALLERY 2027</span>
+            <span className="text-brand-lime block mb-0.5 font-bold">TECH WIZARD 2027</span>
             <span>Database: Supabase Postgres</span>
           </div>
         </aside>

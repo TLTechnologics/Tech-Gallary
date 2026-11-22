@@ -23,6 +23,8 @@ import { TechnicalSeparator } from './components/common/TechnicalSeparator';
 import { ScrollReveal } from './components/common/ScrollReveal';
 import { CustomCursor } from './components/common/CustomCursor';
 import { TechLoaderOverlay } from './components/common/TechLoaderOverlay';
+import { FlyingBroomstickOverlay } from './components/common/FlyingBroomstickOverlay';
+import { SortingHat } from './components/common/SortingHat';
 
 // Default static fallback data (strictly matching the prompt requirements) in case backend is initializing
 const DEFAULT_EVENTS: EventItem[] = [
@@ -158,7 +160,7 @@ const DEFAULT_EVENTS: EventItem[] = [
     date_display: '24 January 2027',
     date_iso: '2027-01-24',
     tagline: 'Grand Valedictory & Awards Ceremony',
-    description: 'Official announcement and celebration of the winners of both the Bhavesh Hackathon and the Thakkar Hackathon, followed by the Tech Gallery 2027 valedictory ceremony.',
+    description: 'Official announcement and celebration of the winners of both the Bhavesh Hackathon and the Thakkar Hackathon, followed by the Tech Wizard 2027 valedictory ceremony.',
     eligibility: 'Open to all attendees, participants, faculty, and parents.',
     eligibility_type: 'results_only',
     registration_status: 'announced',
@@ -248,7 +250,7 @@ const DEFAULT_FAQS: FAQItem[] = [
   {
     id: '10',
     question: 'Will participation certificates be provided?',
-    answer: 'Yes, official Tech Gallery 2027 participation certificates will be awarded to confirmed attendees and project presenters at the valedictory session on 24 January 2027.',
+    answer: 'Yes, official Tech Wizard 2027 participation certificates will be awarded to confirmed attendees and project presenters at the valedictory session on 24 January 2027.',
     category: 'Certificates',
     display_order: 10,
     created_at: new Date().toISOString(),
@@ -319,15 +321,15 @@ const DEFAULT_GALLERY: GalleryItem[] = [
 ];
 
 const DEFAULT_SETTINGS: FestivalSettings = {
-  festival_name: 'TECH GALLERY 2027',
+  festival_name: 'TECH WIZARD 2027',
   tagline: 'Where Ideas Meet Innovation.',
   start_date: '2027-01-18',
   end_date: '2027-01-24',
   our_college_name: 'LJCCA',
-  official_email: 'contact@techgallery2027.edu',
+  official_email: 'contact@techwizard2027.edu',
   phone: '+91 98765 43210',
   address: 'LJCCA, NEAR NEW, IIM Rd, Vastrapur, Ahmedabad, Gujarat 380015',
-  instagram_url: 'https://instagram.com/techgallery2027',
+  instagram_url: 'https://instagram.com/techwizard2027',
 };
 
 const DEFAULT_PROJECTS: ProjectRecord[] = [
@@ -509,6 +511,12 @@ export const App: React.FC = () => {
       {/* Custom Interactive Desktop Cursor */}
       <CustomCursor />
 
+      {/* Occasional Cinematic Broomstick Fly-by */}
+      <FlyingBroomstickOverlay />
+
+      {/* Signature Animated Talking Sorting Hat */}
+      <SortingHat />
+
       {/* Background Interactive Constellation Grid */}
       <TechBackground />
 
@@ -521,10 +529,11 @@ export const App: React.FC = () => {
         <Hero />
 
         <TechnicalSeparator
-          label="SYS // EXPO OVERVIEW"
+          label="GREAT HALL // RAVENCLAW SANCTUARY"
           code="MODULE // 01.ABOUT"
-          fromBg="#F8F5EC"
-          toBg="#F6EFE6"
+          fromBg="#080612"
+          toBg="#080E1B"
+          isDark={true}
         />
 
         {/* B. About */}
@@ -533,10 +542,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // TRACK MATRIX"
+          label="CHALLENGES // GRYFFINDOR ARENA"
           code="MODULE // 02.PROGRAM"
-          fromBg="#F6EFE6"
-          toBg="#EDE5F7"
+          fromBg="#080E1B"
+          toBg="#200A12"
+          isDark={true}
         />
 
         {/* C. Events (Track Overview & 8 Events Program) */}
@@ -549,10 +559,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // INTENSIVE LABS"
+          label="DUNGEONS // SLYTHERIN POTIONS LAB"
           code="MODULE // 02.SPRINTS"
-          fromBg="#EDE5F7"
-          toBg="#FDEEE3"
+          fromBg="#200A12"
+          toBg="#0A1A12"
+          isDark={true}
         />
 
         {/* C.2 Intensive Workshops & Hackathons */}
@@ -564,10 +575,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // INNOVATION SHOWCASE"
+          label="CHAMBER // RAVENCLAW INVENTIONS"
           code="MODULE // 03.EXHIBITS"
-          fromBg="#FDEEE3"
-          toBg="#E2EFFC"
+          fromBg="#0A1A12"
+          toBg="#0A1326"
+          isDark={true}
         />
 
         {/* D. Tech Showcase */}
@@ -576,10 +588,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // 7-DAY TIMELINE"
+          label="PARCHMENT // MARAUDER'S MAP"
           code="MODULE // 04.SCHEDULE"
-          fromBg="#E2EFFC"
-          toBg="#E3F5EB"
+          fromBg="#0A1326"
+          toBg="#1C1610"
+          isDark={true}
         />
 
         {/* E. 7-Day Schedule with Days Tabs & Session Rows */}
@@ -588,10 +601,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // ACCREDITATION PASSES"
+          label="ADMISSION // HOGWARTS PASSES"
           code="MODULE // 05.ACCESS"
-          fromBg="#E3F5EB"
-          toBg="#FEEAE6"
+          fromBg="#1C1610"
+          toBg="#1A0B14"
+          isDark={true}
         />
 
         {/* F. Registration Section */}
@@ -608,10 +622,11 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // VISUAL ARCHIVE"
+          label="GRAND STAIRCASE // ROYAL PORTRAITS"
           code="MODULE // 06.GALLERY"
-          fromBg="#FEEAE6"
-          toBg="#FCE7F3"
+          fromBg="#1A0B14"
+          toBg="#220B17"
+          isDark={true}
         />
 
         {/* G. Gallery */}
@@ -620,10 +635,10 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // INTELLIGENCE BASE"
+          label="RESTRICTED // EMERALD ARCHIVE"
           code="MODULE // 07.FAQS"
-          fromBg="#FCE7F3"
-          toBg="#18191E"
+          fromBg="#220B17"
+          toBg="#091712"
           isDark={true}
         />
 
@@ -633,10 +648,10 @@ export const App: React.FC = () => {
         </ScrollReveal>
 
         <TechnicalSeparator
-          label="SYS // COMMUNICATIONS"
+          label="COMMUNICATIONS // OWL POST"
           code="MODULE // 08.DISPATCH"
-          fromBg="#18191E"
-          toBg="#18191E"
+          fromBg="#091712"
+          toBg="#1F160C"
           isDark={true}
         />
 

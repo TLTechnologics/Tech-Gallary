@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Copy, Printer, ArrowRight, Clock, Cpu } from 'lucide-react';
+import { CheckCircle2, Copy, Printer, Clock, Share2, Sparkles, ArrowRight } from 'lucide-react';
 import { RegistrationRecord } from '../../types';
 import { copyToClipboard } from '../../utils/helpers';
 import { useNotification } from '../../context/NotificationContext';
@@ -32,182 +32,151 @@ export const RegistrationConfirmation: React.FC<RegistrationConfirmationProps> =
     window.print();
   };
 
+  const shareWhatsApp = () => {
+    const text = encodeURIComponent(
+      `⚡ TECH WIZARD 2027 HOGWARTS ADMISSION CONFIRMED!\n\nName: ${registration.full_name}\nPass Code: ${registration.reg_code}\nDates: 18–24 January 2027\nVenue: LJCCA Campus, Ahmedabad\n\nAccess portal: ${window.location.origin}`
+    );
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="p-6 sm:p-8 max-w-2xl mx-auto relative rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[8px_8px_0px_#202020] text-[#202020]"
+      className="p-6 sm:p-8 max-w-2xl mx-auto relative rounded-sm border-2 border-[#D6B36A] bg-[#1A1626] shadow-[0_16px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(214,179,106,0.25),6px_6px_0px_#100D18] text-[#F4EBDD]"
     >
-      {/* Washi Tape Accent */}
+      {/* Crimson & Gold Wax Seal Ribbon Accent */}
       <div
-        className="paper-tape"
-        style={{
-          top: '-12px',
-          left: '20%',
-          width: '75px',
-          transform: 'rotate(-3deg)',
-        }}
-      />
+        className="absolute -top-3.5 left-14 px-4 py-1 bg-gradient-to-r from-[#762E42] to-[#4A1525] border-x border-b border-[#D6B36A] shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-10 flex items-center gap-1.5"
+        style={{ transform: 'rotate(-2deg)' }}
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F3D58A]" />
+        <span className="font-mono text-[9px] uppercase tracking-wider text-[#F3D58A] font-bold">
+          ADMISSION VERIFIED
+        </span>
+      </div>
 
       {/* Header Badge */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="w-12 h-12 rounded-sm bg-[#FAF8F3] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] flex items-center justify-center text-[#3155E7]">
-          {isPending ? <Clock className="w-6 h-6 text-[#FF7139]" /> : <CheckCircle2 className="w-6 h-6 text-[#3155E7]" />}
+        <div className="w-12 h-12 rounded-sm bg-[#1E192D] border-2 border-[#D6B36A] shadow-[0_0_12px_rgba(214,179,106,0.25),2px_2px_0px_#100D18] flex items-center justify-center text-[#F3D58A]">
+          {isPending ? <Clock className="w-6 h-6 text-[#F3D58A]" /> : <Sparkles className="w-6 h-6 text-[#D6B36A]" />}
         </div>
         <div>
-          <span className="font-mono font-bold text-xs tracking-wider text-[#3155E7] uppercase block">
+          <span className="font-mono font-bold text-xs tracking-wider text-[#D6B36A] uppercase block">
             {isPending
-              ? 'REGISTRATION PENDING ADMIN APPROVAL'
+              ? 'ADMISSION PENDING FACULTY APPROVAL'
               : isApproved
-              ? 'SHOWCASING REGISTRATION APPROVED'
-              : 'CONFIRMED VISITOR PASS (100% FREE)'}
+              ? 'HOGWARTS SHOWCASING PASS APPROVED'
+              : 'CONFIRMED HOGWARTS VISITOR PASS (100% FREE)'}
           </span>
-          <h3 className="font-display font-black text-2xl sm:text-3xl text-[#202020]">
-            {isPending ? 'Request Received' : 'Festival Pass Reserved'}
+          <h3 className="font-display font-black text-2xl sm:text-3xl text-[#F4EBDD]">
+            {isPending ? 'Admission Dispatched' : 'Hogwarts Pass Enrolled'}
           </h3>
         </div>
       </div>
 
       {/* Description Advisory */}
-      <p className="font-mono text-xs text-[#5F5B52] mb-6 leading-relaxed font-medium">
+      <p className="font-mono text-xs text-[#C2BDCA] mb-6 leading-relaxed font-normal">
         {isPending ? (
           <span>
-            Your request for <strong className="text-[#202020]">Project Showcasing</strong> has been sent to the festival administrators for review. Once verified, you will receive project submission access.
+            Your request for <strong className="text-[#F4EBDD]">Project Showcasing</strong> has been sent to the festival administrators for review. Once verified, you will receive project submission access.
           </span>
         ) : isApproved ? (
-          <span className="text-[#202020] font-bold">
-            Congratulations! Your registration has been approved. You can now submit your hardware or software project for Tech Gallery 2027.
+          <span className="text-[#F3D58A] font-bold">
+            Congratulations! Your registration has been approved. You can now submit your hardware or software project for Tech Wizard 2027.
           </span>
         ) : (
           <span>
-            Your Visitor Pass is reserved with <strong className="text-[#202020]">Free Entry</strong>. Please save your Registration ID below or open WhatsApp confirmation.
+            Your Visitor Pass is reserved with <strong className="text-[#F4EBDD]">Free Entry</strong>. Please save your Registration ID below or open WhatsApp confirmation.
           </span>
         )}
       </p>
 
-      {/* Pass Box Card: Perforated Ticket Aesthetics */}
-      <div className="bg-[#FAF8F3] border-2 border-[#202020] p-5 sm:p-6 mb-6 rounded-sm shadow-[3.5px_3.5px_0px_#202020]">
-        <div className="flex justify-between items-center pb-4 border-b-2 border-dashed border-[#202020]/25 flex-wrap gap-3">
+      {/* Pass Box Card: Enchanted Dossier Ticket Aesthetics */}
+      <div className="bg-[#1E192D] border-2 border-[#D6B36A] p-5 sm:p-6 mb-6 rounded-sm shadow-[0_8px_30px_rgba(0,0,0,0.5),3.5px_3.5px_0px_#100D18]">
+        <div className="flex justify-between items-center pb-4 border-b-2 border-dashed border-[#D6B36A]/25 flex-wrap gap-3">
           <div>
-            <span className="font-mono text-[10px] text-[#625E56] font-bold tracking-widest uppercase block">
+            <span className="font-mono text-[10px] text-[#D6B36A] font-bold tracking-widest uppercase block">
               OFFICIAL REGISTRATION ID
             </span>
-            <span className="font-display text-2xl sm:text-3xl font-black text-[#3155E7] tracking-wider">
+            <span 
+              className="font-display text-2xl sm:text-3xl font-black text-[#F3D58A] tracking-wider"
+              style={{ textShadow: '0 0 15px rgba(243, 213, 138, 0.4)' }}
+            >
               {registration.reg_code}
             </span>
           </div>
 
           <button
             onClick={handleCopyCode}
-            className="px-3 py-1.5 rounded-sm font-mono text-xs font-bold bg-[#FFFFFF] border-2 border-[#202020] shadow-[2px_2px_0px_#202020] text-[#202020] hover:bg-[#FAF8F2] flex items-center gap-1.5 transition-all"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#1A1626] border-1.5 border-[#D6B36A] text-xs font-mono font-bold text-[#F4EBDD] hover:text-[#F3D58A] shadow-[1.5px_1.5px_0px_#100D18] cursor-pointer"
           >
-            <Copy className="w-3.5 h-3.5" />
+            <Copy size={13} className="text-[#D6B36A]" />
             <span>Copy ID</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-mono">
+        {/* Participant Specs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 font-mono text-xs text-[#C2BDCA]">
           <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              PARTICIPANT NAME
-            </span>
-            <strong className="text-[#202020] font-bold text-sm">{registration.full_name}</strong>
+            <span className="text-[10px] text-[#D6B36A] uppercase font-bold block">PARTICIPANT NAME</span>
+            <span className="font-bold text-[#F4EBDD] text-sm">{registration.full_name}</span>
           </div>
-
           <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              PASS TYPE &amp; COST
-            </span>
-            <strong className="text-[#3155E7] font-bold text-sm">
-              {isShowcasing ? 'Project Showcasing (Free)' : 'Visitor Pass (Free)'}
-            </strong>
+            <span className="text-[10px] text-[#D6B36A] uppercase font-bold block">COLLEGE AFFILIATION</span>
+            <span className="font-bold text-[#F4EBDD] text-sm">{registration.college_name}</span>
           </div>
-
           <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              INSTITUTION
-            </span>
-            <span className="text-[#202020] font-bold">{registration.college_name}</span>
-            {registration.roll_number && (
-              <span className="block text-[11px] text-[#FF7139] font-bold mt-0.5">
-                Roll: {registration.roll_number}
-              </span>
-            )}
+            <span className="text-[10px] text-[#D6B36A] uppercase font-bold block">REGISTERED EMAIL</span>
+            <span className="font-bold text-[#F4EBDD]">{registration.email}</span>
           </div>
-
           <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              REGISTERED EVENT
-            </span>
-            <span className="text-[#202020] font-bold">{registration.event_name}</span>
-          </div>
-
-          <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              PHONE (WHATSAPP)
-            </span>
-            <span className="text-[#202020] font-bold">{registration.phone}</span>
-          </div>
-
-          <div>
-            <span className="text-[10px] text-[#625E56] font-bold uppercase block">
-              STATUS
-            </span>
-            <span
-              className={`font-black uppercase ${
-                isPending ? 'text-[#FF7139]' : 'text-[#3155E7]'
-              }`}
-            >
-              {registration.status}
+            <span className="text-[10px] text-[#D6B36A] uppercase font-bold block">PASS TYPE</span>
+            <span className="font-bold text-[#F3D58A] uppercase">
+              {isShowcasing ? 'Project Showcasing' : 'Visitor Pass'}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Action for Approved Showcasing */}
-      {isApproved && onOpenSubmission && (
-        <div className="mb-6">
+      {/* Action Buttons */}
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#D6B36A]/20">
+        <div className="flex items-center gap-2.5">
           <button
-            onClick={() => onOpenSubmission(registration)}
-            className="w-full justify-center p-4 text-sm font-mono font-bold text-white bg-[#3155E7] border-2 border-[#202020] shadow-[4px_4px_0px_#202020] hover:shadow-[5.5px_5.5px_0px_#202020] hover:-translate-y-0.5 transition-all flex items-center gap-2 rounded-sm"
+            onClick={handlePrint}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#1E192D] border-2 border-[#D6B36A] text-xs font-mono font-bold text-[#F4EBDD] hover:bg-[#251F36] shadow-[2px_2px_0px_#100D18] cursor-pointer"
           >
-            <Cpu className="w-4 h-4 mr-1.5" />
-            Submit Your Project Details Now →
+            <Printer size={14} className="text-[#D6B36A]" />
+            <span>Print Pass</span>
+          </button>
+
+          <button
+            onClick={shareWhatsApp}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#25D366] border-2 border-[#100D18] text-xs font-mono font-bold text-[#100D18] shadow-[2px_2px_0px_#100D18] hover:shadow-[3.5px_3.5px_0px_#100D18] cursor-pointer"
+          >
+            <Share2 size={14} />
+            <span>WhatsApp Dispatch</span>
           </button>
         </div>
-      )}
 
-      {/* Confirmation Actions Strip */}
-      <div className="flex justify-between items-center flex-wrap gap-4 pt-4 border-t-2 border-dashed border-[#202020]/25">
-        <div className="flex gap-3 flex-wrap">
-          {/* WhatsApp Direct Confirmation Button */}
-          {registration.whatsapp_url && (
-            <a
-              href={registration.whatsapp_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-sm font-mono font-bold text-xs text-white bg-[#25D366] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all"
+        <div className="flex items-center gap-2.5">
+          {isApproved && onOpenSubmission && (
+            <button
+              onClick={() => onOpenSubmission(registration)}
+              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-sm bg-[#762E42] border-2 border-[#D6B36A] text-xs font-mono font-bold text-[#F4EBDD] shadow-[0_0_15px_rgba(118,46,66,0.35),2px_2px_0px_#100D18] hover:bg-[#8E3850] cursor-pointer"
             >
-              <span>📱 Open WhatsApp Pass</span>
-            </a>
+              <span>Submit Project</span>
+              <ArrowRight size={14} />
+            </button>
           )}
 
           <button
-            onClick={handlePrint}
-            className="px-4 py-2 rounded-sm font-mono font-bold text-xs text-[#202020] bg-[#FFFFFF] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all flex items-center gap-1.5"
+            onClick={onReset}
+            className="px-3 py-2 text-xs font-mono font-bold text-[#C2BDCA] hover:text-[#F4EBDD] transition-colors"
           >
-            <Printer className="w-3.5 h-3.5" />
-            <span>Print Pass</span>
+            New Registration
           </button>
         </div>
-
-        <button
-          onClick={onReset}
-          className="px-4 py-2 rounded-sm font-mono font-bold text-xs text-[#202020] bg-[#FFD85A] border-2 border-[#202020] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] transition-all flex items-center gap-1.5"
-        >
-          <span>Register Another</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
       </div>
     </motion.div>
   );

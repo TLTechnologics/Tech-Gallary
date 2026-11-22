@@ -117,7 +117,7 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
       ref={containerRef}
       className={`relative w-full ${className}`}
     >
-      {/* Trigger Button with Tactile Paper Styling */}
+      {/* Trigger Button with Tactile Dark Parchment Styling */}
       <button
         type="button"
         id={selectId}
@@ -128,40 +128,40 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
         disabled={disabled}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
-        className={`flex items-center justify-between w-full px-4 py-3 text-left transition-all duration-150 outline-none rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] ${
-          isOpen ? 'shadow-[4px_4px_0px_#3155E7] border-[#3155E7]' : ''
+        className={`flex items-center justify-between w-full px-4 py-3 text-left transition-all duration-150 outline-none rounded-sm border-2 border-[#D6B36A]/60 bg-[#171322] shadow-[2.5px_2.5px_0px_#0B0912] ${
+          isOpen ? 'shadow-[4px_4px_0px_#D6B36A] border-[#F3D58A]' : ''
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${triggerClassName}`}
       >
         <div className="flex-1 truncate mr-2">
           {selectedOption ? (
             <div className="flex items-center gap-2">
-              {selectedOption.icon && <span className="flex-shrink-0 text-[#3155E7]">{selectedOption.icon}</span>}
+              {selectedOption.icon && <span className="flex-shrink-0 text-[#F3D58A]">{selectedOption.icon}</span>}
               <div className="truncate">
-                <span className="font-bold text-sm leading-tight text-[#202020] block truncate">
+                <span className="font-bold text-sm leading-tight text-[#F4EBDD] block truncate">
                   {selectedOption.label}
                 </span>
                 {selectedOption.sublabel && (
-                  <span className="font-mono text-xs block text-[#625E56] font-medium mt-0.5 truncate">
+                  <span className="font-mono text-xs block text-[#C2BDCA] font-medium mt-0.5 truncate">
                     {selectedOption.sublabel}
                   </span>
                 )}
               </div>
             </div>
           ) : (
-            <span className="text-sm text-[#625E56] font-mono">{placeholder}</span>
+            <span className="text-sm text-[#C2BDCA]/70 font-mono">{placeholder}</span>
           )}
         </div>
 
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.18, ease: 'easeOut' }}
-          className="flex-shrink-0 text-[#202020] ml-1"
+          className="flex-shrink-0 text-[#F3D58A] ml-1"
         >
           <ChevronDown className="w-4 h-4" />
         </motion.div>
       </button>
 
-      {/* Floating Paper Dropdown Listbox */}
+      {/* Floating Dark Grimoire Dropdown Listbox */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -169,7 +169,7 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className={`absolute left-0 right-0 z-50 mt-1.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[6px_6px_0px_#202020] p-1.5 max-h-[300px] overflow-y-auto ${dropdownClassName}`}
+            className={`absolute left-0 right-0 z-50 mt-1.5 rounded-sm border-2 border-[#D6B36A] bg-[#1A1626] shadow-[6px_6px_0px_#0B0912] p-1.5 max-h-[300px] overflow-y-auto ${dropdownClassName}`}
           >
             <ul
               ref={listboxRef}
@@ -190,13 +190,13 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
                       opt.disabled
                         ? 'opacity-40 cursor-not-allowed'
                         : isSelected
-                        ? 'bg-[#FFD85A] text-[#202020] font-bold border border-[#202020] shadow-[1.5px_1.5px_0px_#202020]'
-                        : 'text-[#202020] hover:bg-[#FAF8F3]'
+                        ? 'bg-[#762E42]/80 text-[#F3D58A] font-bold border border-[#D6B36A] shadow-[1.5px_1.5px_0px_#0B0912]'
+                        : 'text-[#E7D7B5] hover:bg-[#251E33] hover:text-[#F3D58A]'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0 flex-1">
                       {opt.icon && (
-                        <span className="flex-shrink-0 text-[#3155E7]">
+                        <span className="flex-shrink-0 text-[#F3D58A]">
                           {opt.icon}
                         </span>
                       )}
@@ -207,13 +207,13 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
                             {opt.label}
                           </span>
                           {opt.badge && (
-                            <span className="font-mono text-[9px] px-1.5 py-0.5 rounded-xs border border-[#202020] font-black uppercase tracking-wider bg-[#FFFFFF] text-[#202020]">
+                            <span className="font-mono text-[9px] px-1.5 py-0.5 rounded-xs border border-[#D6B36A] font-black uppercase tracking-wider bg-[#100D18] text-[#F3D58A]">
                               {opt.badge}
                             </span>
                           )}
                         </div>
                         {opt.sublabel && (
-                          <span className="font-mono text-xs block text-[#625E56] font-medium truncate mt-0.5">
+                          <span className="font-mono text-xs block text-[#C2BDCA] font-medium truncate mt-0.5">
                             {opt.sublabel}
                           </span>
                         )}
@@ -221,7 +221,7 @@ export const GlassSelect: React.FC<GlassSelectProps> = ({
                     </div>
 
                     {isSelected && (
-                      <Check className="w-4 h-4 text-[#202020] flex-shrink-0 ml-2" />
+                      <Check className="w-4 h-4 text-[#F3D58A] flex-shrink-0 ml-2" />
                     )}
                   </li>
                 );

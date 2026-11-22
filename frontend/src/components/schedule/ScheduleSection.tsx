@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, ArrowRight, Compass, Footprints } from 'lucide-react';
 
 interface SessionItem {
   time: string;
@@ -92,17 +92,17 @@ const SCHEDULE_DATA: DaySchedule[] = [
 const getTagBadgeStyle = (tag: string) => {
   switch (tag.toLowerCase()) {
     case 'hackathon':
-      return { background: '#BBF7D0', color: '#14532D', border: '1.5px solid #202020' };
+      return { background: '#762E42', color: '#F3D58A', border: '1.5px solid #D6B36A' };
     case 'workshop':
-      return { background: '#DCFCE7', color: '#15803D', border: '1.5px solid #202020' };
+      return { background: '#1E4334', color: '#74C69D', border: '1.5px solid #74C69D' };
     case 'showcase':
-      return { background: '#86EFAC', color: '#14532D', border: '1.5px solid #202020' };
+      return { background: '#D6B36A', color: '#100D18', border: '1.5px solid #FFE27A' };
     case 'ceremony':
-      return { background: '#FEF3C7', color: '#B45309', border: '1.5px solid #202020' };
+      return { background: '#4A3716', color: '#FFE27A', border: '1.5px solid #D6B36A' };
     case 'talk':
-      return { background: '#F0FDF4', color: '#166534', border: '1.5px solid #202020' };
+      return { background: '#1A2942', color: '#93C5FD', border: '1.5px solid #3B82F6' };
     default:
-      return { background: '#F0FDF4', color: '#15803D', border: '1.5px solid #202020' };
+      return { background: '#251D38', color: '#F4EBDD', border: '1.5px solid #D6B36A' };
   }
 };
 
@@ -112,35 +112,51 @@ export const ScheduleSection: React.FC = () => {
   const activeDay = SCHEDULE_DATA[activeDayIndex];
 
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#E3F5EB] overflow-hidden" id="schedule">
-      {/* Background Architectural Grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+    <section className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#1C1610] via-[#261E16] to-[#18120C] overflow-hidden text-white" id="schedule">
+      {/* Marauder's Map Aged Parchment Floorplan Lines & Ink Footprints */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
         style={{
           backgroundImage:
-            'linear-gradient(#15803D 1px, transparent 1px), linear-gradient(90deg, #15803D 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+            'radial-gradient(#D6B36A 1.5px, transparent 1.5px), linear-gradient(to right, #D6B36A 1px, transparent 1px), linear-gradient(to bottom, #D6B36A 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
         }}
         aria-hidden="true"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] mb-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#15803D]" />
-            <span className="font-mono text-[11px] sm:text-xs text-[#202020] tracking-widest uppercase font-bold">
-              CHRONOLOGY // 18–24 JAN 2027
-            </span>
+        {/* Marauder's Map Dedication Banner */}
+        <div className="mb-8 p-4 sm:p-5 rounded-sm border-2 border-[#D6B36A] bg-gradient-to-r from-[#2C2117] via-[#382B1E] to-[#2C2117] shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-sm border border-[#D6B36A] bg-[#1A120B] text-[#F3D58A] shadow-[0_0_12px_rgba(214,179,106,0.3)]">
+              <Compass className="w-5 h-5 animate-spin" style={{ animationDuration: '24s' }} />
+            </div>
+            <div>
+              <span className="font-mono text-[10px] tracking-widest uppercase text-[#D6B36A] font-bold block">
+                MESSRS MOONY, WORMTAIL, PADFOOT &amp; PRONGS PRESENT
+              </span>
+              <h4 className="font-display font-black text-sm sm:text-base text-[#F4EBDD]">
+                THE MARAUDER'S MAP // 7-DAY SCHEDULE
+              </h4>
+            </div>
           </div>
-
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#202020] tracking-tight leading-tight">
-            Seven Days, <span className="text-[#15803D] underline decoration-[#86EFAC] decoration-wavy decoration-2">One Campus.</span>
-          </h2>
+          <div className="font-mono text-xs italic text-[#F3D58A] bg-[#1A120B] px-4 py-1.5 rounded-sm border border-[#D6B36A]/60 shadow-[0_0_10px_rgba(214,179,106,0.25)]">
+            "I solemnly swear that I am up to no good."
+          </div>
         </div>
 
-        {/* 7 Days Tab List Ribbon: Perforated Paper Ticket Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3 mb-6 sm:mb-8" role="tablist" aria-label="Festival days">
+        {/* Section Main Title */}
+        <div className="mb-8 sm:mb-10">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#F4EBDD] tracking-tight leading-tight">
+            Seven Days, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D6B36A] via-[#F3D58A] to-[#D6B36A]">One Enchanted Campus.</span>
+          </h2>
+          <p className="font-mono text-xs sm:text-sm text-[#E2D5C0] mt-2">
+            Select a date below to reveal scheduled sessions, venues, and moving footprints.
+          </p>
+        </div>
+
+        {/* 7 Days Tab List Ribbon: Map Date Tabs */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3.5 mb-8" role="tablist" aria-label="Festival days">
           {SCHEDULE_DATA.map((day, idx) => {
             const isSelected = activeDayIndex === idx;
             return (
@@ -150,20 +166,20 @@ export const ScheduleSection: React.FC = () => {
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setActiveDayIndex(idx)}
-                className={`p-2.5 sm:p-3 rounded-sm font-mono text-left transition-all duration-200 border-2 border-[#202020] flex flex-col justify-between cursor-pointer ${
+                className={`p-3 sm:p-4 rounded-sm font-mono text-left transition-all duration-300 border-2 flex flex-col justify-between cursor-pointer relative overflow-hidden ${
                   isSelected
-                    ? 'bg-[#15803D] text-white shadow-[3.5px_3.5px_0px_#202020] -translate-y-0.5'
-                    : 'bg-[#FFFFFF] text-[#202020] shadow-[2px_2px_0px_#202020] hover:bg-[#F0FDF4] hover:shadow-[3px_3px_0px_#202020] hover:-translate-y-0.5'
+                    ? 'bg-gradient-to-br from-[#D6B36A] to-[#F3D58A] text-[#100D18] border-[#FFE27A] shadow-[0_0_24px_rgba(214,179,106,0.6),3.5px_3.5px_0px_#0A0812] -translate-y-1'
+                    : 'bg-[#261E16] text-[#F4EBDD] border-[#D6B36A]/40 shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:bg-[#34281E] hover:border-[#D6B36A] hover:-translate-y-0.5'
                 }`}
               >
-                <div className={`flex items-center justify-between text-[11px] sm:text-xs font-bold mb-1 ${isSelected ? 'text-[#BBF7D0]' : 'text-[#625E56]'}`}>
+                <div className={`flex items-center justify-between text-[11px] sm:text-xs font-bold mb-1.5 ${isSelected ? 'text-[#100D18]' : 'text-[#E2D5C0]'}`}>
                   <span>{day.dayName}</span>
-                  {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#86EFAC]" />}
+                  {isSelected && <span className="w-2 h-2 rounded-full bg-[#100D18]" />}
                 </div>
-                <div className={`text-xl sm:text-2xl font-black font-display ${isSelected ? 'text-white' : 'text-[#202020]'}`}>
+                <div className={`text-2xl sm:text-3xl font-black font-display leading-none mb-1 ${isSelected ? 'text-[#100D18]' : 'text-[#F4EBDD]'}`}>
                   {day.dayNumber}
                 </div>
-                <div className={`text-[9px] sm:text-[10px] font-bold mt-0.5 tracking-wider uppercase truncate ${isSelected ? 'text-[#BBF7D0]' : 'text-[#625E56]'}`}>
+                <div className={`text-[10px] font-bold tracking-widest uppercase truncate ${isSelected ? 'text-[#100D18]/85' : 'text-[#D6B36A]'}`}>
                   JAN 2027
                 </div>
               </button>
@@ -171,65 +187,66 @@ export const ScheduleSection: React.FC = () => {
           })}
         </div>
 
-        {/* Sessions Panel for the Active Day: Pure Paper Dossier Sheet */}
-        <div className="rounded-sm border-2 border-[#202020] bg-[#FFFFFF] p-5 sm:p-6 shadow-[5px_5px_0px_#202020] relative" role="tabpanel">
-          {/* Washi Tape Corner */}
+        {/* Sessions Panel for the Active Day: Marauder's Parchment Dossier */}
+        <div className="rounded-sm border-2 border-[#D6B36A] bg-gradient-to-b from-[#2A2016] to-[#1C150E] p-6 sm:p-8 shadow-[0_16px_50px_rgba(0,0,0,0.7),0_0_24px_rgba(214,179,106,0.2)] relative overflow-hidden" role="tabpanel">
+          {/* Wax Seal Ribbon in corner */}
           <div
-            className="paper-tape"
-            style={{
-              top: '-10px',
-              right: '12%',
-              width: '56px',
-              transform: 'rotate(-4deg)',
-            }}
-          />
+            className="absolute top-0 right-10 px-4 py-1 bg-gradient-to-r from-[#762E42] to-[#4A1525] border-x border-b border-[#D6B36A] shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-10 flex items-center gap-1.5"
+            style={{ transform: 'rotate(2deg)' }}
+          >
+            <Footprints className="w-3.5 h-3.5 text-[#F3D58A]" />
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#F3D58A] font-bold">
+              MAP VERIFIED
+            </span>
+          </div>
 
-          <div className="flex items-center justify-between border-b-2 border-dashed border-[#202020]/25 pb-3 mb-4 sm:mb-5">
-            <div className="font-mono text-xs sm:text-sm font-black text-[#202020] flex items-center gap-2">
-              <Calendar className="w-3.5 h-3.5 text-[#15803D]" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dashed border-[#D6B36A]/30 pb-4 mb-6 gap-3">
+            <div className="font-mono text-sm sm:text-base font-black text-[#F4EBDD] flex items-center gap-2.5">
+              <Calendar className="w-4 h-4 text-[#D6B36A]" />
               <span>{activeDay.dateStr}</span>
             </div>
-            <span className="font-mono text-[11px] sm:text-xs font-bold text-[#15803D] bg-[#DCFCE7] px-2 py-0.5 rounded-sm border border-[#202020]">
-              {activeDay.sessions.length} SESSIONS SCHEDULED
+            <span className="font-mono text-xs font-bold text-[#100D18] bg-gradient-to-r from-[#D6B36A] to-[#F3D58A] px-3 py-1 rounded-sm border border-[#FFE27A] shadow-[0_0_10px_rgba(214,179,106,0.3)] self-start sm:self-auto">
+              {activeDay.sessions.length} SESSIONS ACTIVE ON MAP
             </span>
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={activeDay.dayNumber}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="space-y-3"
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-4"
             >
               {activeDay.sessions.map((sess, idx) => (
                 <motion.div
                   key={`${activeDay.dayNumber}-${idx}`}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.25, delay: idx * 0.05 }}
-                  className="p-3.5 sm:p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020] hover:-translate-y-0.5 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
+                  transition={{ duration: 0.25, delay: idx * 0.06 }}
+                  className="p-4 sm:p-5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#221A11] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:border-[#D6B36A] hover:shadow-[0_0_20px_rgba(214,179,106,0.25)] hover:-translate-y-0.5 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
                 >
                   <div className="flex items-start sm:items-center gap-4">
-                    <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-[#15803D] font-black min-w-[70px] bg-[#FFFFFF] px-2.5 py-1 rounded-sm border border-[#202020]">
-                      <Clock className="w-3.5 h-3.5 text-[#15803D]" />
+                    {/* Time Badge */}
+                    <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-[#F3D58A] font-black min-w-[76px] bg-[#181109] px-3 py-1.5 rounded-sm border border-[#D6B36A]/50 shadow-[0_0_8px_rgba(214,179,106,0.2)]">
+                      <Clock className="w-3.5 h-3.5 text-[#D6B36A]" />
                       <span>{sess.time}</span>
                     </div>
 
                     <div>
-                      <h3 className="font-display font-black text-base sm:text-lg text-[#202020] group-hover:text-[#15803D] transition-colors">
+                      <h3 className="font-cinzel font-bold text-lg sm:text-xl text-[#F4EBDD] group-hover:text-[#F3D58A] transition-colors tracking-wide">
                         {sess.title}
                       </h3>
-                      <div className="flex items-center gap-1.5 font-mono text-xs text-[#625E56] font-medium mt-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#15803D]" />
+                      <div className="flex items-center gap-2 font-body text-xs text-[#E2D5C0] font-medium mt-1">
+                        <MapPin className="w-3.5 h-3.5 text-[#D6B36A]" />
                         <span>{sess.venue}</span>
                       </div>
                     </div>
                   </div>
 
                   <span
-                    className="font-mono text-xs px-3 py-1 rounded-sm font-bold uppercase tracking-wider self-start sm:self-auto shadow-[1.5px_1.5px_0px_#202020]"
+                    className="font-mono text-xs px-3.5 py-1 rounded-sm font-bold uppercase tracking-wider self-start sm:self-auto shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
                     style={getTagBadgeStyle(sess.tag)}
                   >
                     {sess.tag}
@@ -240,18 +257,18 @@ export const ScheduleSection: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        {/* Bottom Schedule Sub-note */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#625E56]">
+        {/* Bottom Schedule Sub-note: Mischief Managed */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-body text-xs text-[#E2D5C0] border-t border-[#D6B36A]/25 pt-5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#15803D]" />
-            <span className="font-bold text-[#202020]">All tracks hosted on Main Campus · Timings in Indian Standard Time (IST)</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D6B36A] shadow-[0_0_8px_#D6B36A]" />
+            <span className="font-bold text-[#F4EBDD] font-cinzel tracking-wide">All tracks hosted on LJCCA Main Campus · Mischief Managed.</span>
           </div>
           <a
             href="#register"
-            className="text-[#15803D] hover:text-[#065F46] transition-colors font-bold flex items-center gap-1"
+            className="text-[#F3D58A] hover:text-[#FFFFFF] transition-colors font-cinzel font-bold tracking-wider flex items-center gap-1.5"
           >
-            <span>Register for festival passes</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Claim Hogwarts Festival Passes</span>
+            <ArrowRight className="w-4 h-4 text-[#D6B36A]" />
           </a>
         </div>
       </div>

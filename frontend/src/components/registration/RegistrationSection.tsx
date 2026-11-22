@@ -4,7 +4,7 @@ import { EventItem, RegistrationPayload, RegistrationRecord } from '../../types'
 import { RegistrationConfirmation } from './RegistrationConfirmation';
 import { useNotification } from '../../context/NotificationContext';
 import { GlassSelect } from '../common/GlassSelect';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 const YEAR_SEMESTER_OPTIONS = [
   '1st Year / Semester 1',
@@ -212,13 +212,21 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   };
 
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#FEEAE6] overflow-hidden" id="register">
-      {/* Background Architectural Grid */}
+    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#1A0B14] via-[#2A1020] to-[#160812] overflow-hidden" id="register">
+      {/* Hogwarts Admission Burgundy Glow & Constellation */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30 z-0"
+        style={{
+          background: 'radial-gradient(ellipse at 30% 20%, rgba(180, 40, 70, 0.4) 0%, transparent 60%), radial-gradient(ellipse at 75% 75%, rgba(214, 179, 106, 0.25) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
         style={{
           backgroundImage:
-            'linear-gradient(#DC2626 1px, transparent 1px), linear-gradient(90deg, #DC2626 1px, transparent 1px)',
+            'linear-gradient(#D6B36A 1px, transparent 1px), linear-gradient(90deg, #D6B36A 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden="true"
@@ -227,15 +235,15 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2px_2px_0px_#202020] mb-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626]" />
-            <span className="font-mono text-[11px] sm:text-xs text-[#202020] tracking-widest uppercase font-bold">
-              REGISTRATION PORTAL // 100% FREE PASSES
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-1.5 border-[#D6B36A] bg-[#2C0E20] shadow-[0_0_15px_rgba(214,179,106,0.2),2px_2px_0px_#10050C] mb-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E63946] shadow-[0_0_6px_#FF5470]" />
+            <span className="font-mono text-[11px] sm:text-xs text-[#F3D58A] tracking-widest uppercase font-bold">
+              ✦ HOGWARTS ADMISSION // 100% FREE PASSES ✦
             </span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#202020] tracking-tight leading-tight">
-            Reserve Your <span className="text-[#DC2626] underline decoration-[#FED7AA] decoration-wavy decoration-2">Place.</span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#F4EBDD] tracking-tight leading-tight">
+            Reserve Your <span className="text-[#F3D58A] underline decoration-[#E63946] decoration-wavy decoration-2">Place.</span>
           </h2>
         </div>
 
@@ -250,26 +258,26 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
           />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-            {/* Left Column: Choose Pass Tier & Guidance (Perforated Pass Cards) */}
+            {/* Left Column: Choose Pass Tier & Guidance (Enchanted Pass Cards) */}
             <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
               <div>
-                <h3 className="font-display text-xl font-black text-[#202020] mb-1.5">
+                <h3 className="font-cinzel text-xl font-bold text-[#F4EBDD] mb-1.5 tracking-wide">
                   Select Your Festival Pass
                 </h3>
-                <p className="font-body text-xs sm:text-sm text-[#5F5B52] leading-relaxed font-medium">
+                <p className="font-body text-xs sm:text-sm text-[#E2CCD4] leading-relaxed font-normal">
                   Both passes grant 100% free admission to the festival grounds at LJCCA, Vastrapur, Ahmedabad.
                 </p>
               </div>
 
-              {/* Pass Tier Selection Cards: Perforated Paper Passes */}
+              {/* Pass Tier Selection Cards: Enchanted Grimoire Passes */}
               <div className="space-y-3">
                 {/* Tier 1: Visitor */}
                 <div
                   onClick={() => setSelectedPass('visitor')}
-                  className={`p-4 rounded-sm border-2 border-[#202020] transition-all duration-200 cursor-pointer flex items-start justify-between gap-3 ${
+                  className={`p-4 rounded-sm border-2 transition-all duration-200 cursor-pointer flex items-start justify-between gap-3 ${
                     selectedPass === 'visitor'
-                      ? 'bg-[#FED7D7] shadow-[4px_4px_0px_#DC2626] -translate-y-0.5'
-                      : 'bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020]'
+                      ? 'bg-[#331326] border-[#F3D58A] shadow-[0_0_20px_rgba(214,179,106,0.35),3.5px_3.5px_0px_#10050C] -translate-y-0.5'
+                      : 'bg-[#240C1B] border-[#D6B36A]/40 shadow-[0_4px_16px_rgba(0,0,0,0.5),2.5px_2.5px_0px_#10050C] hover:border-[#D6B36A]'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -280,19 +288,19 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                         value="visitor"
                         checked={selectedPass === 'visitor'}
                         onChange={() => setSelectedPass('visitor')}
-                        className="accent-[#DC2626] w-4 h-4 cursor-pointer"
+                        className="accent-[#D6B36A] w-4 h-4 cursor-pointer"
                       />
                     </div>
                     <div>
-                      <div className="font-display font-black text-lg text-[#202020]">
+                      <div className="font-cinzel font-bold text-lg text-[#F4EBDD] tracking-wide">
                         Visitor Pass
                       </div>
-                      <div className="font-body text-xs text-[#5F5B52] font-medium mt-1">
+                      <div className="font-body text-xs text-[#E2CCD4] font-normal mt-1">
                         Access to open talks, demonstration exhibits, and public viewing
                       </div>
                     </div>
                   </div>
-                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#FFFFFF] text-[#202020] border-1.5 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#D6B36A] text-[#100D18] border border-[#F3D58A] shadow-[0_0_8px_rgba(214,179,106,0.3)]">
                     FREE
                   </span>
                 </div>
@@ -300,10 +308,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 {/* Tier 2: Project Showcasing */}
                 <div
                   onClick={() => setSelectedPass('showcasing')}
-                  className={`p-4 rounded-sm border-2 border-[#202020] transition-all duration-200 cursor-pointer flex items-start justify-between gap-3 ${
+                  className={`p-4 rounded-sm border-2 transition-all duration-200 cursor-pointer flex items-start justify-between gap-3 ${
                     selectedPass === 'showcasing'
-                      ? 'bg-[#FED7D7] shadow-[4px_4px_0px_#DC2626] -translate-y-0.5'
-                      : 'bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#202020] hover:shadow-[3.5px_3.5px_0px_#202020]'
+                      ? 'bg-[#331326] border-[#F3D58A] shadow-[0_0_20px_rgba(214,179,106,0.35),3.5px_3.5px_0px_#10050C] -translate-y-0.5'
+                      : 'bg-[#240C1B] border-[#D6B36A]/40 shadow-[0_4px_16px_rgba(0,0,0,0.5),2.5px_2.5px_0px_#10050C] hover:border-[#D6B36A]'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -314,37 +322,37 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                         value="showcasing"
                         checked={selectedPass === 'showcasing'}
                         onChange={() => setSelectedPass('showcasing')}
-                        className="accent-[#DC2626] w-4 h-4 cursor-pointer"
+                        className="accent-[#D6B36A] w-4 h-4 cursor-pointer"
                       />
                     </div>
                     <div>
-                      <div className="font-display font-black text-base sm:text-lg text-[#202020]">
+                      <div className="font-cinzel font-bold text-base sm:text-lg text-[#F4EBDD] tracking-wide">
                         Project Showcasing Pass
                       </div>
-                      <div className="font-body text-xs text-[#5F5B52] font-medium mt-0.5">
+                      <div className="font-body text-xs text-[#E2CCD4] font-normal mt-0.5">
                         Hardware &amp; Software booth exhibition stall (Requires Admin Verification)
                       </div>
                     </div>
                   </div>
-                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#FFFFFF] text-[#202020] border-1.5 border-[#202020] shadow-[1.5px_1.5px_0px_#202020]">
+                  <span className="font-mono text-xs font-black px-2.5 py-1 rounded-sm bg-[#762E42] text-[#F3D58A] border border-[#D6B36A] shadow-[0_0_8px_rgba(118,46,66,0.4)]">
                     FREE
                   </span>
                 </div>
               </div>
 
               {/* Location Reference Badge */}
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#625E56] bg-[#FFFFFF] p-2.5 sm:p-3 rounded-sm border-2 border-[#202020] shadow-[2px_2px_0px_#202020]">
-                <MapPin className="w-3.5 h-3.5 text-[#DC2626]" />
-                <span>LJCCA, Vastrapur, Ahmedabad · 18–24 Jan 2027</span>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#E2CCD4] bg-[#240C1B] p-2.5 sm:p-3 rounded-sm border-2 border-[#D6B36A]/40 shadow-[2px_2px_0px_#10050C]">
+                <MapPin className="w-3.5 h-3.5 text-[#F3D58A]" />
+                <span className="text-[#F4EBDD]">LJCCA, Vastrapur, Ahmedabad · 18–24 Jan 2027</span>
               </div>
 
               {/* Showcasing Workflow Advisory */}
-              <div className="p-4 sm:p-4.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] shadow-[2.5px_2.5px_0px_#FED7AA] font-mono text-xs text-[#5F5B52]">
-                <div className="font-black text-[#202020] mb-1.5 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626]" />
+              <div className="p-4 sm:p-4.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#240C1B] shadow-[0_8px_25px_rgba(0,0,0,0.5),2.5px_2.5px_0px_#10050C] font-mono text-xs text-[#E2CCD4]">
+                <div className="font-black text-[#F4EBDD] mb-1.5 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E63946] shadow-[0_0_6px_#FF5470]" />
                   <span>How Project Showcasing Works:</span>
                 </div>
-                <ol className="list-decimal list-inside space-y-1 leading-relaxed font-medium">
+                <ol className="list-decimal list-inside space-y-1 leading-relaxed font-normal">
                   <li>Select <strong>Project Showcasing</strong> and submit your team details.</li>
                   <li>Festival review administrators verify your submission via admin portal.</li>
                   <li>Upon approval, you receive a direct link to submit prototype specifications.</li>
@@ -353,26 +361,26 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               </div>
             </div>
 
-            {/* Right Column: Registration Form in Pure Paper Dossier */}
-            <form onSubmit={handleSubmit} noValidate className="lg:col-span-7 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] p-5 sm:p-6 shadow-[5px_5px_0px_#202020] relative">
-              {/* Washi Tape Strip */}
+            {/* Right Column: Registration Form in Pure Enchanted Parchment Dossier */}
+            <form onSubmit={handleSubmit} noValidate className="lg:col-span-7 rounded-sm border-2 border-[#D6B36A] bg-[#240C1B] p-5 sm:p-6 shadow-[0_12px_40px_rgba(0,0,0,0.7),4px_4px_0px_#10050C] relative">
+              {/* Crimson Wax Seal Ribbon */}
               <div
-                className="paper-tape"
-                style={{
-                  top: '-10px',
-                  right: '15%',
-                  width: '56px',
-                  transform: 'rotate(4deg)',
-                }}
-              />
+                className="absolute -top-3.5 right-12 px-4 py-1 bg-gradient-to-r from-[#762E42] to-[#4A1525] border-x border-b border-[#D6B36A] shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-10 flex items-center gap-1.5"
+                style={{ transform: 'rotate(2deg)' }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F3D58A]" />
+                <span className="font-mono text-[9px] uppercase tracking-wider text-[#F3D58A] font-bold">
+                  ENCHANTED PARCHMENT
+                </span>
+              </div>
 
-              <h3 className="font-display font-black text-xl text-[#202020] mb-4 sm:mb-5">
+              <h3 className="font-display font-black text-xl text-[#F4EBDD] mb-4 sm:mb-5">
                 Enter Registration Details
               </h3>
 
               {/* Festival Event Dropdown */}
               <div className="mb-5">
-                <label className="block font-mono text-xs text-[#202020] mb-2 font-bold uppercase tracking-wider">
+                <label className="block font-mono text-xs text-[#F4EBDD] mb-2 font-bold uppercase tracking-wider">
                   Selected Festival Event *
                 </label>
                 <GlassSelect
@@ -386,7 +394,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   }))}
                 />
                 {!isInternalCollege && (
-                  <span className="block font-mono text-[11px] text-[#625E56] font-medium mt-1.5">
+                  <span className="block font-mono text-[11px] text-[#C2BDCA] font-normal mt-1.5">
                     External college students can only select from Tech Showcase days (Day 1 &amp; Day 2).
                   </span>
                 )}
@@ -394,17 +402,17 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
               {/* College Affiliation Selector */}
               <div className="mb-5">
-                <label className="block font-mono text-xs text-[#202020] mb-2 font-bold uppercase tracking-wider">
+                <label className="block font-mono text-xs text-[#F4EBDD] mb-2 font-bold uppercase tracking-wider">
                   Student Affiliation *
                 </label>
                 <div className="grid grid-cols-2 gap-3 font-mono text-xs">
                   <button
                     type="button"
                     onClick={() => handleCollegeToggle(true)}
-                    className={`py-2.5 px-4 rounded-sm border-2 border-[#202020] font-black transition-all ${
+                    className={`py-2.5 px-4 rounded-sm border-2 font-black transition-all cursor-pointer ${
                       isInternalCollege
-                        ? 'bg-[#DC2626] text-white shadow-[3px_3px_0px_#202020]'
-                        : 'bg-[#FAF8F3] text-[#202020] hover:bg-[#FFFFFF]'
+                        ? 'bg-[#D6B36A] text-[#100D18] border-[#F3D58A] shadow-[0_0_12px_rgba(214,179,106,0.3),2px_2px_0px_#100D18]'
+                        : 'bg-[#1E192D] text-[#C2BDCA] border-[#D6B36A]/40 hover:text-[#F4EBDD]'
                     }`}
                   >
                     Our College Student
@@ -412,10 +420,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                   <button
                     type="button"
                     onClick={() => handleCollegeToggle(false)}
-                    className={`py-2.5 px-4 rounded-sm border-2 border-[#202020] font-black transition-all ${
+                    className={`py-2.5 px-4 rounded-sm border-2 font-black transition-all cursor-pointer ${
                       !isInternalCollege
-                        ? 'bg-[#DC2626] text-white shadow-[3px_3px_0px_#202020]'
-                        : 'bg-[#FAF8F3] text-[#202020] hover:bg-[#FFFFFF]'
+                        ? 'bg-[#D6B36A] text-[#100D18] border-[#F3D58A] shadow-[0_0_12px_rgba(214,179,106,0.3),2px_2px_0px_#100D18]'
+                        : 'bg-[#1E192D] text-[#C2BDCA] border-[#D6B36A]/40 hover:text-[#F4EBDD]'
                     }`}
                   >
                     External College Student
@@ -426,7 +434,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               {/* Full Name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     Full Name *
                   </label>
                   <input
@@ -436,12 +444,12 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                     placeholder="e.g. Jane Doe"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     Email Address *
                   </label>
                   <input
@@ -451,7 +459,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                     placeholder="name@college.edu"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                   />
                 </div>
               </div>
@@ -459,7 +467,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               {/* Phone (WhatsApp) & College Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     Phone (WhatsApp) *
                   </label>
                   <input
@@ -469,12 +477,12 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                     placeholder="+91 98765 43210"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                    className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     College Name *
                   </label>
                   <input
@@ -484,10 +492,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                     onChange={(e) => setCollegeName(e.target.value)}
                     placeholder="College / University Name"
                     readOnly={isInternalCollege}
-                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] text-[#202020] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#202020] ${
+                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 text-[#F4EBDD] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#100D18] ${
                       isInternalCollege
-                        ? 'bg-[#FAF8F3] text-[#625E56] cursor-not-allowed'
-                        : 'bg-[#FFFFFF] focus:border-[#DC2626]'
+                        ? 'bg-[#1E192D] text-[#C2BDCA] cursor-not-allowed'
+                        : 'bg-[#181424] focus:border-[#D6B36A]'
                     }`}
                   />
                 </div>
@@ -497,7 +505,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 {isInternalCollege && (
                   <div>
-                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                       Roll Number (LJCCA) *
                     </label>
                     <input
@@ -506,13 +514,13 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                       value={rollNumber}
                       onChange={(e) => setRollNumber(e.target.value)}
                       placeholder="e.g. 23BCA101"
-                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                     />
                   </div>
                 )}
 
                 <div className={!isInternalCollege ? 'sm:col-span-1' : ''}>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     Department {isInternalCollege ? '(Locked to BCA)' : ''}
                   </label>
                   <input
@@ -521,16 +529,16 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                     onChange={(e) => setDepartment(e.target.value)}
                     placeholder="e.g. Computer Science"
                     readOnly={isInternalCollege}
-                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] text-[#202020] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#202020] ${
+                    className={`w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 text-[#F4EBDD] font-body text-sm focus:outline-none transition-colors shadow-[2px_2px_0px_#100D18] ${
                       isInternalCollege
-                        ? 'bg-[#FAF8F3] text-[#625E56] cursor-not-allowed'
-                        : 'bg-[#FFFFFF] focus:border-[#DC2626]'
+                        ? 'bg-[#1E192D] text-[#C2BDCA] cursor-not-allowed'
+                        : 'bg-[#181424] focus:border-[#D6B36A]'
                     }`}
                   />
                 </div>
 
                 <div className={!isInternalCollege ? 'sm:col-span-2' : ''}>
-                  <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                  <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                     Year / Semester *
                   </label>
                   <GlassSelect
@@ -543,9 +551,9 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
               {/* Team Name for Showcasing or Hackathons */}
               {(selectedPass === 'showcasing' || isHackathon) && (
-                <div className="border-t-2 border-dashed border-[#202020]/25 pt-4 mt-4 space-y-4">
+                <div className="border-t-2 border-dashed border-[#D6B36A]/25 pt-4 mt-4 space-y-4">
                   <div>
-                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                       Team / Project Name {selectedPass === 'showcasing' ? '(Optional)' : '*'}
                     </label>
                     <input
@@ -553,12 +561,12 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                       placeholder="e.g. Quantum Innovators"
                       value={teamName}
                       onChange={(e) => setTeamName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-xs text-[#202020] mb-1.5 font-bold uppercase tracking-wider">
+                    <label className="block font-mono text-xs text-[#F4EBDD] mb-1.5 font-bold uppercase tracking-wider">
                       Team Member Names (if group project)
                     </label>
                     <input
@@ -566,7 +574,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                       placeholder="e.g. Alice Smith, Bob Chen"
                       value={teamMembers}
                       onChange={(e) => setTeamMembers(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#202020] bg-[#FFFFFF] text-[#202020] font-body text-sm focus:outline-none focus:border-[#DC2626] transition-colors shadow-[2px_2px_0px_#202020]"
+                      className="w-full px-4 py-2.5 rounded-sm border-2 border-[#D6B36A]/40 bg-[#181424] text-[#F4EBDD] font-body text-sm focus:outline-none focus:border-[#D6B36A] focus:shadow-[0_0_12px_rgba(214,179,106,0.3)] transition-colors shadow-[2px_2px_0px_#100D18]"
                     />
                   </div>
                 </div>
@@ -574,15 +582,15 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
               {/* Conditional Parent Checkbox */}
               {isParentWorkshop && (
-                <div className="my-4 p-4 rounded-sm border-2 border-[#202020] bg-[#FAF8F3] shadow-[2.5px_2.5px_0px_#202020] flex items-center gap-3">
+                <div className="my-4 p-4 rounded-sm border-2 border-[#D6B36A] bg-[#1E192D] shadow-[2.5px_2.5px_0px_#100D18] flex items-center gap-3">
                   <input
                     type="checkbox"
                     id="parent-check"
                     checked={isParentAttendee}
                     onChange={(e) => setIsParentAttendee(e.target.checked)}
-                    className="accent-[#DC2626] w-4 h-4 cursor-pointer"
+                    className="accent-[#D6B36A] w-4 h-4 cursor-pointer"
                   />
-                  <label htmlFor="parent-check" className="font-body text-xs sm:text-sm text-[#202020] font-bold cursor-pointer">
+                  <label htmlFor="parent-check" className="font-body text-xs sm:text-sm text-[#F4EBDD] font-bold cursor-pointer">
                     I confirm that I am attending as a parent or guardian of a student.
                   </label>
                 </div>
@@ -592,11 +600,11 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-5 py-3 px-5 rounded-sm font-mono font-bold text-xs sm:text-sm text-white bg-[#DC2626] hover:bg-[#B91C1C] border-2 border-[#202020] shadow-[3.5px_3.5px_0px_#202020] hover:shadow-[5px_5px_0px_#202020] hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full mt-5 py-3.5 px-5 rounded-sm font-cinzel font-bold text-xs sm:text-sm tracking-wider text-[#100D18] bg-gradient-to-r from-[#D6B36A] via-[#F3D58A] to-[#D6B36A] hover:bg-[#F3D58A] border-2 border-[#F3D58A] shadow-[0_0_20px_rgba(214,179,106,0.4),3.5px_3.5px_0px_#100D18] hover:shadow-[0_0_30px_rgba(243,213,138,0.6),5px_5px_0px_#100D18] hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>
                   {isSubmitting
-                    ? 'PROCESSING REGISTRATION...'
+                    ? 'PROCESSING HOGWARTS ADMISSION...'
                     : selectedPass === 'showcasing'
                     ? 'REQUEST PROJECT SHOWCASING PASS (FREE) →'
                     : 'RESERVE VISITOR PASS (FREE) →'}
@@ -607,10 +615,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
               {formFeedback && (
                 <div
                   role="status"
-                  className={`mt-4 p-4 rounded-sm border-2 border-[#202020] font-mono text-xs font-bold leading-relaxed shadow-[3px_3px_0px_#202020] ${
+                  className={`mt-4 p-4 rounded-sm border-2 font-mono text-xs font-bold leading-relaxed shadow-[3px_3px_0px_#100D18] ${
                     formFeedback.isError
-                      ? 'bg-[#FFECEC] text-[#E94B50]'
-                      : 'bg-[#FFD85A] text-[#202020]'
+                      ? 'border-[#762E42] bg-[#351522] text-[#F3D58A]'
+                      : 'border-[#D6B36A] bg-[#1E192D] text-[#F3D58A] shadow-[0_0_15px_rgba(214,179,106,0.25)]'
                   }`}
                 >
                   {formFeedback.message}

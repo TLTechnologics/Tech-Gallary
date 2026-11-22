@@ -53,7 +53,7 @@ export const FloatingTech3DObjects: React.FC = () => {
           rotateY,
         }}
       >
-        {/* Floating Paper Tag #1 - Top Right: "EDITION 2027 / LJCCA" with Washi Tape */}
+        {/* Floating Object #1 - Top Right: Hogwarts Enchanted Dispatch Pass with Wax Seal */}
         <motion.div
           animate={{
             y: [0, -12, 0],
@@ -72,39 +72,39 @@ export const FloatingTech3DObjects: React.FC = () => {
             transform: 'translateZ(40px)',
           }}
         >
-          {/* Yellow Washi Tape strip */}
+          {/* Antique Gold Seal Ribbon */}
           <div
             className="paper-tape"
             style={{
-              top: '-12px',
+              top: '-10px',
               left: '25%',
-              width: '60px',
+              width: '64px',
               transform: 'rotate(-4deg)',
             }}
           />
-          <div className="bg-[#FAF8F3] border-2 border-[#202020] p-4 rounded-sm shadow-[4px_4px_0px_#202020] w-52">
-            <div className="flex justify-between items-center mb-2 pb-1 border-b border-dashed border-[#202020]/20">
-              <span className="font-mono text-[10px] font-bold tracking-widest text-[#3155E7] uppercase">
-                DOC.TG-27
+          <div className="bg-[#1A1626] border-2 border-[#D6B36A] p-4 rounded-sm shadow-[0_8px_25px_rgba(0,0,0,0.6),3px_3px_0px_#D6B36A] w-52">
+            <div className="flex justify-between items-center mb-2 pb-1 border-b border-dashed border-[#D6B36A]/30">
+              <span className="font-mono text-[10px] font-bold tracking-widest text-[#F3D58A] uppercase">
+                DISPATCH // TG-27
               </span>
-              <span className="w-2 h-2 rounded-full bg-[#E94B50]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#762E42] border border-[#D6B36A] shadow-[0_0_6px_#762E42]" />
             </div>
-            <div className="font-display font-extrabold text-sm text-[#202020] leading-tight">
-              7-DAY HYBRID FESTIVAL
+            <div className="font-display font-extrabold text-sm text-[#F4EBDD] leading-tight">
+              7-DAY MAGICAL FESTIVAL
             </div>
-            <div className="font-mono text-[11px] text-[#625E56] mt-1 flex justify-between">
+            <div className="font-mono text-[11px] text-[#C2BDCA] mt-1.5 flex justify-between">
               <span>VASTRAPUR, AHM</span>
-              <span className="font-bold text-[#FF7139]">JAN 18-24</span>
+              <span className="font-bold text-[#D6B36A]">JAN 18-24</span>
             </div>
           </div>
         </motion.div>
 
-        {/* Floating Origami Airplane / Dart - Center Right */}
+        {/* Floating Object #2 - Center Right: Enchanted Golden Snitch with Shimmering Wings */}
         <motion.div
           animate={{
             x: [0, 15, 0],
             y: [0, -18, 0],
-            rotate: [-8, -4, -8],
+            rotate: [-6, -2, -6],
           }}
           transition={{
             duration: 8,
@@ -120,21 +120,49 @@ export const FloatingTech3DObjects: React.FC = () => {
             transform: 'translateZ(65px)',
           }}
         >
-          <svg width="110" height="90" viewBox="0 0 110 90" fill="none">
-            {/* Origami airplane facets with light & shadow */}
-            <polygon points="10,45 100,10 70,80" fill="#3155E7" stroke="#202020" strokeWidth="2" />
-            <polygon points="10,45 100,10 65,45" fill="#5373F2" stroke="#202020" strokeWidth="1.5" />
-            <polygon points="10,45 65,45 70,80" fill="#1E3DBE" stroke="#202020" strokeWidth="1.5" />
-            <polygon points="65,45 70,80 50,60" fill="#FFD85A" stroke="#202020" strokeWidth="1.5" />
-            {/* Dashed flight fold line */}
-            <line x1="5" y1="48" x2="0" y2="52" stroke="#202020" strokeWidth="2" strokeDasharray="3 3" />
+          <svg width="120" height="96" viewBox="0 0 120 96" fill="none">
+            <defs>
+              <linearGradient id="goldWing" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F3D58A" stopOpacity="0.85" />
+                <stop offset="60%" stopColor="#D6B36A" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#8C6F32" stopOpacity="0.2" />
+              </linearGradient>
+              <radialGradient id="snitchSphere" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#FFE485" />
+                <stop offset="50%" stopColor="#D6B36A" />
+                <stop offset="100%" stopColor="#8C6F32" />
+              </radialGradient>
+            </defs>
+
+            {/* Left Enchanted Wing */}
+            <path
+              d="M52 48 C35 25, 8 20, 2 35 C15 48, 38 46, 52 48 Z"
+              fill="url(#goldWing)"
+              stroke="#D6B36A"
+              strokeWidth="1.2"
+            />
+            <path d="M12 30 C25 35, 42 42, 52 48" stroke="#F3D58A" strokeWidth="0.8" opacity="0.7" />
+
+            {/* Right Enchanted Wing */}
+            <path
+              d="M68 48 C85 25, 112 20, 118 35 C105 48, 82 46, 68 48 Z"
+              fill="url(#goldWing)"
+              stroke="#D6B36A"
+              strokeWidth="1.2"
+            />
+            <path d="M108 30 C95 35, 78 42, 68 48" stroke="#F3D58A" strokeWidth="0.8" opacity="0.7" />
+
+            {/* Central Golden Sphere */}
+            <circle cx="60" cy="48" r="14" fill="url(#snitchSphere)" stroke="#F3D58A" strokeWidth="1.5" />
+            <ellipse cx="60" cy="48" rx="13" ry="5" stroke="#FFE485" strokeWidth="1" opacity="0.7" />
+            <circle cx="56" cy="44" r="3" fill="#FFFFFF" opacity="0.8" />
           </svg>
-          <div className="paper-stamp paper-stamp-cobalt text-[9px] -mt-3 ml-2">
-            ORIGAMI ENGINE
+          <div className="paper-stamp text-[9px] -mt-3 ml-2 border-[#D6B36A] bg-[#1E192D] text-[#F3D58A] shadow-[0_0_8px_rgba(214,179,106,0.3)]">
+            GOLDEN ENGINE
           </div>
         </motion.div>
 
-        {/* Floating Paper Badge #2 - Bottom Left: Perforated Stamp Ticket */}
+        {/* Floating Object #3 - Bottom Left: Ancient Enchanted Scroll Pass with Burgundy Seal */}
         <motion.div
           animate={{
             y: [0, 14, 0],
@@ -154,30 +182,30 @@ export const FloatingTech3DObjects: React.FC = () => {
             transform: 'translateZ(35px)',
           }}
         >
-          {/* Kraft tape */}
+          {/* Burgundy Ribbon */}
           <div
             className="paper-tape paper-tape-kraft"
             style={{
               top: '-10px',
               right: '20%',
-              width: '50px',
+              width: '54px',
               transform: 'rotate(6deg)',
             }}
           />
-          <div className="bg-[#FAF8F3] border-2 border-[#202020] p-3.5 rounded-sm shadow-[4px_4px_0px_#FFD85A] w-48 relative">
+          <div className="bg-[#1A1626] border-2 border-[#D6B36A] p-3.5 rounded-sm shadow-[0_8px_25px_rgba(0,0,0,0.6),3px_3px_0px_#762E42] w-48 relative">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="px-1.5 py-0.5 bg-[#FF7139] text-white font-mono text-[9px] font-bold rounded">
+              <span className="px-1.5 py-0.5 bg-[#762E42] text-[#F4EBDD] font-mono text-[9px] font-bold rounded border border-[#D6B36A]/40">
                 8 TRACKS
               </span>
-              <span className="font-mono text-[10px] text-[#625E56]">300+ CREATORS</span>
+              <span className="font-mono text-[10px] text-[#C2BDCA]">300+ CREATORS</span>
             </div>
-            <div className="font-display font-bold text-xs text-[#202020]">
+            <div className="font-display font-bold text-xs text-[#F4EBDD]">
               WORKSHOPS · HACKS · SHOWCASE
             </div>
-            {/* Perforated bottom cut */}
-            <div className="mt-2 pt-1 border-t-2 border-dashed border-[#202020]/30 flex justify-between items-center text-[9px] font-mono text-[#625E56]">
+            {/* Enchanted bottom cut */}
+            <div className="mt-2 pt-1 border-t-2 border-dashed border-[#D6B36A]/30 flex justify-between items-center text-[9px] font-mono text-[#C2BDCA]">
               <span>PASS NO: #027-LJ</span>
-              <span className="text-[#3155E7] font-bold">VERIFIED</span>
+              <span className="text-[#F3D58A] font-bold">ALOHOMORA</span>
             </div>
           </div>
         </motion.div>

@@ -10,9 +10,9 @@ interface FAQSectionProps {
 const DEFAULT_FAQS = [
   {
     id: 'f1',
-    question: 'Who can attend Tech Gallery?',
+    question: 'Who can attend Tech Wizard?',
     answer:
-      'Tech Gallery 2027 welcomes students, educators, tech enthusiasts, and parents. While certain internal workshops and hackathons are exclusive to our college students, the Tech Showcase and exhibition floor are open to all colleges and the public.',
+      'Tech Wizard 2027 welcomes students, educators, tech enthusiasts, and parents. While certain internal workshops and hackathons are exclusive to our college students, the Tech Showcase and exhibition floor are open to all colleges and the public.',
   },
   {
     id: 'f2',
@@ -73,13 +73,21 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
   };
 
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[#18191E] overflow-hidden text-white" id="faq">
-      {/* Background Architectural Grid */}
+    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#091712] via-[#10261E] to-[#07130F] overflow-hidden text-[#F4EBDD]" id="faq">
+      {/* Restricted Library Emerald Glow & Ancient Shadows */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30 z-0"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 15%, rgba(46, 196, 182, 0.25) 0%, transparent 65%), radial-gradient(ellipse at 80% 85%, rgba(186, 165, 116, 0.18) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.05] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
         style={{
           backgroundImage:
-            'linear-gradient(#3A3D4D 1px, transparent 1px), linear-gradient(90deg, #3A3D4D 1px, transparent 1px)',
+            'linear-gradient(#BFA574 1px, transparent 1px), linear-gradient(90deg, #BFA574 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
         aria-hidden="true"
@@ -88,19 +96,22 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="mb-8 sm:mb-10 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-2 border-[#3A3D4D] bg-[#22242D] shadow-[2px_2px_0px_#0A0A0D] mb-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" />
-            <span className="font-mono text-[11px] sm:text-xs text-neutral-200 tracking-widest uppercase font-bold">
-              INTELLIGENCE BASE // FAQ
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border-1.5 border-[#74C69D]/60 bg-[#0C2419] shadow-[0_0_15px_rgba(116,198,157,0.2),2px_2px_0px_#040B07] mb-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#74C69D] shadow-[0_0_6px_#74C69D]" />
+            <span className="font-mono text-[11px] sm:text-xs text-[#A7F3D0] tracking-widest uppercase font-bold">
+              ✦ RESTRICTED LIBRARY // WIZARDING FAQ ARCHIVE ✦
             </span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-            Frequently Asked <span className="text-[#00E5FF] underline decoration-[#C6FF32] decoration-wavy decoration-2">Questions.</span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#F4EBDD] tracking-tight leading-tight">
+            Frequently Asked <span className="text-[#A7F3D0] underline decoration-[#2D6A53] decoration-wavy decoration-2">Questions.</span>
           </h2>
+          <p className="font-body text-xs sm:text-sm text-[#B8D8C9] mt-2 max-w-2xl">
+            Whispered answers from the ancient tomes. Everything you need to know about attendance eligibility, hardware and software exhibits, rules, and entry passes.
+          </p>
         </div>
 
-        {/* Paper Folder Accordions */}
+        {/* Grimoire Accordions */}
         <div className="space-y-3">
           {displayFaqs.map((faq, idx) => {
             const currentId = faq.id || `faq-${idx}`;
@@ -111,8 +122,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
                 key={currentId}
                 className={`rounded-sm border-2 transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? 'bg-[#252833] border-[#00E5FF]/70 shadow-[4px_4px_0px_#0A0A0D]'
-                    : 'bg-[#22242D] border-[#3A3D4D] hover:bg-[#282B36] shadow-[2.5px_2.5px_0px_#0A0A0D]'
+                    ? 'bg-[#0E281D] border-[#74C69D] shadow-[0_0_20px_rgba(116,198,157,0.25),3.5px_3.5px_0px_#040B07]'
+                    : 'bg-[#0A1E15] border-[#2D6A53]/60 hover:bg-[#0D241A] hover:border-[#74C69D]/70 shadow-[2.5px_2.5px_0px_#040B07]'
                 }`}
               >
                 <button
@@ -121,16 +132,16 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
                   className="w-full p-4 sm:p-4.5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-sm border-1.5 border-[#0A0A0D] bg-[#C6FF32] text-[#0A0A0D] shadow-[1px_1px_0px_#0A0A0D]">
+                    <span className="font-mono text-[11px] sm:text-xs font-black px-2 py-0.5 rounded-sm border border-[#A7F3D0] bg-[#1E523A] text-[#F4EBDD] shadow-[1px_1px_0px_#040B07]">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="font-display font-black text-sm sm:text-base text-white">
+                    <h3 className="font-cinzel font-bold text-sm sm:text-base text-[#F4EBDD] tracking-wide">
                       {faq.question}
                     </h3>
                   </div>
 
-                  <div className="p-1.5 rounded-sm bg-[#18191E] border-2 border-[#3A3D4D] text-[#00E5FF] shadow-[1px_1px_0px_#0A0A0D] flex-shrink-0">
-                    {isOpen ? <Minus size={14} className="text-[#00E5FF]" /> : <Plus size={14} className="text-[#C6FF32]" />}
+                  <div className="p-1.5 rounded-sm bg-[#06140D] border border-[#2D6A53] text-[#A7F3D0] shadow-[1px_1px_0px_#040B07] flex-shrink-0">
+                    {isOpen ? <Minus size={14} className="text-[#A7F3D0]" /> : <Plus size={14} className="text-[#74C69D]" />}
                   </div>
                 </button>
 
@@ -141,7 +152,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ faqs }) => {
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="px-4 pb-4 pt-1.5 font-body text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed border-t-2 border-dashed border-[#3A3D4D] bg-[#1C1E26]"
+                      className="px-4 pb-4 pt-2 font-body text-xs sm:text-sm text-[#C9DFD5] font-normal leading-relaxed border-t-2 border-dashed border-[#2D6A53]/40 bg-[#07160F]"
                     >
                       {faq.answer}
                     </motion.div>

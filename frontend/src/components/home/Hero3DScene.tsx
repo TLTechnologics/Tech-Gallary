@@ -36,97 +36,112 @@ export const Hero3DScene: React.FC = () => {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
 
-    // 2. Realistic Paper Craft Lighting (Key daylight, soft paper bounce, tactile contrast)
-    const ambientLight = new THREE.AmbientLight(0xFFF9F0, 1.6);
+    // 2. Hogwarts Midnight Magical Lighting
+    const ambientLight = new THREE.AmbientLight(0x15182A, 1.4); // Hogwarts Navy Ambient
     scene.add(ambientLight);
 
-    const keySunLight = new THREE.DirectionalLight(0xFFFFFF, 2.4);
-    keySunLight.position.set(16, 22, 18);
-    scene.add(keySunLight);
+    const keyGoldLight = new THREE.DirectionalLight(0xF3D58A, 2.8); // Warm Candlelight & Starlight
+    keyGoldLight.position.set(16, 22, 18);
+    scene.add(keyGoldLight);
 
-    const cobaltFillLight = new THREE.DirectionalLight(0x3155E7, 1.2);
-    cobaltFillLight.position.set(-18, -12, 10);
-    scene.add(cobaltFillLight);
+    const burgundyRimLight = new THREE.DirectionalLight(0x762E42, 1.8); // Deep Burgundy Rim Glow
+    burgundyRimLight.position.set(-18, -12, 10);
+    scene.add(burgundyRimLight);
 
-    const orangeAccentLight = new THREE.PointLight(0xFF7139, 1.8, 60);
-    orangeAccentLight.position.set(0, -12, 12);
-    scene.add(orangeAccentLight);
+    const coreGoldLight = new THREE.PointLight(0xD6B36A, 2.2, 50); // Radiant Core Beacon
+    coreGoldLight.position.set(0, 0, 0);
+    scene.add(coreGoldLight);
 
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
 
-    // 3. Central Folded Origami Polyhedron (Faceted Paper Sculpture)
-    const coreGeo = new THREE.IcosahedronGeometry(5.4, 0); // Low-poly flat faces like folded paper
-    const paperMat = new THREE.MeshStandardMaterial({
-      color: 0xFDFCF7, // Ivory paper sheet
-      roughness: 0.95,
-      metalness: 0.04,
+    // 3. Central Enchanted Celestial Astrolabe (Faceted Antique Gold Relic)
+    const coreGeo = new THREE.IcosahedronGeometry(5.4, 0);
+    const goldMat = new THREE.MeshStandardMaterial({
+      color: 0xD6B36A, // Antique Gold
+      roughness: 0.32,
+      metalness: 0.82,
       flatShading: true,
     });
-    const coreMesh = new THREE.Mesh(coreGeo, paperMat);
+    const coreMesh = new THREE.Mesh(coreGeo, goldMat);
     mainGroup.add(coreMesh);
 
-    // Ink crease edges along the folds
+    // Glowing Runic Edge Filigree
     const wireGeo = new THREE.WireframeGeometry(coreGeo);
     const wireMat = new THREE.LineBasicMaterial({
-      color: 0x202020,
+      color: 0xF3D58A,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.55,
     });
     const creaseLines = new THREE.LineSegments(wireGeo, wireMat);
     coreMesh.add(creaseLines);
 
-    // Inner Origami Star (Butter Yellow / Cobalt Paper facets)
+    // Inner Celestial Star (Magical Radiant Gold)
     const innerGeo = new THREE.OctahedronGeometry(3.6, 0);
-    const yellowPaperMat = new THREE.MeshStandardMaterial({
-      color: 0xFFD85A,
-      roughness: 0.9,
-      metalness: 0.05,
+    const innerMat = new THREE.MeshStandardMaterial({
+      color: 0xF3D58A,
+      roughness: 0.22,
+      metalness: 0.9,
       flatShading: true,
     });
-    const innerMesh = new THREE.Mesh(innerGeo, yellowPaperMat);
+    const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     mainGroup.add(innerMesh);
 
     const innerWireGeo = new THREE.WireframeGeometry(innerGeo);
-    const innerCrease = new THREE.LineSegments(innerWireGeo, new THREE.LineBasicMaterial({ color: 0x202020, transparent: true, opacity: 0.4 }));
+    const innerCrease = new THREE.LineSegments(innerWireGeo, new THREE.LineBasicMaterial({ color: 0xD6B36A, transparent: true, opacity: 0.65 }));
     innerMesh.add(innerCrease);
 
-    // Central Radiant Paper Core (Bright Orange Origami Tetrahedron)
-    const jewelGeo = new THREE.TetrahedronGeometry(1.6, 0);
-    const orangeMat = new THREE.MeshStandardMaterial({
-      color: 0xFF7139,
-      roughness: 0.85,
+    // Central Philosopher's Relic Core (Enchanted Burgundy Crystal)
+    const jewelGeo = new THREE.TetrahedronGeometry(1.7, 0);
+    const burgundyMat = new THREE.MeshStandardMaterial({
+      color: 0x8E3850,
+      roughness: 0.2,
+      metalness: 0.6,
       flatShading: true,
     });
-    const jewelMesh = new THREE.Mesh(jewelGeo, orangeMat);
+    const jewelMesh = new THREE.Mesh(jewelGeo, burgundyMat);
     mainGroup.add(jewelMesh);
 
-    // 4. Orbiting Paper Ribbons / Geometric Origami Cutouts
+    // 4. Armillary Sphere Orbital Celestial Rings
+    const ringGeo1 = new THREE.TorusGeometry(7.6, 0.1, 8, 48);
+    const ringMat = new THREE.MeshStandardMaterial({
+      color: 0xD6B36A,
+      metalness: 0.85,
+      roughness: 0.3,
+    });
+    const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat);
+    mainGroup.add(ringMesh1);
+
+    const ringGeo2 = new THREE.TorusGeometry(8.8, 0.08, 8, 48);
+    const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat);
+    ringMesh2.rotation.x = Math.PI / 4;
+    ringMesh2.rotation.y = Math.PI / 6;
+    mainGroup.add(ringMesh2);
+
+    // 5. Orbiting Enchanted Celestial Glyphs & Crystals
     const orbitGroup = new THREE.Group();
     mainGroup.add(orbitGroup);
 
-    const paperColors = [0x3155E7, 0xFF7139, 0xFFD85A, 0xE94B50, 0xB7A5E8, 0xFDFCF7];
+    const magicColors = [0xD6B36A, 0xF3D58A, 0x762E42, 0x245B43, 0xE9D9B5, 0xB8BAC8];
     const cutouts: THREE.Mesh[] = [];
 
-    // Create 18 floating paper cutout planes around the sculpture
-    for (let i = 0; i < 18; i++) {
-      const radius = 8.5 + (i % 4) * 2.2;
-      const angle = (i / 18) * Math.PI * 2;
-      const elevation = Math.sin(i * 1.5) * 5;
+    for (let i = 0; i < 16; i++) {
+      const radius = 9.2 + (i % 3) * 2.2;
+      const angle = (i / 16) * Math.PI * 2;
+      const elevation = Math.sin(i * 1.6) * 4.5;
 
-      // Varied paper shapes: triangular dart or folded quad
       const shapeGeo = (i % 2 === 0) 
-        ? new THREE.ConeGeometry(0.9, 1.8, 3) 
-        : new THREE.BoxGeometry(1.4, 1.4, 0.05);
+        ? new THREE.OctahedronGeometry(0.7, 0) 
+        : new THREE.TetrahedronGeometry(0.85, 0);
 
-      const color = paperColors[i % paperColors.length];
+      const color = magicColors[i % magicColors.length];
       const mat = new THREE.MeshStandardMaterial({
         color,
-        roughness: 0.92,
-        metalness: 0.02,
+        roughness: 0.3,
+        metalness: 0.75,
         flatShading: true,
       });
 
@@ -142,19 +157,19 @@ export const Hero3DScene: React.FC = () => {
       cutouts.push(cutout);
     }
 
-    // 5. Drifting Paper Confetti Particles
+    // 6. Floating Golden Stardust Swarm
     const confettiCount = 180;
     const confettiGeo = new THREE.BufferGeometry();
     const cCoords = new Float32Array(confettiCount * 3);
     const cColors = new Float32Array(confettiCount * 3);
 
-    const confettiPalette = [
-      new THREE.Color(0x3155E7), // Cobalt
-      new THREE.Color(0xFF7139), // Orange
-      new THREE.Color(0xFFD85A), // Butter Yellow
-      new THREE.Color(0xE94B50), // Cherry Red
-      new THREE.Color(0xB7A5E8), // Soft Lavender
-      new THREE.Color(0x202020), // Deep Ink speckles
+    const magicPalette = [
+      new THREE.Color(0xF3D58A), // Magical Gold
+      new THREE.Color(0xD6B36A), // Antique Gold
+      new THREE.Color(0xE9D9B5), // Parchment Starlight
+      new THREE.Color(0x8E3850), // Enchanted Burgundy
+      new THREE.Color(0x2E7356), // Emerald Spark
+      new THREE.Color(0xB8BAC8), // Spell Silver
     ];
 
     for (let i = 0; i < confettiCount; i++) {
@@ -162,7 +177,7 @@ export const Hero3DScene: React.FC = () => {
       cCoords[i * 3 + 1] = (Math.random() - 0.5) * 48;
       cCoords[i * 3 + 2] = (Math.random() - 0.5) * 25;
 
-      const clr = confettiPalette[Math.floor(Math.random() * confettiPalette.length)];
+      const clr = magicPalette[Math.floor(Math.random() * magicPalette.length)];
       cColors[i * 3] = clr.r;
       cColors[i * 3 + 1] = clr.g;
       cColors[i * 3 + 2] = clr.b;
@@ -172,15 +187,15 @@ export const Hero3DScene: React.FC = () => {
     confettiGeo.setAttribute('color', new THREE.BufferAttribute(cColors, 3));
 
     const confettiMat = new THREE.PointsMaterial({
-      size: 0.32,
+      size: 0.36,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.85,
     });
     const confettiPoints = new THREE.Points(confettiGeo, confettiMat);
     scene.add(confettiPoints);
 
-    // 6. Smooth Mouse Parallax Tracking
+    // 7. Parallax Tracking
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
@@ -203,7 +218,7 @@ export const Hero3DScene: React.FC = () => {
     window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('touchmove', onPointerMove, { passive: true });
 
-    // 7. Responsive Resizing
+    // 8. Responsive Resizing
     const onResize = () => {
       if (!container) return;
       width = container.clientWidth;
@@ -215,7 +230,7 @@ export const Hero3DScene: React.FC = () => {
 
     window.addEventListener('resize', onResize);
 
-    // 8. Render Animation Loop
+    // 9. Render Animation Loop
     let animId: number;
     const clock = new THREE.Clock();
 
@@ -223,7 +238,7 @@ export const Hero3DScene: React.FC = () => {
       animId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
 
-      // Smooth camera/group interpolation with tactile damping
+      // Smooth camera/group interpolation
       currentX += (targetX - currentX) * 0.04;
       currentY += (targetY - currentY) * 0.04;
 
@@ -239,10 +254,12 @@ export const Hero3DScene: React.FC = () => {
       jewelMesh.rotation.y = elapsed * 0.4;
       jewelMesh.rotation.z = -elapsed * 0.3;
 
+      ringMesh1.rotation.z = elapsed * 0.12;
+      ringMesh2.rotation.x = -elapsed * 0.15;
+
       orbitGroup.rotation.y = -elapsed * 0.08;
       orbitGroup.rotation.x = Math.sin(elapsed * 0.05) * 0.15;
 
-      // Gentle wobble of orbiting cutouts
       cutouts.forEach((cutout, idx) => {
         cutout.rotation.x += 0.015 * (idx % 2 === 0 ? 1 : -1);
         cutout.rotation.y += 0.02;
@@ -265,14 +282,17 @@ export const Hero3DScene: React.FC = () => {
       }
       renderer.dispose();
       coreGeo.dispose();
-      paperMat.dispose();
+      goldMat.dispose();
       wireGeo.dispose();
       wireMat.dispose();
       innerGeo.dispose();
-      yellowPaperMat.dispose();
+      innerMat.dispose();
       innerWireGeo.dispose();
       jewelGeo.dispose();
-      orangeMat.dispose();
+      burgundyMat.dispose();
+      ringGeo1.dispose();
+      ringGeo2.dispose();
+      ringMat.dispose();
       confettiGeo.dispose();
       confettiMat.dispose();
     };
